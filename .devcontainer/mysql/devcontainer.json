@@ -1,0 +1,6 @@
+{
+    "name" : "Bookshelf - MySql",
+    "service" : "mysql",
+    "dockerComposeFile" : "../../docker-compose.dev.yaml",
+    "workspaceFolder" : "/app"
+}

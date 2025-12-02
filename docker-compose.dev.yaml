@@ -1,0 +1,47 @@
+services:
+  app:  
+    image: node:25
+    volumes:
+      - ./code:/app
+    ports : 
+      - 3000:3000 # API
+      - 5173:5173 # React
+      - 5500:5500 # Live server
+    tty: true # Laisser le conteneur en vie
+    restart: always
+    working_dir: /app
+
+
+  mysql:
+    image: mysql:9.5
+    ports:
+      - 3306:3306
+    volumes:
+      - ./code/mysql:/app
+      - ./mysql-data:/var/lib/mysql
+    working_dir: /app
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  
+  mongodb:
+    # application ou le langage lié au service
+    image: mongo:8.2
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    #port partagé entre le client et le conteneur
+    ports:
+      - 27017:27017
+    #dossier partagé entre le client et le conteneur
+    volumes:
+      - ./code/mongodb:/app
+      - ./mongodb/data:/etc/mongo
+    # dossier de travail dans le conteneur 
+    working_dir: /app
+      
+
+
+    
+    

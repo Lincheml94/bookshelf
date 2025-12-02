@@ -1,0 +1,6 @@
+{
+    "name" : "Bookshelf - Mongo DB",
+    "service" : "mongodb",
+    "dockerComposeFile" : "../../docker-compose.dev.yaml",
+    "workspaceFolder" : "/app"
+}
