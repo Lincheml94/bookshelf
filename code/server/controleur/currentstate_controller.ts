@@ -1,12 +1,12 @@
 import type { Request, Response } from "express";
-import Current_stateRepository from "../repository/current_state_repository";
+import CurrentstateRepository from "../repository/currentstate_repository";
 
-class Current_stateController {
+class CurrentstateController {
 	// Méthode reliée à la route en GET située dans le routeur
 	// convention : nommer la première fonction "index"
 
 	public index = async (req: Request, res: Response) => {
-		const results = await new Current_stateRepository().selectAll();
+		const results = await new CurrentstateRepository().selectAll();
 
 		// si la requête renvoie une erreur
 		if (results instanceof Error) {
@@ -28,7 +28,7 @@ class Current_stateController {
 	public selectOne = async (req: Request, res: Response) => {
 		// récupérer la variable de route
 		// req.params : permet de récupérer les variables de la route
-		const results = await new Current_stateRepository().selectOne(req.params);
+		const results = await new CurrentstateRepository().selectOne(req.params);
 
 		// si la requête renvoie une erreur
 		if (results instanceof Error) {
@@ -48,4 +48,4 @@ class Current_stateController {
 	};
 }
 
-export default Current_stateController;
+export default CurrentstateController;

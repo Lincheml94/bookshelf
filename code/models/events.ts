@@ -1,6 +1,6 @@
 // reprendre strictement les noms des colonnes de la table SQL
 
-type Event = {
+type Events = {
 	id: number;
 	title: string;
 	description: string;
@@ -8,4 +8,4 @@ type Event = {
 	book_id: number;
 };
 
-export type { Event };
+export type { Events };

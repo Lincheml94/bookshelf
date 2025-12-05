@@ -3,7 +3,7 @@ import MySQLService from "../service/mysql_service";
 
 class AuthorRepository {
 	// nom de la table SQL
-	private table = "book";
+	private table = "author";
 
 	// sélectionner tous les enregistrements
 	public selectAll = async (): Promise<Author[] | unknown> => {

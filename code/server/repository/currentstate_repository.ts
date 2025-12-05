@@ -1,12 +1,12 @@
-import type { Event } from "../../models/event";
+import type { Currentstate } from "../../models/currentstate";
 import MySQLService from "../service/mysql_service";
 
-class EventRepository {
+class CurrentstateRepository {
 	// nom de la table SQL
-	private table = "event";
+	private table = "currentstate";
 
 	// sélectionner tous les enregistrements
-	public selectAll = async (): Promise<Event[] | unknown> => {
+	public selectAll = async (): Promise<Currentstate[] | unknown> => {
 		// connexion au serveur MySQL
 		const connection = await new MySQLService().connect();
 
@@ -30,7 +30,9 @@ class EventRepository {
 	// Partial : on va utiliser une partie des propriétés d'un objet
 	// exemple : on veut seulement l'id et non l'id ET le name (etc)
 	// data représente une partie des propriétés du type
-	public selectOne = async (data: Partial<Event>): Promise<Event | unknown> => {
+	public selectOne = async (
+		data: Partial<Currentstate>,
+	): Promise<Currentstate | unknown> => {
 		// connexion au serveur MySQL
 		const connection = await new MySQLService().connect();
 
@@ -53,7 +55,7 @@ class EventRepository {
 			// récupérer le premier indice d'un tableau
 			// as permet de "transtyper". Dire que query est un tableau
 			// shift : récupérer le premier indice d'un array
-			const result = (query as Event[]).shift();
+			const result = (query as Currentstate[]).shift();
 
 			// retourner les résultats
 			return result;
@@ -63,4 +65,4 @@ class EventRepository {
 	};
 }
 
-export default EventRepository;
+export default CurrentstateRepository;

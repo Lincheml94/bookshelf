@@ -2,8 +2,8 @@ import express from "express";
 import AuthorRouter from "../router/author_router";
 import BookRouter from "../router/book_router";
 import CategoryRouter from "../router/category_router";
-import Current_stateRouter from "../router/current_state_router";
-import EventRouter from "../router/event_router";
+import Current_stateRouter from "../router/currentstate_router";
+import EventRouter from "../router/events_router";
 import HomepageRouter from "../router/homepage_router";
 import RoleRouter from "../router/role_router";
 import VisitorRouter from "../router/visitor_router";
@@ -28,14 +28,11 @@ class Server {
 		this.router.use("/api", new HomepageRouter().getRoutes());
 		this.router.use("/api/category", new CategoryRouter().getRoutes());
 		this.router.use("/api/book", new BookRouter().getRoutes());
-		this.router.use(
-			"/api/current_state",
-			new Current_stateRouter().getRoutes(),
-		);
+		this.router.use("/api/currentstate", new Current_stateRouter().getRoutes());
 		this.router.use("/api/author", new AuthorRouter().getRoutes());
 		this.router.use("/api/visitor", new VisitorRouter().getRoutes());
 		this.router.use("/api/role", new RoleRouter().getRoutes());
-		this.router.use("/api/event", new EventRouter().getRoutes());
+		this.router.use("/api/events", new EventRouter().getRoutes());
 	};
 
 	// démarrer le serveur, comme c'est avec index.ts, c'est côté navigateur donc public
