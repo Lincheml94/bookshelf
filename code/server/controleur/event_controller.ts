@@ -1,12 +1,12 @@
 import type { Request, Response } from "express";
-import CategoryRepository from "../repository/category_repository";
+import EventRepository from "../repository/event_repository";
 
-class CategoryController {
+class EventController {
 	// Méthode reliée à la route en GET située dans le routeur
 	// convention : nommer la première fonction "index"
 
 	public index = async (req: Request, res: Response) => {
-		const results = await new CategoryRepository().selectAll();
+		const results = await new EventRepository().selectAll();
 
 		// si la requête renvoie une erreur
 		if (results instanceof Error) {
@@ -28,7 +28,7 @@ class CategoryController {
 	public selectOne = async (req: Request, res: Response) => {
 		// récupérer la variable de route
 		// req.params : permet de récupérer les variables de la route
-		const results = await new CategoryRepository().selectOne(req.params);
+		const results = await new EventRepository().selectOne(req.params);
 
 		// si la requête renvoie une erreur
 		if (results instanceof Error) {
@@ -48,4 +48,4 @@ class CategoryController {
 	};
 }
 
-export default CategoryController;
+export default EventController;

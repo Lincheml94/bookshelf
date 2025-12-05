@@ -1,12 +1,12 @@
-import type { Category } from "../../models/category";
+import type { Current_state } from "../../models/current_state";
 import MySQLService from "../service/mysql_service";
 
-class CategoryRepository {
+class Current_stateRepository {
 	// nom de la table SQL
-	private table = "category";
+	private table = "current_state";
 
 	// sélectionner tous les enregistrements
-	public selectAll = async (): Promise<Category[] | unknown> => {
+	public selectAll = async (): Promise<Current_state[] | unknown> => {
 		// connexion au serveur MySQL
 		const connection = await new MySQLService().connect();
 
@@ -31,8 +31,8 @@ class CategoryRepository {
 	// exemple : on veut seulement l'id et non l'id ET le name (etc)
 	// data représente une partie des propriétés du type
 	public selectOne = async (
-		data: Partial<Category>,
-	): Promise<Category | unknown> => {
+		data: Partial<Current_state>,
+	): Promise<Current_state | unknown> => {
 		// connexion au serveur MySQL
 		const connection = await new MySQLService().connect();
 
@@ -55,7 +55,7 @@ class CategoryRepository {
 			// récupérer le premier indice d'un tableau
 			// as permet de "transtyper". Dire que query est un tableau
 			// shift : récupérer le premier indice d'un array
-			const result = (query as Category[]).shift();
+			const result = (query as Current_state[]).shift();
 
 			// retourner les résultats
 			return result;
@@ -65,4 +65,4 @@ class CategoryRepository {
 	};
 }
 
-export default CategoryRepository;
+export default Current_stateRepository;

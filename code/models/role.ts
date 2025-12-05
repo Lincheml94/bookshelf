@@ -1,8 +1,7 @@
 // reprendre strictement les noms des colonnes de la table SQL
 
-type Category = {
+type Role = {
 	id: number;
-	name: string;
 };
 
-export type { Category };
+export type { Role };
