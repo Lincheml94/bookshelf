@@ -173,7 +173,7 @@ VALUES
 
 INSERT INTO publishinghouse_dev.visitor
 VALUES
-    ( NULL, "visitor1@visitor.fr", "SolÃ¨ne", "Colin"),
+    ( NULL, "visitor1@visitor.fr", "Solène", "Colin"),
     ( NULL, "visitor2@visitor.fr", "Caro", "Rheims"),
     ( NULL, "visitor3@visitor.fr", "Julia", "Piccolo")
 ;
@@ -185,83 +185,254 @@ VALUES
     ( NULL, "en rupture de stock" ),
     ( NULL, "en stock" ),
     ( NULL, "Paru" ),
-    ( NULL, "Ã  paraÃ®tre" )
+    ( NULL, "A paraitre" )
 ;
 
 -- AUTHOR--------------------------------------------
 
--- INSERT INTO publishinghouse_dev.author
--- VALUES
---     ( NULL, "HÃ©loise", "BrÃ©zillon", "HÃ©loÃ¯se BrÃ©zillon est autrice~chercheure. Son travail hybride poÃ©sie, thÃ©orie & SF. En 2018 naÃ®t Mange tes mots, une bulle poÃ©tique crÃ©Ã©e avec Margot Ferrera, oÃ¹ reprendre son souffle le temps dâ€™une scÃ¨ne ouverte, dâ€™un atelier dâ€™Ã©criture ou dâ€™un podcast. Ses textes ont Ã©tÃ© performÃ©s avec sa bouche partout en France et publiÃ©s en revues. T3M est son premier livre." ),
---     ( NULL, "Elodie", "Petit", "Ã‰lodie Petit alias Gorge Bataille, nÃ©e en 1985, est une performeuse et poÃ©tesse queer franÃ§aise." ),
-    
--- ;
+INSERT INTO publishinghouse_dev.author
+VALUES
+    ( NULL, "Héloise", "Brézillon", "Héloise Brézillon est autrice~chercheure. Son travail hybride poésie, théorie & SF. En 2018 naÃ®t Mange tes mots, une bulle poÃ©tique crÃ©Ã©e avec Margot Ferrera, oÃ¹ reprendre son souffle le temps dâ€™une scÃ¨ne ouverte, dâ€™un atelier dâ€™Ã©criture ou dâ€™un podcast. Ses textes ont Ã©tÃ© performÃ©s avec sa bouche partout en France et publiÃ©s en revues. T3M est son premier livre." ),
+    ( NULL, "Elodie", "Petit", "Ã‰lodie Petit alias Gorge Bataille, nÃ©e en 1985, est une performeuse et poÃ©tesse queer franÃ§aise." ),
+    ( NULL, 'Dorothy', 'Allison', 'Dorothy Allison est une romancière, poétesse et essayiste américaine, connue pour ses œuvres explorant la classe, la sexualité et la violence. Son roman "Bastard Out of Carolina" est un classique de la littérature queer et féministe.'),
+    ( NULL, 'Goliarda', 'Sapienza', 'Goliarda Sapienza était une écrivaine italienne, célèbre pour son roman "L''Art de la joie", une œuvre audacieuse et féministe qui explore la liberté et la quête de soi.'),
+    ( NULL, 'Fatima', 'Daas', 'Fatima Daas est une autrice française, connue pour son roman "La Petite Dernière", où elle aborde les thèmes de l''identité, de la religion et de la sexualité à travers une narration poétique et intime.'),
+    ( NULL, 'Wendy', 'Delorme', 'Wendy Delorme est une écrivaine et performeuse française, dont les œuvres, comme "Quatrième génération", explorent la transidentité, la famille et la mémoire.'),
+    ( NULL, 'Mariana', 'Enriquez', 'Mariana Enriquez est une journaliste et écrivaine argentine, autrice de "Nos choses", un recueil de nouvelles horrifiques ancrées dans la réalité sociale et politique de l''Argentine.'),
+    ( NULL, 'Laura', 'Vazquez', 'Laura Vazquez est une écrivaine et poétesse française, dont les textes, comme "La Vie sexuelle des fleurs", mêlent érotisme, nature et quête d''identité.'),
+    ( NULL, 'Joan', 'Nestle', 'Joan Nestle est une historienne et écrivaine américaine, cofondatrice des Lesbian Herstory Archives. Ses œuvres, comme "A Restricted Country", explorent la mémoire lesbienne et la résistance.'),
+    ( NULL, 'Phoebe', 'Hadjimarkos Clark', 'Phoebe Hadjimarkos Clark est une écrivaine et artiste américaine, connue pour ses textes expérimentaux et son engagement dans les communautés queer et trans.'),
+    ( NULL, 'Leslie', 'Feinberg', 'Leslie Feinberg était une militante transgenre et écrivaine américaine, autrice de "Stone Butch Blues", un roman culte sur la vie des personnes trans et la lutte des classes.'),
+    ( NULL, 'Karim', 'Kattan', 'Karim Kattan est un écrivain palestinien, dont les œuvres, comme "La Maison des absents", explorent l''exil, la mémoire et l''identité palestinienne.'),
+    ( NULL, 'Alison', 'Bechdel', 'Alison Bechdel est une autrice de bandes dessinées américaine, célèbre pour "Fun Home", une autobiographie graphique explorant son coming out et sa relation avec son père.');
+    ( NULL, 'Violette', 'Leduc', 'Violette Leduc (1907-1972) est une écrivaine française, figure majeure de la littérature autobiographique. Son œuvre, souvent audacieuse et intime, explore la quête d''amour, la sexualité, la jalousie et la souffrance, avec un style lyrique et sans concession. Elle fut proche de Simone de Beauvoir et de Jean Genet.');
+;
 
 -- BOOK ---------------------------------------------------------------
 
--- INSERT INTO publishinghouse_dev.book
--- VALUES
---     (
---         NULL,
---         "T3M",
---         "2024-10-11",
---         "et Ã§a te comporte. Ã§a te comporte sans que tu ne le saches. tu roules les jours Ã  lâ€™aveugle. tu as un monde en toi, un petit monde dont tu nâ€™as jamais fait la carte et tu roules dedans, hors piste. il faut la faire la carte, oui, câ€™est important. pour ne pas Ãªtre triste.",
---         14,
---         "120 pages",
---         "20 x 11 cm",
---         "t3m.jpg",
---         "979-10-95630-78-4",
---         "livre brochÃ©"
---     ),
---     (
---         NULL,
---         "vingt mille lieux sous la mer",
---         "1875-10-11",
---         "et Ã§a te comporte. Ã§a te comporte sans que tu ne le saches. tu roules les jours Ã  lâ€™aveugle. tu as un monde en toi, un petit monde dont tu nâ€™as jamais fait la carte et tu roules dedans, hors piste. il faut la faire la carte, oui, câ€™est important. pour ne pas Ãªtre triste.",
---         14,
---         "7Ã 0 pages",
---         "20 x 11 cm",
---         "vmlslm.jpg",
---         "879-10-95630-78-4",
---         "livre brochÃ©"
---     )
+INSERT INTO publishinghouse_dev.book
+VALUES
+    (
+        NULL,
+        "T3M",
+        "2024-10-11",
+        "et Ã§a te comporte. Ã§a te comporte sans que tu ne le saches. tu roules les jours Ã  lâ€™aveugle. tu as un monde en toi, un petit monde dont tu nâ€™as jamais fait la carte et tu roules dedans, hors piste. il faut la faire la carte, oui, câ€™est important. pour ne pas Ãªtre triste.",
+        14,
+        "120 pages",
+        "20 x 11 cm",
+        "t3m.jpg",
+        "979-10-95630-78-4",
+        "livre brochÃ©"
+    ),
+    (   
+        NULL,
+        'Bastard Out of Carolina', 
+        '1992-06-01', 
+        'Un roman poignant sur une jeune fille grandissant dans une famille pauvre et violente du Sud des États-Unis, explorant les thèmes de la résilience et de l''identité.', 
+        12.99, 
+        '320', 
+        '14x21', 
+        'bastard_out_of_carolina.jpg', 
+        '9780452273281', 
+        'Plume'
+    ),
+    (   
+        NULL,
+        'Cavedweller', 
+        '1998-05-15', 
+        'L''histoire d''une femme qui retourne dans sa ville natale de Géorgie pour retrouver ses filles, après une vie tumultueuse à Los Angeles.', 
+        13.50, 
+        '384', 
+        '14x21', 
+        'cavedweller.jpg', 
+        '9780452280128', 
+        'Plume'),
+    (   NULL, 
+        'L''Art de la joie', 
+        '2008-09-15', 
+        'Une épopée féministe et sensuelle sur la vie de Modesta, une femme sicilienne en quête de liberté et de bonheur au début du XXe siècle.', 
+        14.50, 
+        '400', 
+        '15x23', 
+        'art_de_la_joie.jpg', 
+        '9782070396071', 
+        'Gallimard'
+    ),
+    (   
+        NULL,
+        'La Petite Dernière', 
+        '2020-08-20', 
+        'Un roman intime et poétique sur une jeune femme française d''origine algérienne, en quête d''identité entre religion, famille et sexualité.', 
+        11.90, 
+        '160', 
+        '13x20', 
+        'petite_derniere.jpg', 
+        '9782072894567', 
+        'Noir sur Blanc'
+    ),
+    (   
+        NULL,
+        'Jouer le jeu', 
+        '2024-01-11', 
+        'Un roman sur l''amitié, l''amour et les jeux de pouvoir, explorant les relations humaines dans un Paris contemporain.', 
+        11.90, 
+        '192', 
+        '13x20', 
+        'jouer_le_jeu.jpg', 
+        '9782073021456', 
+        'Noir sur Blanc');
+    (
+        NULL,
+        'Quatrième génération', 
+        '2017-03-10', 
+        'Un récit autobiographique et politique sur la transidentité, la filiation et la mémoire familiale.', 
+        10.50, 
+        '192', 
+        '12x19', 
+        'quatrieme_generation.jpg', 
+        '9782367440556', 
+        'Cambourakis'
+    ),
+    (   
+        NULL,
+        'Viendra le temps du feu', 
+        '2021-08-26', 
+        'Un récit poétique et politique sur la transmission, la mémoire et la résistance, entre autobiographie et fiction.', 
+        12.90, 
+        '176', 
+        '12x19', 
+        'viendra_le_temps_du_feu.jpg', 
+        '9782367441560', 
+        'Cambourakis'),
+    (
+        NULL,
+        'Nos choses', 
+        '2019-11-07', 
+        'Un recueil de nouvelles horrifiques et sociales, ancrées dans la réalité argentine, où le surnaturel côtoie le quotidien.', 
+        13.99, 
+        '224', 
+        '14x22', 
+        'nos_choses.jpg', 
+        '9782378870256', 
+        'Grasset'
+    ),
+    (
+        NULL,
+        'La Vie sexuelle des fleurs', 
+        '2021-05-13', 
+        "Un recueil de poèmes et de textes hybrides, explorant l'érotisme, la nature et la quête d''identité.", 
+        9.90, 
+        '128', 
+        '11x18', 
+        'vie_sexuelle_fleurs.jpg', 
+        '9782378870560', 
+        'Grasset'
+    ),
+    (   
+        NULL,
+        'A Restricted Country', 
+        '1987-05-01', 
+        'Un recueil d''essais et de récits sur la mémoire lesbienne, la résistance et la construction d''une histoire collective.', 
+        15.99, 
+        '256', 
+        '15x23', 
+        'restricted_country.jpg', 
+        '9780918393300', 
+        'Firebrand Books'
+    ),
+    (   
+        NULL,
+        'Stone Butch Blues', 
+        '1993-06-01', 
+        'Un roman culte sur la vie d''une personne butch dans les années 1950-1970, mêlant lutte des classes et quête d''identité de genre.', 
+        14.99, 
+        '352', 
+        '14x21', 
+        'stone_butch_blues.jpg', 
+        '9781573441189', 
+        'Firebrand Books'
+    ),
+    (
+        NULL,
+        'La Maison des absents', 
+        '2021-09-02', 
+        'Un roman sur l''exil, la mémoire et l''identité palestinienne, à travers les histoires d''une famille dispersée.', 
+        12.50, 
+        '208', 
+        '13x20', 
+        'maison_absents.jpg', 
+        '9782367190556', 
+        'Actes Sud'
+    ),
+    (   
+        NULL,
+        'L''Éden à l''aube', '2024-08-22', 
+        'Un roman qui explore les thèmes de l''exil, de la mémoire et de la quête d''identité palestinienne, à travers une narration poétique et intime.', 
+        14.90, 
+        '224', 
+        '13x20', 
+        'eden_a_l_aube.jpg', 
+        '9782367191232', 
+        'Actes Sud');
+    (   
+        NULL,
+        'Fun Home', 
+        '2006-06-08', 
+        'Une autobiographie graphique explorant le coming out de l''autrice et sa relation complexe avec son père, entre secrets et littérature.', 
+        18.99, 
+        '240', 
+        '17x23', 
+        'fun_home.jpg', 
+        '9780618871711', 
+        'Houghton Mifflin'
+    );
+    (   
+        NULL,
+        'Ravages', 
+        '1955-01-01', 
+        'Roman autobiographique où Violette Leduc raconte sa passion destructrice pour une femme mariée, "Hermine", explorant la jalousie, la souffrance et la quête d''absolu. Une œuvre majeure de la littérature lesbienne et intime.', 
+        12.50, 
+        '256', 
+        '14x22', 
+        'ravages_violette_leduc.jpg', 
+        '9782070293456', 
+        'Gallimard');
 
--- ;
 
 -- CATEGORY ------------------------------------------------------------------------------------------------
 
 INSERT INTO publishinghouse_dev.category
 VALUES
     ( NULL, "Fiction" ), 
-    ( NULL, "PoÃ©sie" ), 
+    ( NULL, "Poésie" ), 
     ( NULL, "Autofiction" ), 
-    ( NULL, "Bande dessinÃ©e" ), 
+    ( NULL, "Bande dessinée" ), 
     ( NULL, "Essai" )
 ;
 
 -- EVENTS
 
--- INSERT INTO publishinghouse_dev.events
--- VALUES
---     ( NULL, 
---     "SÃ©ance de dÃ©dicace : HÃ©loise BrÃ©zillon", 
---     "2025-12-02", 
---     "Venez vous faire dÃ©dicasser votre livre par l'autrice la plus innovante de sa gÃ©nÃ©ration !", 
---     "Librairie Les mots Ã  la bouche", false, 1 )
--- ;
+INSERT INTO publishinghouse_dev.events
+VALUES
+    ( NULL, 
+    "Séance de dédicace : Héloise Brézillon", 
+    "2025-12-02", 
+    "Venez vous faire dédicasser votre livre par l'autrice la plus innovante de sa génération !", 
+    "Librairie Les mots à la bouche", false, 1 )
+;
 
 -- ----------------------------------------------------------------------------------------
 -- ---------------------------------TABLES DE JOINTURE ----------------------------------
 
--- pour les tables de jointures, on doit crÃ©er deux tables, on crÃ©e une transaction
+-- pour les tables de jointures, on doit créer deux tables, on crÃ©e une transaction
 -- choisir la table principale pour la transaction
--- crÃ©er une variable sql : une fonction sql qui va permettre de rÃ©cupÃ©rer le dernier identifiant insÃ©rÃ©
+-- créer une variable sql : une fonction sql qui va permettre de rÃ©cupÃ©rer le dernier identifiant inséré
 
 
 
 -- BOOK_AUTHOR----------------------------------------------------------------------------
 
--- requÃªte 1
+-- requête 1
 
 -- START TRANSACTION;
 
