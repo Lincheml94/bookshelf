@@ -1,4 +1,5 @@
 import styles from "../assets/css/content.module.css";
+import CarteEventAccueil from "./carte_event_accueil";
 
 const Content = () => {
 	return (
@@ -10,7 +11,7 @@ const Content = () => {
 			</div>
 			<div className={styles.actuellement}>
 				<h2>A venir</h2>
-				<div className={styles.event_accueil}></div>
+				<CarteEventAccueil />
 			</div>
 		</div>
 	);

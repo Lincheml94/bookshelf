@@ -19,11 +19,21 @@
 		height: 50vh;
 		width: auto;
 		display: block;
+		box-shadow: 10px 5px 15px black;
 	}
 
 	.event_accueil {
 		width: 15vw;
 		height: 50vh;
 		background-color: white;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 20px;
+		gap: 30px;
+		box-shadow: 5px 5px 20px red;
+		a {
+			text-decoration: underline;
+		}
 	}
 }
