@@ -22,17 +22,41 @@ class RouterService {
 								id: "home",
 								// premiere route de notre app : index
 								index: true,
+								path: "",
 								lazy: () => import("../pages/index"),
+							},
+							{
+								id: "info",
+								path: "info",
+								lazy: () => import("../pages/info"),
+							},
+							{
+								id: "catalogue",
+								path: "catalogue",
+								lazy: () => import("../pages/catalogue"),
+							},
+							{
+								id: "agenda",
+								path: "agenda",
+								lazy: () => import("../pages/agenda"),
+							},
+							{
+								id: "mentions_legales",
+								path: "mentions_legales",
+								lazy: () => import("../pages/mentions_legales"),
+							},
+							{
+								id: "register",
+								path: "register",
+								lazy: () => import("../pages/register"),
+							},
+							{
+								id: "login",
+								path: "login",
+								lazy: () => import("../pages/login"),
 							},
 						],
 					},
-
-					// children : admin_layout comme deuxième enfant de root_layout
-					// 	{
-					// 		id: "about",
-					// 		path: "about",
-					// 		lazy: () => import("./about/route"),
-					// 	},
 				],
 			},
 		] satisfies RSCRouteConfig;

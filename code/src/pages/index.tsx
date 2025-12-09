@@ -1,5 +1,7 @@
+import Content from "../components/content_accueil";
+
 const HomePage = () => {
-	return <h1>HomePage</h1>;
+	return <Content />;
 };
 
 export default HomePage;

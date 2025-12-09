@@ -1,0 +1,41 @@
+.fond {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	display: flex;
+
+	.bande_un {
+		width: 10vw;
+		height: 100vh;
+		background-color: #feffc1;
+	}
+
+	.bande_deux {
+		width: 12vw;
+		height: 100vh;
+		background-color: #ffffe8;
+	}
+
+	.bande_trois {
+		width: 26vw;
+		height: 100vh;
+		background-color: #f8f8f8;
+	}
+
+	.bande_quatre {
+		width: 12vw;
+		height: 100vh;
+		background-color: #e6e0f5;
+	}
+	.bande_cinq {
+		width: 28vw;
+		height: 100vh;
+		background-color: #f7f2f2;
+	}
+	.bande_six {
+		width: 12vw;
+		height: 100vh;
+		background-color: #fbff00;
+	}
+}

@@ -1,0 +1,14 @@
+header {
+	background-color: rgba(0, 249, 71, 0.62);
+	height: 5vh;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 20px;
+	padding-right: 60px;
+	position: fixed;
+	z-index: 10;
+
+	/* responsive */
+}

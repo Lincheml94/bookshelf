@@ -1,9 +1,21 @@
 /* polices */
+@font-face {
+	font-family: Dindong;
+	src: url(/src/assets/font/DINdong.ttf);
+}
+body {
+	font-family: Dindong;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
 
 /* variables css */
 
-:root {
-}
+/* :root {
+} */
 
 /* balises HTML */
 

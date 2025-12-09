@@ -1,0 +1,29 @@
+.contenu_accueil {
+	padding: 30px;
+	display: flex;
+	gap: 20vw;
+	align-items: center;
+	width: 100vw;
+	position: relative;
+	z-index: 3;
+	height: 100vh;
+
+	.nouveautés,
+	.actuellement {
+		display: flex;
+		align-items: center;
+		gap: 30px;
+	}
+
+	img {
+		height: 50vh;
+		width: auto;
+		display: block;
+	}
+
+	.event_accueil {
+		width: 15vw;
+		height: 50vh;
+		background-color: white;
+	}
+}
