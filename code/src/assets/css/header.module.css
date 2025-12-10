@@ -8,6 +8,15 @@ header {
 	align-items: center;
 	width: 100vw;
 	justify-content: center;
+	gap: 20px;
+
+	.logo {
+		width: 40px;
+	}
+
+	.menuham {
+		width: 20px;
+	}
 
 	/* desktop */
 	/* 

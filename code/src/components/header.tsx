@@ -1,11 +1,16 @@
 import styles from "../assets/css/header.module.css";
-import Logo from "./logo";
+import LogoDessin from "./logo_dessin";
+import LogoTitre from "./logo_titre";
+import Logo from "./logo_titre";
+import MenuHamburger from "./menu_ham";
 import Nav from "./navbar";
 
 const Header = () => {
 	return (
 		<header>
-			<Logo />
+			<LogoDessin />
+			<LogoTitre />
+			<MenuHamburger />
 			{/* <Nav /> */}
 		</header>
 	);

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 
-const Logo = () => {
+const LogoTitre = () => {
 	return (
 		<NavLink to={"/"}>
 			<p>BOOKSHELF EDITIONS</p>
@@ -8,4 +8,4 @@ const Logo = () => {
 	);
 };
 
-export default Logo;
+export default LogoTitre;
