@@ -1,14 +1,20 @@
 header {
+	/* mobile first */
 	background-color: rgba(0, 249, 71, 0.62);
 	height: 5vh;
-	width: 100%;
+	z-index: 10;
 	display: flex;
-	justify-content: space-between;
+	position: fixed;
 	align-items: center;
+	width: 100vw;
+	justify-content: center;
+
+	/* desktop */
+	/* 
+	
+	justify-content: space-between;
 	padding-left: 20px;
 	padding-right: 60px;
-	position: fixed;
-	z-index: 10;
-
-	/* responsive */
+	
+	 */
 }

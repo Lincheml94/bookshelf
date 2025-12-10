@@ -6,7 +6,7 @@ const Header = () => {
 	return (
 		<header>
 			<Logo />
-			<Nav />
+			{/* <Nav /> */}
 		</header>
 	);
 };

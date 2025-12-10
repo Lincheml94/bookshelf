@@ -1,3 +1,5 @@
+// "use client";
+
 import { NavLink } from "react-router";
 import styles from "../assets/css/navbar.module.css";
 
@@ -14,6 +16,7 @@ const Nav = () => {
 				Info
 			</NavLink>
 		</nav>
+		// évènement clic
 	);
 };
 
