@@ -1,10 +1,16 @@
 nav {
-	display: flex;
-	gap: 15vw;
+	display: none;
 }
 
-.navbar-mobile-visible {
+@media only screen and (min-width: 1100px) {
+	nav {
+		display: flex;
+		gap: 15vw;
+	}
+}
+
+/* .navbar-mobile-visible {
 }
 
 .btn-nav {
-}
+} */
