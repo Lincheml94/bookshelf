@@ -35,11 +35,14 @@ const Nav = () => {
 					Info
 				</NavLink>
 				<button type="button" onClick={handleClic}>
-					Menu
+					<img
+						className={styles.menuham}
+						src="/img/icons8-menu-50.png"
+						alt=""
+					/>
 				</button>
 			</div>
 		</nav>
-		// évènement clic
 	);
 };
 

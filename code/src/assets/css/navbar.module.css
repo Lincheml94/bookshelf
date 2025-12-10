@@ -2,3 +2,9 @@ nav {
 	display: flex;
 	gap: 15vw;
 }
+
+.navbar-mobile-visible {
+}
+
+.btn-nav {
+}

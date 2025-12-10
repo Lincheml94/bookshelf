@@ -1,14 +1,14 @@
 header {
 	/* mobile first */
 	background-color: rgba(0, 249, 71, 0.62);
-	height: 5vh;
+	height: 8vh;
 	z-index: 10;
 	display: flex;
 	position: fixed;
 	align-items: center;
 	width: 100vw;
-	justify-content: center;
-	gap: 20px;
+	justify-content: space-evenly;
+	gap: 8vw;
 
 	.logo {
 		width: 40px;
@@ -16,6 +16,10 @@ header {
 
 	.menuham {
 		width: 20px;
+	}
+
+	/* Tablette */
+	@media only screen and (min-width: 600px) {
 	}
 
 	/* desktop */
