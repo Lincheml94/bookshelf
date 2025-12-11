@@ -1,5 +1,12 @@
+import FondInfo from "../components/fond_info";
+
 const Info = () => {
-	return <h2>Info</h2>;
+	return (
+		<>
+			<FondInfo />
+			<h2>Info</h2>
+		</>
+	);
 };
 
 export default Info;

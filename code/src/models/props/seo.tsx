@@ -1,4 +1,4 @@
-import type { SeoProps } from "../models/props/seo_props";
+import type { SeoProps } from "./seo_props";
 
 // récupérer les props dans les paramètres de la fonction du composant
 const Seo = ({ title, description, url }: SeoProps) => {

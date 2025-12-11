@@ -1,3 +1,5 @@
+/* fond accueil */
+
 .fond {
 	position: fixed;
 	top: 0;
@@ -35,6 +37,126 @@
 	}
 	.bande_six {
 		width: 12vw;
+		height: 100vh;
+		background-color: #fbff00;
+	}
+	.bande_un:hover {
+		width: 12vw;
+		height: 100vh;
+		background-color: #feffc1;
+	}
+
+	.bande_deux:hover {
+		width: 14vw;
+		height: 100vh;
+		background-color: #ffffe8;
+	}
+
+	.bande_trois:hover {
+		width: 28vw;
+		height: 100vh;
+		background-color: #f8f8f8;
+	}
+
+	.bande_quatre:hover {
+		width: 14vw;
+		height: 100vh;
+		background-color: #e6e0f5;
+	}
+	.bande_cinq:hover {
+		width: 30vw;
+		height: 100vh;
+		background-color: #f7f2f2;
+	}
+	.bande_six:hover {
+		width: 14vw;
+		height: 100vh;
+		background-color: #fbff00;
+	}
+}
+
+/* fond INFO */
+
+.fondinfo {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	display: flex;
+
+	.bande_un_info {
+		width: 6vw;
+		height: 100vh;
+		background-color: #feffc1;
+	}
+
+	.bande_deux_info {
+		width: 5vw;
+		height: 100vh;
+		background-color: #ffffe8;
+	}
+
+	.bande_trois_info {
+		width: 5vw;
+		height: 100vh;
+		background-color: #f8f8f8;
+	}
+
+	.bande_quatre_info {
+		width: 6vw;
+		height: 100vh;
+		background-color: #e6e0f5;
+	}
+	.bande_cinq_info {
+		width: 8vw;
+		height: 100vh;
+		background-color: #f7f2f2;
+	}
+	.bande_six_info {
+		width: 70vw;
+		height: 100vh;
+		background-color: #fbff00;
+	}
+}
+/* fond CATALOGUE */
+
+.fondcatalogue {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	display: flex;
+
+	.bande_un_catalogue {
+		width: 1vw;
+		height: 100vh;
+		background-color: #feffc1;
+	}
+
+	.bande_deux_catalogue {
+		width: 2vw;
+		height: 100vh;
+		background-color: #ffffe8;
+	}
+
+	.bande_trois_catalogue {
+		width: 2vw;
+		height: 100vh;
+		background-color: #f8f8f8;
+	}
+
+	.bande_quatre_catalogue {
+		width: 90vw;
+		height: 100vh;
+		background-color: #e6e0f5;
+	}
+	.bande_cinq_catalogue {
+		width: 2vw;
+		height: 100vh;
+		background-color: #f7f2f2;
+	}
+	.bande_six_catalogue {
+		width: 3vw;
 		height: 100vh;
 		background-color: #fbff00;
 	}

@@ -1,4 +1,4 @@
-import Seo from "../components/seo";
+import Seo from "../models/props/seo";
 
 const Agenda = () => {
 	return (
