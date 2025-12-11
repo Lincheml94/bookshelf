@@ -1,16 +1,39 @@
-nav {
+.menu {
 	display: none;
 }
 
+.navbar-mobile-visible {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+	position: absolute;
+	top: 8vh;
+	left: 0;
+	width: 100vw;
+	height: 8vh;
+	background-color: rgba(0, 249, 71, 0.62);
+}
+
+button {
+	width: 30px;
+	background: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-style: none;
+}
+
 @media only screen and (min-width: 1100px) {
-	nav {
+	.menu {
 		display: flex;
+		flex-direction: row;
 		gap: 15vw;
+		justify-content: center;
+		align-items: center;
+	}
+
+	button {
+		display: none;
 	}
 }
-
-/* .navbar-mobile-visible {
-}
-
-.btn-nav {
-} */
