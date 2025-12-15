@@ -20,6 +20,7 @@ class BookRepository {
 		try {
 			// execution de la requête
 			const [query] = await connection.execute(sql);
+
 			return query;
 		} catch (error) {
 			return error;

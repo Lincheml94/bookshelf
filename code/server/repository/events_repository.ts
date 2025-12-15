@@ -1,5 +1,7 @@
+import type { Book } from "../../models/book";
 import type { Events } from "../../models/events";
 import MySQLService from "../service/mysql_service";
+import BookRepository from "./book_repository";
 
 class EventsRepository {
 	// nom de la table SQL
@@ -20,6 +22,17 @@ class EventsRepository {
 		try {
 			// execution de la requête
 			const [query] = await connection.execute(sql);
+
+			// boucler sur les résultats pour récupérer les objets en relation (composition en POO)
+			for (let i = 0; i < (query as Events[]).length; i++) {
+				// récupérer un résultat
+				const result = (query as Events[])[i] as Events;
+
+				// clés étrangères
+				result.book = (await new BookRepository().selectOne({
+					id: result.book_id,
+				})) as Book;
+			}
 			return query;
 		} catch (error) {
 			return error;
@@ -55,7 +68,12 @@ class EventsRepository {
 			// récupérer le premier indice d'un tableau
 			// as permet de "transtyper". Dire que query est un tableau
 			// shift : récupérer le premier indice d'un array
-			const result = (query as Events[]).shift();
+			const result = (query as Events[]).shift() as Events;
+
+			// clés étrangères
+			result.book = (await new BookRepository().selectOne({
+				id: result.book_id,
+			})) as Book;
 
 			// retourner les résultats
 			return result;
