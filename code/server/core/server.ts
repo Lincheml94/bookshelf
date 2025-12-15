@@ -6,6 +6,7 @@ import Current_stateRouter from "../router/currentstate_router";
 import EventRouter from "../router/events_router";
 import HomepageRouter from "../router/homepage_router";
 import RoleRouter from "../router/role_router";
+import UserRouter from "../router/user_router";
 import VisitorRouter from "../router/visitor_router";
 
 class Server {
@@ -33,6 +34,7 @@ class Server {
 		this.router.use("/api/visitor", new VisitorRouter().getRoutes());
 		this.router.use("/api/role", new RoleRouter().getRoutes());
 		this.router.use("/api/events", new EventRouter().getRoutes());
+		this.router.use("/api/user", new UserRouter().getRoutes());
 	};
 
 	// démarrer le serveur, comme c'est avec index.ts, c'est côté navigateur donc public

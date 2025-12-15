@@ -6,7 +6,6 @@ type Events = {
 	title: string;
 	description: string;
 	IsComplete: boolean;
-	// book_id: number;
 
 	book_id: number;
 	book: Book;
