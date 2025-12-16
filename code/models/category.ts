@@ -1,8 +1,13 @@
 // reprendre strictement les noms des colonnes de la table SQL
 
+import type { Book } from "./book";
+
 type Category = {
 	id: number;
 	name: string;
+
+	book_ids: string;
+	books: Book[];
 };
 
 export type { Category };

@@ -1,5 +1,7 @@
+import type { Book } from "../../models/book";
 import type { Category } from "../../models/category";
 import MySQLService from "../service/mysql_service";
+import BookRepository from "./book_repository";
 
 class CategoryRepository {
 	// nom de la table SQL
@@ -12,14 +14,41 @@ class CategoryRepository {
 
 		// requête SQL
 		// SELECT category.* FROM publishinghouse_dev.category
+
 		const sql = `
-            SELECT ${this.table}.* 
-            FROM ${process.env.MYSQL_DATABASE}.${this.table}
+            SELECT ${this.table}.*,
+			GROUP_CONCAT(book_id) AS book_ids
+
+            FROM 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book_category
+			ON 
+				book_category.category_id = category.id
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book
+			ON 
+				book.id = book_category.book_id
+			GROUP BY 
+				${this.table}.id
+			;
         `;
 		// try / catch : récupérer les résultats de la requête ou une erreur
 		try {
 			// execution de la requête
 			const [query] = await connection.execute(sql);
+
+			// boucler sur les résultats pour récupérer les objets en relation (composition en POO)
+			for (let i = 0; i < (query as Category[]).length; i++) {
+				// récupérer un résultat
+				const result = (query as Category[])[i] as Category;
+
+				// table de jointure
+				result.books = (await new BookRepository().selectInList(
+					result.book_ids,
+				)) as Book[];
+			}
+
 			return query;
 		} catch (error) {
 			return error;
@@ -39,10 +68,26 @@ class CategoryRepository {
 		// requête SQL
 		// WHERE category.id = ... variable de requête : précédée d'un :, suivi du nom de la variable
 		const sql = `
-            SELECT ${this.table}.* 
-            FROM ${process.env.MYSQL_DATABASE}.${this.table}
-			WHERE ${this.table}.id = :id
-			;
+            SELECT ${this.table}.*,
+			GROUP_CONCAT(book_id) AS book_ids
+
+            FROM 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book_category
+			ON 
+				book_category.category_id = category.id
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book
+			ON 
+				book.id = book_category.book_id
+
+				WHERE ${this.table}.id = :id
+			
+			GROUP BY 
+				${this.table}.id;
+	
+			
         `;
 		// try / catch : récupérer les résultats de la requête ou une erreur
 		try {
@@ -55,10 +100,63 @@ class CategoryRepository {
 			// récupérer le premier indice d'un tableau
 			// as permet de "transtyper". Dire que query est un tableau
 			// shift : récupérer le premier indice d'un array
-			const result = (query as Category[]).shift();
+			const result = (query as Category[]).shift() as Category;
+
+			// table de jointure
+			result.books = (await new BookRepository().selectInList(
+				result.book_ids,
+			)) as Book[];
 
 			// retourner les résultats
 			return result;
+		} catch (error) {
+			return error;
+		}
+	};
+
+	// sélectionner plusieurs enregistrements dans une list
+	public selectInList = async (list: string): Promise<Category[] | unknown> => {
+		// connexion au serveur MySQL
+		const connection = await new MySQLService().connect();
+
+		// requête SQL
+
+		const sql = `
+            SELECT ${this.table}.*, 
+			GROUP_CONCAT(book_id) AS book_ids
+
+            FROM 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book_category
+			ON 
+				book_category.category_id = category.id
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book
+			ON 
+				book.id = book_category.book_id
+			WHERE 
+				${this.table}.id IN (${list})
+			GROUP BY 
+				${this.table}.id
+			;
+		`;
+
+		// try / catch : récupérer les résultats de la requête ou une erreur
+		try {
+			// execution de la requête
+			const [query] = await connection.execute(sql);
+			// récupérer le premier indice d'un tableau
+			// as permet de "transtyper". Dire que query est un tableau
+			// shift : récupérer le premier indice d'un array
+			// const result = (query as Category[]).shift() as Category;
+
+			// table de jointure
+			// result.books = (await new BookRepository().selectInList(
+			// 	result.book_ids,
+			// )) as Book[];
+
+			return query;
 		} catch (error) {
 			return error;
 		}

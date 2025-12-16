@@ -1,5 +1,8 @@
+import type { QueryResult } from "mysql2";
 import type { Book } from "../../models/book";
+import type { Category } from "../../models/category";
 import MySQLService from "../service/mysql_service";
+import CategoryRepository from "./category_repository";
 
 class BookRepository {
 	// nom de la table SQL
@@ -11,15 +14,40 @@ class BookRepository {
 		const connection = await new MySQLService().connect();
 
 		// requête SQL
-		// SELECT category.* FROM publishinghouse_dev.category
+
 		const sql = `
-            SELECT ${this.table}.* 
-            FROM ${process.env.MYSQL_DATABASE}.${this.table}
+            SELECT ${this.table}.*, 
+			GROUP_CONCAT(book_id) AS category_ids
+
+            FROM 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book_category
+			ON 
+				book_category.book_id = book.id
+			JOIN 
+				${process.env.MYSQL_DATABASE}.category
+			ON 
+				category.id = book_category.category_id
+			GROUP BY 
+				${this.table}.id
+			;
         `;
 		// try / catch : récupérer les résultats de la requête ou une erreur
 		try {
 			// execution de la requête
 			const [query] = await connection.execute(sql);
+
+			// boucler sur les résultats pour récupérer les objets en relation (composition en POO)
+			for (let i = 0; i < (query as Book[]).length; i++) {
+				// récupérer un résultat
+				const result = (query as Book[])[i] as Book;
+
+				// table de jointure
+				result.categories = (await new CategoryRepository().selectInList(
+					result.category_ids,
+				)) as Category[];
+			}
 
 			return query;
 		} catch (error) {
@@ -38,9 +66,24 @@ class BookRepository {
 		// requête SQL
 		// WHERE category.id = ... variable de requête : précédée d'un :, suivi du nom de la variable
 		const sql = `
-            SELECT ${this.table}.* 
-            FROM ${process.env.MYSQL_DATABASE}.${this.table}
-			WHERE ${this.table}.id = :id
+            SELECT ${this.table}.*, 
+			GROUP_CONCAT(book_id) AS category_ids
+
+            FROM 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book_category
+			ON 
+				book_category.book_id = book.id
+			JOIN 
+				${process.env.MYSQL_DATABASE}.category
+			ON 
+				category.id = book_category.category_id
+			WHERE 
+				${this.table}.id = :id
+			GROUP BY 
+				${this.table}.id
+			;
 			;
         `;
 		// try / catch : récupérer les résultats de la requête ou une erreur
@@ -54,10 +97,104 @@ class BookRepository {
 			// récupérer le premier indice d'un tableau
 			// as permet de "transtyper". Dire que query est un tableau
 			// shift : récupérer le premier indice d'un array
-			const result = (query as Book[]).shift();
+			const result = (query as Book[]).shift() as Book;
+
+			result.categories = (await new CategoryRepository().selectInList(
+				result.category_ids,
+			)) as Category[];
 
 			// retourner les résultats
 			return result;
+		} catch (error) {
+			return error;
+		}
+	};
+
+	// sélectionner plusieurs enregistrements dans une list
+	public selectInList = async (list: string): Promise<Book[] | unknown> => {
+		// connexion au serveur MySQL
+		const connection = await new MySQLService().connect();
+
+		// requête SQL
+
+		const sql = `
+            SELECT ${this.table}.*, 
+			GROUP_CONCAT(book_id) AS category_ids
+
+            FROM 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book_category
+			ON 
+				book_category.book_id = book.id
+			JOIN 
+				${process.env.MYSQL_DATABASE}.category
+			ON 
+				category.id = book_category.category_id
+			WHERE 
+				${this.table}.id IN (${list})
+			GROUP BY 
+				${this.table}.id
+			;
+		`;
+
+		// try / catch : récupérer les résultats de la requête ou une erreur
+		try {
+			// execution de la requête
+			const [query] = await connection.execute(sql);
+			// récupérer le premier indice d'un tableau
+			// as permet de "transtyper". Dire que query est un tableau
+			// shift : récupérer le premier indice d'un array
+			const result = (query as Book[]).shift() as Book;
+
+			// table de jointure
+			result.categories = (await new CategoryRepository().selectInList(
+				result.category_ids,
+			)) as Category[];
+
+			return query;
+		} catch (error) {
+			return error;
+		}
+	};
+
+	// insérer un enregistrement
+	public insert = async (
+		data: Partial<Book>,
+	): Promise<QueryResult | unknown> => {
+		// connexion au serveur mysql
+		const connection = await new MySQLService().connect();
+
+		// requête SQL
+		// Dans VALUE, on crée des variables de requête, pour éviter les injections SQL (les attaques)
+		// les variables s'écrivent avec deux points
+		const sql = `
+		INSERT INTO 
+			${process.env.MYSQL_DATABASE}.${this.table}
+		VALUE
+			(
+				NULL, 
+				:title, 
+				:published_at, 
+				:description, 
+				:price, 
+				:pages, 
+				:dimensions, 
+				:images, 
+				:isbn, 
+				:print
+			)
+			;
+
+		`;
+
+		// try / catch : exécuter requête / récupérer les résultats ou une erreur
+		try {
+			// execution de la requête
+			const [query] = await connection.execute(sql, data);
+
+			// retourner les informations de la requête
+			return query;
 		} catch (error) {
 			return error;
 		}

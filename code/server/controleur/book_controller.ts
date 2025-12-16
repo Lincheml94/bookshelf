@@ -46,6 +46,31 @@ class BookController {
 			data: results,
 		});
 	};
+
+	public insert = async (req: Request, res: Response) => {
+		console.log(req.body);
+
+		// récupérer la variable de route
+		// req.body : permet de récupérer la propriété body de la requête http
+		const results = await new BookRepository().insert(req.body);
+
+		// si la requête renvoie une erreur
+		if (results instanceof Error) {
+			res.status(400).json({
+				status: 400,
+				message: process.env.NODE === "production" ? "error" : results.message,
+			});
+			return;
+		}
+		// renvoyer une réponse avec un code de statut HTTP et au format JSON
+		// code 200 : requête traitée avec succès (voir p 5 du pdf 14
+		// 201 : requête traitée avec succès, et création d'une ressource
+		res.status(201).json({
+			status: 201,
+			message: "ça fonctionne",
+			data: results,
+		});
+	};
 }
 
 export default BookController;

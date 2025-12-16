@@ -1,9 +1,13 @@
 import express from "express";
+import multer from "multer";
 import BookController from "../controleur/book_controller";
 
 class BookRouter {
 	// routeur express
 	private router = express.Router();
+
+	// multer permet de gérer les transfert de fichiers
+	private multer = multer({ dest: "public" });
 
 	// liste des routes
 	public getRoutes = () => {
@@ -14,6 +18,10 @@ class BookRouter {
 
 		// variable de route ; précédée par un :; suivie du nom de la variable
 		this.router.get("/:id", new BookController().selectOne);
+
+		// insérér un enregistrement
+		// utilisation du middleware "multer"
+		this.router.post("/", this.multer.any(), new BookController().insert);
 		// retourner le routeur
 		return this.router;
 	};
