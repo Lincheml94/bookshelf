@@ -1,5 +1,7 @@
+import type { Book } from "../../models/book";
 import type { Currentstate } from "../../models/currentstate";
 import MySQLService from "../service/mysql_service";
+import BookRepository from "./book_repository";
 
 class CurrentstateRepository {
 	// nom de la table SQL
@@ -13,13 +15,39 @@ class CurrentstateRepository {
 		// requête SQL
 		// SELECT category.* FROM publishinghouse_dev.category
 		const sql = `
-            SELECT ${this.table}.* 
-            FROM ${process.env.MYSQL_DATABASE}.${this.table}
+            SELECT ${this.table}.*,
+			GROUP_CONCAT(book_id) AS book_ids
+
+            FROM 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book_currentstate
+			ON 
+				book_currentstate.currentstate_id = currentstate.id
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book
+			ON 
+				book.id = book_currentstate.book_id
+			GROUP BY 
+				${this.table}.id
+			;
         `;
 		// try / catch : récupérer les résultats de la requête ou une erreur
 		try {
 			// execution de la requête
 			const [query] = await connection.execute(sql);
+
+			// boucler sur les résultats pour récupérer les objets en relation (composition en POO)
+			for (let i = 0; i < (query as Currentstate[]).length; i++) {
+				// récupérer un résultat
+				const result = (query as Currentstate[])[i] as Currentstate;
+
+				// table de jointure
+				result.books = (await new BookRepository().selectInList(
+					result.book_ids,
+				)) as Book[];
+			}
+
 			return query;
 		} catch (error) {
 			return error;
@@ -39,12 +67,26 @@ class CurrentstateRepository {
 		// requête SQL
 		// WHERE category.id = ... variable de requête : précédée d'un :, suivi du nom de la variable
 		const sql = `
-            SELECT ${this.table}.* 
-            FROM ${process.env.MYSQL_DATABASE}.${this.table}
-			WHERE ${this.table}.id = :id
+            SELECT ${this.table}.*,
+			GROUP_CONCAT(book_id) AS book_ids
+
+            FROM 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book_currentstate
+			ON 
+				book_currentstate.currentstate_id = currentstate.id
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book
+			ON 
+				book.id = book_currentstate.book_id
+			WHERE 
+				${this.table}.id = :id
+			GROUP BY 
+				${this.table}.id
 			;
         `;
-		// try / catch : récupérer les résultats de la requête ou une erreur
+
 		try {
 			// execution de la requête
 			// Si la requête possède des variables, utiliser les paramètres de la méthode (ici: data)
@@ -55,10 +97,65 @@ class CurrentstateRepository {
 			// récupérer le premier indice d'un tableau
 			// as permet de "transtyper". Dire que query est un tableau
 			// shift : récupérer le premier indice d'un array
-			const result = (query as Currentstate[]).shift();
+			const result = (query as Currentstate[]).shift() as Currentstate;
+
+			// table de jointure
+			result.books = (await new BookRepository().selectInList(
+				result.book_ids,
+			)) as Book[];
 
 			// retourner les résultats
 			return result;
+		} catch (error) {
+			return error;
+		}
+	};
+
+	// sélectionner plusieurs enregistrements dans une list
+	public selectInList = async (
+		list: string,
+	): Promise<Currentstate[] | unknown> => {
+		// connexion au serveur MySQL
+		const connection = await new MySQLService().connect();
+
+		// requête SQL
+
+		const sql = `
+            SELECT ${this.table}.*, 
+			GROUP_CONCAT(book_id) AS book_ids
+
+            FROM 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book_currentstate
+			ON 
+				book_currentstate.currentstate_id = currentstate.id
+			JOIN 
+				${process.env.MYSQL_DATABASE}.book
+			ON 
+				book.id = book_currentstate.book_id
+			WHERE 
+				${this.table}.id IN (${list})
+			GROUP BY 
+				${this.table}.id
+			;
+
+		`;
+		// try / catch : récupérer les résultats de la requête ou une erreur
+		try {
+			// execution de la requête
+			// Si la requête possède des variables, utiliser les paramètres de la méthode (ici: data)
+			// requêtes préparées (utilisations des variables de requêtes) : ça sert à améliorer la sécurité, le système va évaluer la sécurité de la requête
+			// la requête est exécutée uniquement si elle ne présente pas de risque
+			const [query] = await connection.execute(sql);
+
+			// récupérer le premier indice d'un tableau
+			// as permet de "transtyper". Dire que query est un tableau
+			// shift : récupérer le premier indice d'un array
+			// const result = (query as Currentstate[]).shift();
+
+			// retourner les résultats
+			return query;
 		} catch (error) {
 			return error;
 		}

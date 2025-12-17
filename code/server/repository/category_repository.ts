@@ -82,7 +82,7 @@ class CategoryRepository {
 			ON 
 				book.id = book_category.book_id
 
-				WHERE ${this.table}.id = :id
+			WHERE ${this.table}.id = :id	
 			
 			GROUP BY 
 				${this.table}.id;
@@ -140,6 +140,7 @@ class CategoryRepository {
 			GROUP BY 
 				${this.table}.id
 			;
+
 		`;
 
 		// try / catch : récupérer les résultats de la requête ou une erreur

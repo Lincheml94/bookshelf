@@ -1,8 +1,12 @@
 import type { QueryResult } from "mysql2";
+import type { Author } from "../../models/author";
 import type { Book } from "../../models/book";
 import type { Category } from "../../models/category";
+import type { Currentstate } from "../../models/currentstate";
 import MySQLService from "../service/mysql_service";
+import AuthorRepository from "./author_repository";
 import CategoryRepository from "./category_repository";
+import CurrentstateRepository from "./currentstate_repository";
 
 class BookRepository {
 	// nom de la table SQL
@@ -17,18 +21,36 @@ class BookRepository {
 
 		const sql = `
             SELECT ${this.table}.*, 
-			GROUP_CONCAT(book_id) AS category_ids
+			GROUP_CONCAT(category.id) AS category_ids,
+			GROUP_CONCAT(currentstate.id) AS currentstate_ids,
+			GROUP_CONCAT(author.id) AS author_ids
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book_category
 			ON 
 				book_category.book_id = book.id
-			JOIN 
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.book_currentstate
+			ON
+				book_currentstate.book_id = book.id
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.book_author
+			ON
+				book_author.book_id = book.id
+			LEFT JOIN  
 				${process.env.MYSQL_DATABASE}.category
 			ON 
 				category.id = book_category.category_id
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.currentstate
+			ON
+				currentstate.id = book_currentstate.currentstate_id
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.author
+			ON
+				author.id = book_author.author_id
 			GROUP BY 
 				${this.table}.id
 			;
@@ -43,10 +65,20 @@ class BookRepository {
 				// récupérer un résultat
 				const result = (query as Book[])[i] as Book;
 
-				// table de jointure
+				// table de jointure - CATEGORY
 				result.categories = (await new CategoryRepository().selectInList(
 					result.category_ids,
 				)) as Category[];
+
+				// table de jointure - CURRENTSTATE
+				result.currentstates = (await new CurrentstateRepository().selectInList(
+					result.category_ids,
+				)) as Currentstate[];
+
+				// table de jointure - CURRENTSTATE
+				result.authors = (await new AuthorRepository().selectInList(
+					result.author_ids,
+				)) as Author[];
 			}
 
 			return query;
@@ -67,25 +99,44 @@ class BookRepository {
 		// WHERE category.id = ... variable de requête : précédée d'un :, suivi du nom de la variable
 		const sql = `
             SELECT ${this.table}.*, 
-			GROUP_CONCAT(book_id) AS category_ids
+			GROUP_CONCAT(category.id) AS category_ids,
+			GROUP_CONCAT(currentstate.id) AS currentstate_ids,
+			GROUP_CONCAT(author.id) AS author_ids
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
-			JOIN 
+				
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book_category
 			ON 
 				book_category.book_id = book.id
-			JOIN 
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.book_currentstate
+			ON
+				book_currentstate.book_id = book.id
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.book_author
+			ON	
+				book_author.book_id = book.id
+			LEFT JOIN  
 				${process.env.MYSQL_DATABASE}.category
 			ON 
 				category.id = book_category.category_id
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.currentstate
+			ON
+				currentstate.id = book_currentstate.currentstate_id
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.author
+			ON
+				author.id = book_author.author_id
 			WHERE 
 				${this.table}.id = :id
 			GROUP BY 
 				${this.table}.id
 			;
-			;
         `;
+
 		// try / catch : récupérer les résultats de la requête ou une erreur
 		try {
 			// execution de la requête
@@ -99,9 +150,20 @@ class BookRepository {
 			// shift : récupérer le premier indice d'un array
 			const result = (query as Book[]).shift() as Book;
 
+			// table de jointure - CATEGORY
 			result.categories = (await new CategoryRepository().selectInList(
 				result.category_ids,
 			)) as Category[];
+
+			// table de jointure - CURRENTSTATE
+			result.currentstates = (await new CurrentstateRepository().selectInList(
+				result.category_ids,
+			)) as Currentstate[];
+
+			// table de jointure - CURRENTSTATE
+			result.authors = (await new AuthorRepository().selectInList(
+				result.category_ids,
+			)) as Author[];
 
 			// retourner les résultats
 			return result;
@@ -118,19 +180,38 @@ class BookRepository {
 		// requête SQL
 
 		const sql = `
-            SELECT ${this.table}.*, 
-			GROUP_CONCAT(book_id) AS category_ids
+		SELECT ${this.table}.*, 
+			GROUP_CONCAT(category.id) AS category_ids,
+			GROUP_CONCAT(currentstate.id) AS currentstate_ids,
+			GROUP_CONCAT(author.id) AS author_ids
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
-			JOIN 
+				
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book_category
 			ON 
 				book_category.book_id = book.id
-			JOIN 
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.book_currentstate
+			ON
+				book_currentstate.book_id = book.id
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.book_author
+			ON	
+				book_author.book_id = book.id
+			LEFT JOIN  
 				${process.env.MYSQL_DATABASE}.category
 			ON 
 				category.id = book_category.category_id
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.currentstate
+			ON
+				currentstate.id = book_currentstate.currentstate_id
+			LEFT JOIN 
+				${process.env.MYSQL_DATABASE}.author
+			ON
+				author.id = book_author.author_id
 			WHERE 
 				${this.table}.id IN (${list})
 			GROUP BY 
@@ -147,10 +228,20 @@ class BookRepository {
 			// shift : récupérer le premier indice d'un array
 			const result = (query as Book[]).shift() as Book;
 
-			// table de jointure
+			// table de jointure - CATEGORY
 			result.categories = (await new CategoryRepository().selectInList(
 				result.category_ids,
 			)) as Category[];
+
+			// table de jointure - CURRENTSTATE
+			result.currentstates = (await new CurrentstateRepository().selectInList(
+				result.category_ids,
+			)) as Currentstate[];
+
+			// table de jointure - CURRENTSTATE
+			result.authors = (await new AuthorRepository().selectInList(
+				result.category_ids,
+			)) as Author[];
 
 			return query;
 		} catch (error) {

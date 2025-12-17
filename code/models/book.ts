@@ -1,6 +1,8 @@
 // reprendre strictement les noms des colonnes de la table SQL
 
+import type { Author } from "./author";
 import type { Category } from "./category";
+import type { Currentstate } from "./currentstate";
 
 type Book = {
 	id: number;
@@ -16,6 +18,12 @@ type Book = {
 	// liste concaténée des identifiants des catégories
 	category_ids: string;
 	categories: Category[];
+	// liste concaténée des identifiants des currentstates
+	currentstate_ids: string;
+	currentstates: Currentstate[];
+	// liste concaténée des identifiants des authors
+	author_ids: string;
+	authors: Author[];
 };
 
 export type { Book };
