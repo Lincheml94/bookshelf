@@ -168,7 +168,7 @@ class BookRepository {
 		// requête SQL
 		// Dans VALUE, on crée des variables de requête, pour éviter les injections SQL (les attaques)
 		// les variables s'écrivent avec deux points
-		const sql = `
+		let sql = `
 		INSERT INTO 
 			${process.env.MYSQL_DATABASE}.${this.table}
 		VALUE
@@ -190,12 +190,46 @@ class BookRepository {
 
 		// try / catch : exécuter requête / récupérer les résultats ou une erreur
 		try {
+			// démarrer une transaction SQL
+			connection.beginTransaction();
+
+			// exécution de la première requête
+			await connection.execute(sql, data);
+
 			// execution de la requête
+
+			// deuxième requête
+			sql = `SET @id = LAST_INSERT_ID();`;
+			// exécution de la deuxième requête
+			await connection.execute(sql, data);
+
+			// troisième requête
+			const joinIds = data.category_ids
+				?.split(",")
+				.map((value) => `(${value}, @id)`)
+				.join();
+			console.log(joinIds);
+
+			sql = `
+				INSERT INTO 
+					${process.env.MYSQL_DATABASE}.book_category
+				VALUES
+						
+				${joinIds}
+				;
+			
+				`;
 			const [query] = await connection.execute(sql, data);
+
+			// valider la transition SQL
+			connection.commit();
 
 			// retourner les informations de la requête
 			return query;
 		} catch (error) {
+			// annuler une transaction
+			connection.rollback();
+
 			return error;
 		}
 	};

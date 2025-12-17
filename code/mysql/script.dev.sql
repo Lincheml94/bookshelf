@@ -1,12 +1,12 @@
--- les commandes sql sont en capitales pour les diffÃ©rencier des autres commandes
--- supprimer la base de donnÃ©es si elle existe
--- ATTETION, ne pas faire en production
+-- les commandes sql sont en capitales pour les différencier des autres commandes
+-- supprimer la base de données si elle existe
+-- ATTENTION, ne pas faire en production
 DROP DATABASE IF EXISTS publishinghouse_dev;
 
--- crÃ©er la base de donnÃ©es 
+-- créer la base de données 
 CREATE DATABASE publishinghouse_dev;
 
--- crÃ©er les tables
+-- créer les tables
 
 -- ROLE
 CREATE TABLE publishinghouse_dev.role(
@@ -141,8 +141,8 @@ CREATE TABLE publishinghouse_dev.events_visitor(
 
 -- --------------------------------------INSERER LES DONNEES----------------------------------------------
 
--- on doit les insÃ©rer dans un ordre logique : comme au dessus, d'abord les tables qui n'ont pas de relations. On peut suivre l'ordre ci-dessus et suivre l'ordre des colonnes
--- NULL pour dÃ©finir les clÃ©s primaires : le systÃ¨me va dÃ©cider
+-- on doit les insérer dans un ordre logique : comme au dessus, d'abord les tables qui n'ont pas de relations. On peut suivre l'ordre ci-dessus et suivre l'ordre des colonnes
+-- NULL pour définir les clés primaires : le systÃ¨me va décider
 
 -- ROLE
 
@@ -204,7 +204,7 @@ VALUES
     ( NULL, 'Phoebe', 'Hadjimarkos Clark', 'Phoebe Hadjimarkos Clark est une écrivaine et artiste américaine, connue pour ses textes expérimentaux et son engagement dans les communautés queer et trans.'),
     ( NULL, 'Leslie', 'Feinberg', 'Leslie Feinberg était une militante transgenre et écrivaine américaine, autrice de "Stone Butch Blues", un roman culte sur la vie des personnes trans et la lutte des classes.'),
     ( NULL, 'Karim', 'Kattan', 'Karim Kattan est un écrivain palestinien, dont les œuvres, comme "La Maison des absents", explorent l''exil, la mémoire et l''identité palestinienne.'),
-    ( NULL, 'Alison', 'Bechdel', 'Alison Bechdel est une autrice de bandes dessinées américaine, célèbre pour "Fun Home", une autobiographie graphique explorant son coming out et sa relation avec son père.');
+    ( NULL, 'Alison', 'Bechdel', 'Alison Bechdel est une autrice de bandes dessinées américaine, célèbre pour "Fun Home", une autobiographie graphique explorant son coming out et sa relation avec son père.'),
     ( NULL, 'Violette', 'Leduc', 'Violette Leduc (1907-1972) est une écrivaine française, figure majeure de la littérature autobiographique. Son œuvre, souvent audacieuse et intime, explore la quête d''amour, la sexualité, la jalousie et la souffrance, avec un style lyrique et sans concession. Elle fut proche de Simone de Beauvoir et de Jean Genet.');
 ;
 
@@ -226,49 +226,50 @@ VALUES
     ),
     (   
         NULL,
-        'Bastard Out of Carolina', 
-        '1992-06-01', 
-        'Un roman poignant sur une jeune fille grandissant dans une famille pauvre et violente du Sud des États-Unis, explorant les thèmes de la résilience et de l''identité.', 
+        "Bastard Out of Carolina", 
+        "1992-06-01", 
+        "Un roman poignant sur une jeune fille grandissant dans une famille pauvre et violente du Sud des États-Unis, explorant les thèmes de la résilience et de l'identité.", 
         12.99, 
-        '320', 
-        '14x21', 
-        'bastard_out_of_carolina.jpg', 
-        '9780452273281', 
-        'Plume'
+        "320", 
+        "14x21", 
+        "bastard_out_of_carolina.jpg", 
+        "9780452273281", 
+        "Plume"
     ),
     (   
         NULL,
-        'Cavedweller', 
-        '1998-05-15', 
-        'L''histoire d''une femme qui retourne dans sa ville natale de Géorgie pour retrouver ses filles, après une vie tumultueuse à Los Angeles.', 
+        "Cavedweller", 
+        "1998-05-15", 
+        "L'histoire d'une femme qui retourne dans sa ville natale de Géorgie pour retrouver ses filles, après une vie tumultueuse à Los Angeles.", 
         13.50, 
-        '384', 
-        '14x21', 
-        'cavedweller.jpg', 
-        '9780452280128', 
-        'Plume'),
+        "384", 
+        "14x21", 
+        "cavedweller.jpg", 
+        "9780452280128", 
+        "Plume"
+    ),
     (   NULL, 
-        'L''Art de la joie', 
-        '2008-09-15', 
-        'Une épopée féministe et sensuelle sur la vie de Modesta, une femme sicilienne en quête de liberté et de bonheur au début du XXe siècle.', 
+        "L'Art de la joie", 
+        "2008-09-15", 
+        "Une épopée féministe et sensuelle sur la vie de Modesta, une femme sicilienne en quête de liberté et de bonheur au début du XXe siècle.", 
         14.50, 
-        '400', 
-        '15x23', 
-        'art_de_la_joie.jpg', 
-        '9782070396071', 
-        'Gallimard'
+        "400", 
+        "15x23", 
+        "art_de_la_joie.jpg", 
+        "9782070396071", 
+        "Gallimard"
     ),
     (   
         NULL,
-        'La Petite Dernière', 
-        '2020-08-20', 
-        'Un roman intime et poétique sur une jeune femme française d''origine algérienne, en quête d''identité entre religion, famille et sexualité.', 
+        "La Petite Dernière", 
+        "2020-08-20", 
+        "Un roman intime et poétique sur une jeune femme française d'origine algérienne, en quête d'identité entre religion, famille et sexualité.", 
         11.90, 
-        '160', 
-        '13x20', 
-        'petite_derniere.jpg', 
-        '9782072894567', 
-        'Noir sur Blanc'
+        "160", 
+        "13x20", 
+        "petite_derniere.jpg", 
+        "9782072894567", 
+        "Noir sur Blanc"
     ),
     (   
         NULL,
@@ -276,39 +277,41 @@ VALUES
         '2024-01-11', 
         'Un roman sur l''amitié, l''amour et les jeux de pouvoir, explorant les relations humaines dans un Paris contemporain.', 
         11.90, 
-        '192', 
-        '13x20', 
-        'jouer_le_jeu.jpg', 
-        '9782073021456', 
-        'Noir sur Blanc');
+        "192", 
+        "13x20", 
+        "jouer_le_jeu.jpg", 
+        "9782073021456", 
+        "Noir sur Blanc"
+    ),
     (
         NULL,
-        'Quatrième génération', 
-        '2017-03-10', 
-        'Un récit autobiographique et politique sur la transidentité, la filiation et la mémoire familiale.', 
+        "Quatrième génération", 
+        "2017-03-10", 
+        "Un récit autobiographique et politique sur la transidentité, la filiation et la mémoire familiale.", 
         10.50, 
-        '192', 
-        '12x19', 
-        'quatrieme_generation.jpg', 
-        '9782367440556', 
-        'Cambourakis'
+        "192", 
+        "12x19", 
+        "quatrieme_generation.jpg", 
+        "9782367440556", 
+        "Cambourakis"
     ),
     (   
         NULL,
-        'Viendra le temps du feu', 
-        '2021-08-26', 
-        'Un récit poétique et politique sur la transmission, la mémoire et la résistance, entre autobiographie et fiction.', 
+        "Viendra le temps du feu", 
+        "2021-08-26", 
+        "Un récit poétique et politique sur la transmission, la mémoire et la résistance, entre autobiographie et fiction.", 
         12.90, 
-        '176', 
-        '12x19', 
-        'viendra_le_temps_du_feu.jpg', 
-        '9782367441560', 
-        'Cambourakis'),
+        "176", 
+        "12x19", 
+        "viendra_le_temps_du_feu.jpg", 
+        "9782367441560", 
+        "Cambourakis"
+    ),
     (
         NULL,
-        'Nos choses', 
-        '2019-11-07', 
-        'Un recueil de nouvelles horrifiques et sociales, ancrées dans la réalité argentine, où le surnaturel côtoie le quotidien.', 
+        "Nos choses", 
+        "2019-11-07", 
+        "Un recueil de nouvelles horrifiques et sociales, ancrées dans la réalité argentine, où le surnaturel côtoie le quotidien.", 
         13.99, 
         '224', 
         '14x22', 
@@ -366,14 +369,15 @@ VALUES
     ),
     (   
         NULL,
-        'L''Éden à l''aube', '2024-08-22', 
+        "L'Éden à l''aube', '2024-08-22", 
         'Un roman qui explore les thèmes de l''exil, de la mémoire et de la quête d''identité palestinienne, à travers une narration poétique et intime.', 
         14.90, 
         '224', 
         '13x20', 
         'eden_a_l_aube.jpg', 
         '9782367191232', 
-        'Actes Sud');
+        'Actes Sud'
+    ),
     (   
         NULL,
         'Fun Home', 
@@ -385,7 +389,7 @@ VALUES
         'fun_home.jpg', 
         '9780618871711', 
         'Houghton Mifflin'
-    );
+    ),
     (   
         NULL,
         'Ravages', 
@@ -396,7 +400,8 @@ VALUES
         '14x22', 
         'ravages_violette_leduc.jpg', 
         '9782070293456', 
-        'Gallimard');
+        'Gallimard'
+    );
 
 
 -- CATEGORY ------------------------------------------------------------------------------------------------
@@ -418,7 +423,8 @@ VALUES
     "Séance de dédicace : Héloise Brézillon", 
     "2025-12-02", 
     "Venez vous faire dédicasser votre livre par l'autrice la plus innovante de sa génération !", 
-    "Librairie Les mots à la bouche", false, 1 )
+    "Librairie Les mots à la bouche", false, 1 
+    )
 ;
 
 -- ----------------------------------------------------------------------------------------
