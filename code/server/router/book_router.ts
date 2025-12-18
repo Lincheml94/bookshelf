@@ -22,6 +22,14 @@ class BookRouter {
 		// insérér un enregistrement
 		// utilisation du middleware "multer"
 		this.router.post("/", this.multer.any(), new BookController().insert);
+
+		// mettre à jour un enregistrement
+		// utilisation du middleware "multer"
+		this.router.put("/", this.multer.any(), new BookController().update);
+
+		// supprimer un enregistrement
+		this.router.delete("/", new BookController().delete);
+
 		// retourner le routeur
 		return this.router;
 	};
