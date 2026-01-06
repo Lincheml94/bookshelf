@@ -6,7 +6,6 @@ const HomePage = () => {
 	return (
 		<>
 			<Seo title="Accueil" description="Accueil - desc" url="/" />
-			{/* Fond */}
 			<Fond />
 			<Content />
 		</>

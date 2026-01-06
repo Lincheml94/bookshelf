@@ -1,16 +1,16 @@
 .flexall {
 	display: flex;
 	flex-direction: column;
-	width: 100vw;
+	/* width: 90vw; */
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	top: 120px;
-	z-index: 3;
+	padding-top: 120px;
 }
 
 .flexcat {
 	display: flex;
+	width: 90vw;
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 50px;
@@ -24,6 +24,7 @@
 		border: rgb(123, 123, 123) 1px solid;
 		margin: 10px;
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 	}

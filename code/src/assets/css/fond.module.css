@@ -1,10 +1,9 @@
 /* fond accueil */
-
 .fond {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: -1;
 	display: flex;
 
 	.bande_un {
@@ -38,42 +37,43 @@
 	.bande_six {
 		width: 12vw;
 		height: 100vh;
-		background-color: #fbff00;
-	}
+		background-color: 
+	}	
 	.bande_un:hover {
-		width: 12vw;
+		width: 10vw;
 		height: 100vh;
-		background-color: #feffc1;
+		background-color: #bcbd8f;
 	}
 
 	.bande_deux:hover {
-		width: 14vw;
+		width: 12vw;
 		height: 100vh;
 		background-color: #ffffe8;
 	}
 
 	.bande_trois:hover {
-		width: 28vw;
+		width: 26vw;
 		height: 100vh;
 		background-color: #f8f8f8;
 	}
 
 	.bande_quatre:hover {
-		width: 14vw;
+		width: 12vw;
 		height: 100vh;
-		background-color: #e6e0f5;
+		background-color: #cfcadc;
 	}
 	.bande_cinq:hover {
-		width: 30vw;
+		width: 28vw;
 		height: 100vh;
-		background-color: #f7f2f2;
+		background-color: #c0bdbd;
 	}
 	.bande_six:hover {
-		width: 14vw;
+		width: 12vw;
 		height: 100vh;
-		background-color: #fbff00;
+		background-color: #969902;
 	}
 }
+
 
 /* fond INFO */
 
@@ -124,7 +124,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: -1;
 	display: flex;
 
 	.bande_un_catalogue {
@@ -160,4 +160,49 @@
 		height: 100vh;
 		background-color: #fbff00;
 	}
+	}
+
+	/* fond AGENDA */
+
+.fondagenda {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	display: flex;
+
+	.bande_un_agenda {
+		width: 5vw;
+		height: 100vh;
+		background-color: #feffc1;
+	}
+
+	.bande_deux_agenda {
+		width: 12vw;
+		height: 100vh;
+		background-color: #ffffe8;
+	}
+
+	.bande_trois_agenda {
+		width: 10vw;
+		height: 100vh;
+		background-color: #f8f8f8;
+	}
+
+	.bande_quatre_agenda {
+		width: 18vw;
+		height: 100vh;
+		background-color: #e6e0f5;
+	}
+	.bande_cinq_agenda {
+		width: 45vw;
+		height: 100vh;
+		background-color: #f7f2f2;
+	}
+	.bande_six_agenda {
+		width: 12vw;
+		height: 100vh;
+		background-color: #fbff00;
+	}
 }
+

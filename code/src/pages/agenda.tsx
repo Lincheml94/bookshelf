@@ -1,12 +1,12 @@
+import FondAgenda from "../components/fond_agenda";
 import Seo from "../models/props/seo";
 
 const Agenda = () => {
-	return (
-		<>
+	return <>
 			<Seo title="Agenda" description="Agenda - desc" url="/agenda" />
-			return <h2>Agenda</h2>
-		</>
-	);
+			<FondAgenda />
+			</>
+	
 };
 
 export default Agenda;
