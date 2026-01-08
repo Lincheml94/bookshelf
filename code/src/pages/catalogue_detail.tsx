@@ -1,9 +1,9 @@
-import Seo from "../models/props/seo";
+import Seo from "../models/props//seo/seo";
 import type { CatalogueDetailsParams } from "../models/params/catalogue_details_params"
 import { use } from "react";
 import BookApiService from "../services/book_api_service";
 import type { Book } from "../../models/book";
-import BookContentDetails from "../components/book/book_content_details";
+import BookContentDetails from "../components/page_catalogue/book_content_details";
 // param permet de récupérer une variable d'URL
 
 const CatalogueDetail = ({ params }: CatalogueDetailsParams) => {

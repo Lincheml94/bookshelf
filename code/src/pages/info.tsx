@@ -1,4 +1,4 @@
-import FondInfo from "../components/fond_info";
+import FondInfo from "../components/fonds/fond_info";
 
 const Info = () => {
 	return (

@@ -2,7 +2,7 @@
 "use client";
 import { useState } from "react";
 import { NavLink } from "react-router";
-import styles from "../assets/css/navbar.module.css";
+import styles from "../../assets/css/navbar.module.css";
 
 // import MenuHamburger from "./menu_ham";
 
@@ -23,7 +23,7 @@ const Nav = () => {
 
 	return (
 		<div className={styles.navbar}>
-			<button type="button" onClick={handleClic}>
+			<button className={styles.hamburger} type="button" onClick={handleClic}>
 				<img
 					className={styles.menuham}
 					src="/img/icons8-menu-50.png"
@@ -36,6 +36,7 @@ const Nav = () => {
 				<NavLink to={"/catalogue"}>Catalogue</NavLink>
 				<NavLink to={"/agenda"}>Agenda</NavLink>
 				<NavLink to={"/info"}>Info</NavLink>
+				<NavLink to={"/contact"}>Contact</NavLink>
 			</nav>
 		</div>
 	);

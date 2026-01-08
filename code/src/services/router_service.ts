@@ -3,6 +3,7 @@ import type { unstable_RSCRouteConfig as RSCRouteConfig } from "react-router";
 class RouterService {
 	public getRouter = () => {
 		return [
+		
 			{
 				// identifiant unique de la mise en page
 				id: "root",
@@ -12,6 +13,37 @@ class RouterService {
 				lazy: () => import("../layouts/root_layout"),
 
 				children: [
+				
+					 // 🔐 ADMIN
+					{
+						id: "admin",
+						path: "admin",
+						lazy: () => import("../layouts/admin_layout"),
+
+						children: [
+						{
+							id: "admin_home",
+							path: "dashboard",
+							index: true,
+							lazy: () => import("../pages/admin/dashboard"),
+						},
+						{
+							id: "admin_login",
+							path: "login",
+							lazy: () => import("../pages/admin/login"),
+						},
+						{
+							id: "admin_register",
+							path: "register",
+							lazy: () => import("../pages/admin/register"),
+						},
+						{
+							id: "admin_books",
+							path: "books",
+							lazy: () => import("../pages/admin/books"),
+						},
+						],
+					},
 					{
 						id: "public",
 						path: "",
@@ -31,6 +63,11 @@ class RouterService {
 								lazy: () => import("../pages/info"),
 							},
 							{
+								id: "contact",
+								path: "contact",
+								lazy: () => import("../pages/contact"),
+							},
+							{
 								id: "catalogue",
 								path: "catalogue",
 								lazy: () => import("../pages/catalogue"),
@@ -46,14 +83,9 @@ class RouterService {
 								lazy: () => import("../pages/mentions_legales"),
 							},
 							{
-								id: "register",
-								path: "register",
-								lazy: () => import("../pages/register"),
-							},
-							{
 								id: "login",
 								path: "login",
-								lazy: () => import("../pages/login"),
+								lazy: () => import("../pages/admin/login"),
 							},
 							{
 								id: "catalogue_detail",

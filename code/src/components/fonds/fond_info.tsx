@@ -1,4 +1,4 @@
-import styles from "../assets/css/fond.module.css";
+import styles from "../../assets/css/fond.module.css";
 
 const FondInfo = () => {
 	return (

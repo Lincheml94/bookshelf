@@ -1,6 +1,7 @@
+// import React from 'react'
 import { Link } from "react-router";
 import styles from "../../assets/css/galerie_catalogue.module.css";
-import type { BookListItemProps } from "../../models/props/book_list_item_props";
+import type { BookListItemProps } from "../../models/props/book/book_list_item_props";
 // récupérer les props dans les paramètres
 
 

@@ -1,6 +1,6 @@
-import Content from "../components/content_accueil";
-import Fond from "../components/fond";
-import Seo from "../models/props/seo";
+import Content from "../components/accueil/content_accueil";
+import Fond from "../components/fonds/fond";
+import Seo from "../models/props/seo/seo";
 
 const HomePage = () => {
 	return (

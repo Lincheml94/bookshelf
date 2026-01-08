@@ -1,4 +1,4 @@
-import styles from "../assets/css/content.module.css";
+import styles from "../../assets/css/content.module.css";
 import CarteEventAccueil from "./carte_event_accueil";
 
 const Content = () => {

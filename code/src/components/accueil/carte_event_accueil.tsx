@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import styles from "../assets/css/content.module.css";
+import styles from "../../assets/css/content.module.css";
 
 const CarteEventAccueil = () => {
 	return (

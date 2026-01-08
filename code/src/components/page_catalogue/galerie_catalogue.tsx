@@ -1,9 +1,9 @@
 import { use } from "react";
-import styles from "../assets/css/galerie_catalogue.module.css";
-import type { ApiResponse } from "../models/api_response";
-import type { Book } from "../../models/book";
-import BookApiService from "../services/book_api_service";
-import BookListItem from "./book/book_list_item";
+import styles from "../../assets/css/galerie_catalogue.module.css";
+import type { ApiResponse } from "../../models/api_response";
+import type { Book } from "../../../models/book";
+import BookApiService from "../../services/book_api_service";
+import BookListItem from "./book_list_item";
 
 const GalerieCatalogue = () => {
 

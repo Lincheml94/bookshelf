@@ -37,9 +37,11 @@
 	.bande_six {
 		width: 12vw;
 		height: 100vh;
-		background-color: 
-	}	
-	.bande_un:hover {
+		background-color: #fbff00;
+	}
+	
+	/* HOVER */
+	/* .bande_un:hover {
 		width: 10vw;
 		height: 100vh;
 		background-color: #bcbd8f;
@@ -71,53 +73,11 @@
 		width: 12vw;
 		height: 100vh;
 		background-color: #969902;
-	}
+	} */
 }
 
 
-/* fond INFO */
 
-.fondinfo {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	display: flex;
-
-	.bande_un_info {
-		width: 6vw;
-		height: 100vh;
-		background-color: #feffc1;
-	}
-
-	.bande_deux_info {
-		width: 5vw;
-		height: 100vh;
-		background-color: #ffffe8;
-	}
-
-	.bande_trois_info {
-		width: 5vw;
-		height: 100vh;
-		background-color: #f8f8f8;
-	}
-
-	.bande_quatre_info {
-		width: 6vw;
-		height: 100vh;
-		background-color: #e6e0f5;
-	}
-	.bande_cinq_info {
-		width: 8vw;
-		height: 100vh;
-		background-color: #f7f2f2;
-	}
-	.bande_six_info {
-		width: 70vw;
-		height: 100vh;
-		background-color: #fbff00;
-	}
-}
 /* fond CATALOGUE */
 
 .fondcatalogue {
@@ -201,6 +161,94 @@
 	}
 	.bande_six_agenda {
 		width: 12vw;
+		height: 100vh;
+		background-color: #fbff00;
+	}
+}
+
+/* fond INFO */
+
+.fondinfo {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	display: flex;
+
+	.bande_un_info {
+		width: 6vw;
+		height: 100vh;
+		background-color: #feffc1;
+	}
+
+	.bande_deux_info {
+		width: 5vw;
+		height: 100vh;
+		background-color: #ffffe8;
+	}
+
+	.bande_trois_info {
+		width: 5vw;
+		height: 100vh;
+		background-color: #f8f8f8;
+	}
+
+	.bande_quatre_info {
+		width: 6vw;
+		height: 100vh;
+		background-color: #e6e0f5;
+	}
+	.bande_cinq_info {
+		width: 8vw;
+		height: 100vh;
+		background-color: #f7f2f2;
+	}
+	.bande_six_info {
+		width: 70vw;
+		height: 100vh;
+		background-color: #fbff00;
+	}
+}
+
+/* fond CONTACT */
+
+.fondcontact {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	display: flex;
+
+	.bande_un_contact {
+		width: 6vw;
+		height: 100vh;
+		background-color: #feffc1;
+	}
+
+	.bande_deux_contact {
+		width: 10vw;
+		height: 100vh;
+		background-color: #ffffe8;
+	}
+
+	.bande_trois_contact {
+		width: 15vw;
+		height: 100vh;
+		background-color: #f8f8f8;
+	}
+
+	.bande_quatre_contact {
+		width: 16vw;
+		height: 100vh;
+		background-color: #e6e0f5;
+	}
+	.bande_cinq_contact {
+		width: 18vw;
+		height: 100vh;
+		background-color: #f7f2f2;
+	}
+	.bande_six_contact {
+		width: 35vw;
 		height: 100vh;
 		background-color: #fbff00;
 	}

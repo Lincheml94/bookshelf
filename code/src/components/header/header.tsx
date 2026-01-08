@@ -1,7 +1,7 @@
-import styles from "../assets/css/header.module.css";
+import styles from "../../assets/css/header.module.css";
 import LogoDessin from "./logo_dessin";
 import LogoTitre from "./logo_titre";
-import Nav from "./navbar";
+import Nav from "../nav/navbar";
 
 const Header = () => {
 	return (

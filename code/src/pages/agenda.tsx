@@ -1,5 +1,5 @@
-import FondAgenda from "../components/fond_agenda";
-import Seo from "../models/props/seo";
+import FondAgenda from "../components/fonds/fond_agenda";
+import Seo from "../models/props/seo/seo";
 
 const Agenda = () => {
 	return <>

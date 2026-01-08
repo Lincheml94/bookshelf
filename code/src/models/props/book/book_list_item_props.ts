@@ -1,4 +1,4 @@
-import type { Book } from "../../../models/book"
+import type { Book } from "../../../../models/book"
 
 // reprendre strictement le nom des props définis 
 

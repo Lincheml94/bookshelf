@@ -1,0 +1,21 @@
+.contentformulaire{
+    
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: right;
+
+
+form{
+    z-index: 3;
+    width: 35vw;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+}
