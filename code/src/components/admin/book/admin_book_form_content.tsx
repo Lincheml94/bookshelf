@@ -4,10 +4,11 @@ import type { AdminBookFormContentProps } from "../../../models/props/admin/admi
 import style from "../../../assets/css/formulaire_crud.module.css"
 import type { Book } from "../../../../models/book";
 import { useForm } from "react-hook-form";
-
+import type { ZodIssue } from "zod/v3";
+import { useState } from "react";
 
 // import { Link } from "react-router";
-const AdminBookFormContent = ({categories, authors, currentstates, validator}:AdminBookFormContentProps) => {
+const AdminBookFormContent = ({ categories, authors, currentstates, validator }: AdminBookFormContentProps) => {
     // créer de identifiants pour chaque champs de formulaire
     const idId = useId();
     const titleId = useId();
@@ -18,7 +19,9 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
     const imagesId = useId();
     const isbnId = useId();
     const printId = useId();
-    
+
+    // stocker les messages d'erreur de validation côté serveur
+    const [serverErrors, setServerErrors] = useState<Partial<Book>>();
      /*
         react hook form 
         register : 
@@ -30,9 +33,39 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
     
         // soumission du formulaire
         // data stocke la saisie du formulaire
-        const submitForm = (data: Partial<Book>) => {
-            console.log(data);
-        }
+    const submitForm = async (data: Partial<Book>) => {
+            
+            // normaliser les données saisies : se base sur les données testées dans flashport pour que les données
+            const normalizeData = {
+                ...data,
+                category_ids: (data.category_ids as unknown as string[]).join(),
+                currentstate_ids: (data.currentstate_ids as unknown as string[]).join(),
+                author_ids: (data.author_ids as unknown as string[]).join(),
+
+            };
+        
+        // validation de la saisie avec le validateur côté serveur
+        const validation = await validator(normalizeData);
+            console.log(validation);
+    
+    // si la validation échoue
+    if (validation instanceof Error) {
+        // stocker les messages d'erreur
+        let errors = {};
+        // récupérer les messages d'erreur
+        (JSON.parse(validation.message) as ZodIssue[]).map((item) => {
+                errors = { ...errors, [item.path.shift() as string]: item.message };
+                return errors;
+        });
+
+        // définir l'état affichant les messages d'erreur côté serveur
+        setServerErrors(errors);
+
+        return;
+        
+    }
+        
+}
 
     return <>
         <div className={style.formulaire_crud}>
@@ -45,7 +78,8 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                 */
                 
             }
-          <form className={style.formulaire_crud} encType="multipart/form-data" onSubmit={handleSubmit(submitForm)}>
+            <form className={style.formulaire_crud} encType="multipart/form-data" onSubmit={handleSubmit(submitForm)}>
+                {/* TITLE */}
             <p>   
             <label htmlFor={titleId}>Titre</label>
                     <input type="text"
@@ -56,7 +90,7 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                         })} />
 
                     {/*afficher les messages d'erreur : utiliser le name du champ défini dans register  */}
-                    <p className={style.msg_erreur} role="alert">{ errors.title?.message}</p>
+                    <p className={style.msg_erreur} role="alert">{ errors.title?.message ?? serverErrors?.title}</p>
                 </p> 
                 
             {/* PUBLISHED_AT */}
@@ -65,7 +99,7 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                     <input type="date" id={published_atId} {...register('published_at', {
                 required : "La date est obligatoire"
                     })} />
-                     <p className={style.msg_erreur} role="alert">{ errors.title?.message}</p>
+                     <p className={style.msg_erreur} role="alert">{ errors.published_at?.message ?? serverErrors?.published_at}</p>
                 </p> 
                 
                 {/* PRICE */}
@@ -82,7 +116,7 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                      message: "le prix doit être de maximum 999,99 euros"
                  }
                     })} />
-            <p className={style.msg_erreur} role="alert">{ errors.price?.message}</p>
+            <p className={style.msg_erreur} role="alert">{ errors.price?.message ?? serverErrors?.price}</p>
                 </p> 
 
             {/* PAGES */}
@@ -95,7 +129,7 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                             message: "le nombre de caractère est limité à 20"
                         }
                     })} />
-                     <p className={style.msg_erreur} role="alert">{ errors.pages?.message}</p>
+                     <p className={style.msg_erreur} role="alert">{ errors.pages?.message ?? serverErrors?.pages}</p>
                 </p> 
 
             {/* DIMENSIONS */}
@@ -108,7 +142,7 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                             message: "le nombre de caractère est limité à 20"
                         }
                     })} />
-                     <p className={style.msg_erreur} role="alert">{ errors.dimensions?.message}</p>
+                     <p className={style.msg_erreur} role="alert">{ errors.dimensions?.message ?? serverErrors?.dimensions}</p>
                 </p> 
             
             {/* IMAGE */}
@@ -118,7 +152,7 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                 required: "ce champ est obligatoire"
             })} />
                 </p> 
-                 <p className={style.msg_erreur} role="alert">{ errors.images?.message}</p>
+                 <p className={style.msg_erreur} role="alert">{ errors.images?.message ?? serverErrors?.images}</p>
             
             {/* ISBN */}
             <p>
@@ -130,7 +164,7 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                             message: "le nombre de caractères est limité à 40"
                         }
                     })} />
-                     <p className={style.msg_erreur} role="alert">{ errors.isbn?.message}</p>
+                     <p className={style.msg_erreur} role="alert">{ errors.isbn?.message ?? serverErrors?.isbn}</p>
                 </p> 
 
             {/* PRINT */}
@@ -143,7 +177,7 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                             message: "le nombre de caractères est limité à 100"
                         }
                     })} />
-                     <p className={style.msg_erreur} role="alert">{ errors.print?.message}</p>
+                     <p className={style.msg_erreur} role="alert">{ errors.print?.message ?? serverErrors?.print}</p>
                 </p> 
             
             {/* ID HIDDEN */}
@@ -164,7 +198,7 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
 
                                     })} />
                                 <label>{item.name}</label>
-                                <p className={style.msg_erreur} role="alert">{ errors.print?.message}</p>
+                                <p className={style.msg_erreur} role="alert">{ errors.category_ids?.message ?? serverErrors?.category_ids}</p>
                             </p>
                         )
                     })
@@ -179,9 +213,12 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                             <p key={item.id}>
                                 <input type="checkbox" value={item.id} id={item.id as unknown as string}
                                     
-                                    name="currentstate_ids"
-                                />
-                            <label>{ item.statename }</label>
+                                    {...register("currentstate_ids", {
+                                        required: "cochez au moins une case",
+
+                                    })} />
+                                <label>{item.statename}</label>
+                                 <p className={style.msg_erreur} role="alert">{ errors.currentstate_ids?.message ?? serverErrors?.currentstate_ids}</p>
                             </p>
                         )
                     })
@@ -195,11 +232,14 @@ const AdminBookFormContent = ({categories, authors, currentstates, validator}:Ad
                     authors.map((item) => {
                         return (
                             <p key={item.id}>
-                                <input type="checkbox" value={item.id} id={item.id as unknown as string}
+                               <input type="checkbox" value={item.id} id={item.id as unknown as string}
                                     
-                                    name="author_ids"
-                                />
-                            <label>{ item.firstname }</label>
+                                    {...register("author_ids", {
+                                        required: "cochez au moins une case",
+
+                                    })} />
+                                <label>{item.firstname}</label>
+                                 <p className={style.msg_erreur} role="alert">{ errors.author_ids?.message ?? serverErrors?.author_ids}</p>
                             </p>
                         )
                     })

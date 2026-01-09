@@ -1,6 +1,6 @@
-import z from "zod";
+import z, { maxLength } from "zod";
 import type { Book } from "../../models/book";
-
+import { ZodError } from "zod";
 
 class AdminBookFormValidator{
 
@@ -18,9 +18,18 @@ class AdminBookFormValidator{
                     .number()
                     .positive(),
             ]),
-            title: z.string("Le titre est obligatoire"),
-            published_at: z.date("La date est obligatoire"),
-	        price: z.number("le prix est obligatoire"),
+            title: z
+                .string("Le titre est obligatoire")
+                .max(100, "un titre doit comporter au maximum 100 caractères"),
+            
+             published_at: z
+                .date("La date est obligatoire"),
+                
+            price: z
+                .number("le prix est obligatoire")
+                .min(1, "le prix doit être de minimum 1 euro")
+                .max(999.99, "le prix doit être de maximum 999,99 euros"),
+           
             pages: z
                 .string("le nombre de pages est obligatoire")
                 .max(20, "le nombre de caractère est limité à 20"),
@@ -37,11 +46,24 @@ class AdminBookFormValidator{
                 .max(100, "le nombre de caractères est limité à 100"),
             category_ids: z
                 .string("ce champ est obligatoire")
+                .min(1, "veuillez cocher au moins une case"),
+            currentstate_ids: z
+                .string("ce champ est obligatoire")
+                .min(1, "veuillez cocher au moins une case"),
+            author_ids: z
+                .string("ce champ est obligatoire")
                 .min(1, "veuillez cocher au moins une case")
         });
         
         // validation de la saisie du formmulaire
         const validation = await constraints.safeParseAsync(data);
+
+        // si la validation échoue
+        if (!validation.success) {
+            return validation.error;
+        }
+        // si la validation réussi
+            return validation.data as Partial<Book>;
             
             
     };
