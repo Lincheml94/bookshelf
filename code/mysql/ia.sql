@@ -53,7 +53,7 @@ INSERT INTO publishinghouse_dev.book (title, published_at, description, price, p
 ('Harry Potter à l\'école des sorciers', '1997-06-26', 'Le premier tome de la saga Harry Potter, où un jeune sorcier découvre le monde de la magie.', 14.99, '312', '15x23', 'harry_potter1.jpg', '9782070518520', 'Broché');
 
 -- Catégories
-INSERT INTO publishinghouse_dev.category (name_) VALUES
+INSERT INTO publishinghouse_dev.category (name) VALUES
 ('Roman'),
 ('Poésie'),
 ('Essai'),

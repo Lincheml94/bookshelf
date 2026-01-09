@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 // import Content from "../components/content_accueil";
 import Header from "../components/header/header";
-import LoginButton from "../components/admin/login_button";
+import LoginButton from "../components/admin/login/login_button";
 
 const PublicLayout = () => {
 	return (

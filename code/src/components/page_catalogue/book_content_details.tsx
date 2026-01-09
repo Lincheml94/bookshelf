@@ -6,13 +6,13 @@ const BookContentDetails = ({data}: BookContentDetailsProps) => {
     return <div>
         {data.title}
         {data.images}
-        {data.authors.map((item) => (
-                                    <li key={item.id}>{item.firstname} {item.lastname}</li>))
-                            }
-        {data.price}
-        {data.dimensions}
-        {data.isbn}
-        {data.pages}
+        <p>prix : {data.price}</p>
+        <p>dimensions :{data.dimensions} cm</p>
+        <p>isbn : {data.isbn}</p>
+        <p>{data.pages}</p>
+        <p>A propos de l'auteur.ice : {data.authors.map((item) => (
+                                    <li key={item.id}>{item.firstname} {item.lastname} {item.bio}</li>))
+                            }</p>
     
     </div>
 };

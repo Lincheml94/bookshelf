@@ -75,7 +75,7 @@ CREATE TABLE publishinghouse_dev.book(
 
 CREATE TABLE publishinghouse_dev.category(
     id TINYINT(2) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name_ VARCHAR(15) NOT NULL
+    name VARCHAR(15) NOT NULL
 );
 
 

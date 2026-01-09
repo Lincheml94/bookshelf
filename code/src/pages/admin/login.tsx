@@ -1,4 +1,5 @@
-import FormulaireLogin from "../../components/admin/login_formulaire";
+
+import FormulaireLogin from "../../components/admin/login/login_formulaire";
 import style from "../../assets/css/formulaire_login.module.css"
 import Fond from "../../components/fonds/fond";
 

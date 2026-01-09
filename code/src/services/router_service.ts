@@ -25,7 +25,7 @@ class RouterService {
 							id: "admin_home",
 							path: "dashboard",
 							index: true,
-							lazy: () => import("../pages/admin/dashboard"),
+							lazy: () => import("../pages/admin/index"),
 						},
 						{
 							id: "admin_login",
@@ -38,12 +38,30 @@ class RouterService {
 							lazy: () => import("../pages/admin/register"),
 						},
 						{
+							id: "admin_agenda",
+							path: "agenda",
+							lazy: () => import("../pages/admin/agenda/index"),
+						},
+						{
+							id: "agenda_form",
+							path: "agenda_form",
+							lazy: () => import("../pages/admin/agenda/admin_agenda_form"),
+						},
+						{
 							id: "admin_books",
 							path: "books",
-							lazy: () => import("../pages/admin/books"),
+							lazy: () => import("../pages/admin/book/index"),
+						},
+						{
+							id: "book_form",
+							path: "book_form",
+							lazy: () => import("../pages/admin/book/admin_book_form"),
 						},
 						],
 					},
+
+					// PUBLIC 
+
 					{
 						id: "public",
 						path: "",
