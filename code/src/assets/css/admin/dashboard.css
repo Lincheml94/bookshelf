@@ -1,0 +1,13 @@
+.dashboard{
+    width: 30vh;
+    height: 100vh;
+    background-color: blueviolet;
+    padding: 10px;
+    /* position: fixed;
+     */
+}
+
+.dashboard-admin-book{
+    display: flex;
+   
+}

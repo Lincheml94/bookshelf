@@ -9,6 +9,7 @@ import type { Author } from "../../../../models/author";
 import type { Currentstate } from "../../../../models/currentstate";
 import style from "../../../assets/css/formulaire_crud.module.css"
 import AdminBookFormValidator from "../../../validator/admin_book_form_validator";
+import DashboardLeft from "../../../components/admin/accueil/dashboard";
 
 const AdminBookForm = () => {
     // récupérer les catégories 
@@ -22,11 +23,14 @@ const AdminBookForm = () => {
 
     return  (
         <>
+            <div className="dashboard-admin-book">
+            <DashboardLeft />
             <div className={style.page_formulaire}>
             <title> Gestion des livres - administration</title>
 
                 <AdminBookFormContent categories={categories} authors={authors} currentstates={currentstates} validator={ new AdminBookFormValidator().validate } />
-            </div>
+                </div>
+                </div>
         </>
       )
 }
