@@ -358,12 +358,12 @@ class BookRepository {
 			// démarrer une transaction SQL
 			connection.beginTransaction();
 
-			// exécution de la première requête
+			// exécution de la première requête : mise à jour du livre
 			await connection.execute(sql, data);
 
-			// // execution de la requête
+			// execution de la requête
 
-			// // deuxième requête
+			// deuxième requête : supprimer les anciennes relations book_category
 			sql = `
 				DELETE FROM
 					${process.env.MYSQL_DATABASE}.book_category
@@ -372,30 +372,45 @@ class BookRepository {
 				;
 
 			`;
+			// définir @id pour l'INSERT des relations
+			        
+			await connection.execute(sql, data);
+			
 			// // exécution de la deuxième requête
+			sql = `SET @id = :id;`;  
 			await connection.execute(sql, data);
 
-			// // troisième requête
-			const joinIds = data.category_ids
-				?.split(",")
-				.map((value) => `(${value}, @id)`)
-				.join();
-			// console.log(joinIds);
+			// 5️⃣ filtrer les doublons dans category_ids
+		const categoryIds = data.category_ids
+			?.split(",")
+			.map(id => parseInt(id.trim()))
+			.filter((v, i, a) => a.indexOf(v) === i);
 
-			sql = `
+		// si il n'y a pas de category_ids, on ne fait rien
+			if (categoryIds && categoryIds.length > 0) {
+
+				// // troisième requête
+				const joinIds = data.category_ids
+					?.split(",")
+					.map((value) => `(@id, ${value})`)
+					.join();
+				// console.log(joinIds);
+
+				sql = `
 				INSERT INTO
-					${process.env.MYSQL_DATABASE}.book_category
+					${process.env.MYSQL_DATABASE}.book_category (book_id, category_id)
 				VALUES
 				${joinIds}
 	 	;
 	`;
-			const [query] = await connection.execute(sql, data);
-
+				const [query] = await connection.execute(sql, data);
+		
 			// valider la transition SQL
 			connection.commit();
 
 			// retourner les informations de la requête
-			return query;
+				return query;
+			}
 		} catch (error) {
 			// annuler une transaction
 			connection.rollback();
