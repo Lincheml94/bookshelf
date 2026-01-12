@@ -7,13 +7,14 @@ import type { Currentstate } from "./currentstate";
 type Book = {
 	id: number;
 	title: string;
-	published_at: Date;
+	published_at: string;
 	price: number;
 	pages: string;
 	dimensions: string;
 	images: string;
 	isbn: string;
 	print: string;
+	description: string;
 
 	// liste concaténée des identifiants des catégories
 	category_ids: string;

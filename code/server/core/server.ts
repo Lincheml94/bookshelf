@@ -8,6 +8,7 @@ import HomepageRouter from "../router/homepage_router";
 import RoleRouter from "../router/role_router";
 import UserRouter from "../router/user_router";
 import VisitorRouter from "../router/visitor_router";
+import cors from 'cors';
 
 class Server {
 	// propriétés pour stocker
@@ -18,6 +19,11 @@ class Server {
 	constructor() {
 		// intégrer le middleware express JSON qui permet de récupérer la propriété body de la requête HTTP en JSON
 		this.app.use(express.json());
+
+		// intégrer le middleware CORS - Cross Origin Ressource Sharing - qui permet d'autoriser l'accès aux ressouces à certaines origines différentes (protocole, port, sous-domaine)
+		this.app.use(cors({
+			origin:process.env.ORIGINS?.split(",")
+		}));
 
 		// relier le routeur à l'application
 		this.app.use(this.router);

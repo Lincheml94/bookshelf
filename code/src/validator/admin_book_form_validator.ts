@@ -1,6 +1,6 @@
-import z, { maxLength } from "zod";
+
 import type { Book } from "../../models/book";
-import { ZodError } from "zod";
+import { type ZodError, z } from "zod";
 
 class AdminBookFormValidator{
 
@@ -23,10 +23,9 @@ class AdminBookFormValidator{
                 .max(100, "un titre doit comporter au maximum 100 caractères"),
             
              published_at: z
-                .date("La date est obligatoire"),
+                .iso.date("La date est obligatoire"),
                 
-            price: z
-                .number("le prix est obligatoire")
+            price: z.coerce.number()
                 .min(1, "le prix doit être de minimum 1 euro")
                 .max(999.99, "le prix doit être de maximum 999,99 euros"),
            

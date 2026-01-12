@@ -72,7 +72,7 @@ class BookRepository {
 
 				// table de jointure - CURRENTSTATE
 				result.currentstates = (await new CurrentstateRepository().selectInList(
-					result.category_ids,
+					result.currentstate_ids,
 				)) as Currentstate[];
 
 				// table de jointure - CURRENTSTATE
@@ -157,12 +157,12 @@ class BookRepository {
 
 			// table de jointure - CURRENTSTATE
 			result.currentstates = (await new CurrentstateRepository().selectInList(
-				result.category_ids,
+				result.currentstate_ids,
 			)) as Currentstate[];
 
 			// table de jointure - CURRENTSTATE
 			result.authors = (await new AuthorRepository().selectInList(
-				result.category_ids,
+				result.author_ids,
 			)) as Author[];
 
 			// retourner les résultats
@@ -235,12 +235,12 @@ class BookRepository {
 
 			// table de jointure - CURRENTSTATE
 			result.currentstates = (await new CurrentstateRepository().selectInList(
-				result.category_ids,
+				result.currentstate_ids,
 			)) as Currentstate[];
 
-			// table de jointure - CURRENTSTATE
+			// table de jointure - AUTHOR
 			result.authors = (await new AuthorRepository().selectInList(
-				result.category_ids,
+				result.author_ids,
 			)) as Author[];
 
 			return query;
@@ -262,7 +262,7 @@ class BookRepository {
 		let sql = `
 		INSERT INTO 
 			${process.env.MYSQL_DATABASE}.${this.table}
-		VALUE
+		VALUE 
 			(
 				NULL, 
 				:title, 
@@ -297,13 +297,13 @@ class BookRepository {
 			// troisième requête
 			const joinIds = data.category_ids
 				?.split(",")
-				.map((value) => `(${value}, @id)`)
+				.map((value) => `(@id, ${value})`)
 				.join();
 			console.log(joinIds);
 
 			sql = `
 				INSERT INTO 
-					${process.env.MYSQL_DATABASE}.book_category
+					${process.env.MYSQL_DATABASE}.book_category (book_id, category_id)
 				VALUES
 						
 				${joinIds}

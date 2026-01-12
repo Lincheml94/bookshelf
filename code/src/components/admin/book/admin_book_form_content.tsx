@@ -6,6 +6,7 @@ import type { Book } from "../../../../models/book";
 import { useForm } from "react-hook-form";
 import type { ZodIssue } from "zod/v3";
 import { useState } from "react";
+import BookApiService from "../../../services/book_api_service";
 
 // import { Link } from "react-router";
 const AdminBookFormContent = ({ categories, authors, currentstates, validator }: AdminBookFormContentProps) => {
@@ -19,6 +20,7 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
     const imagesId = useId();
     const isbnId = useId();
     const printId = useId();
+    const descriptionId = useId();
 
     // stocker les messages d'erreur de validation côté serveur
     const [serverErrors, setServerErrors] = useState<Partial<Book>>();
@@ -35,37 +37,62 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
         // data stocke la saisie du formulaire
     const submitForm = async (data: Partial<Book>) => {
             
-            // normaliser les données saisies : se base sur les données testées dans flashport pour que les données
-            const normalizeData = {
-                ...data,
-                category_ids: (data.category_ids as unknown as string[]).join(),
-                currentstate_ids: (data.currentstate_ids as unknown as string[]).join(),
-                author_ids: (data.author_ids as unknown as string[]).join(),
+        // normaliser les données saisies : se base sur les données testées dans flashport pour que les données
+        const normalizeData = {
+            ...data,
+            category_ids: (data.category_ids as unknown as string[]).join(),
+            currentstate_ids: (data.currentstate_ids as unknown as string[]).join(),
+            author_ids: (data.author_ids as unknown as string[]).join(),
 
-            };
+        };
         
         // validation de la saisie avec le validateur côté serveur
         const validation = await validator(normalizeData);
-            console.log(validation);
+        // console.log(validation);
     
-    // si la validation échoue
-    if (validation instanceof Error) {
-        // stocker les messages d'erreur
-        let errors = {};
-        // récupérer les messages d'erreur
-        (JSON.parse(validation.message) as ZodIssue[]).map((item) => {
+        // si la validation échoue
+        if (validation instanceof Error) {
+            // stocker les messages d'erreur
+            let errors = {};
+            // récupérer les messages d'erreur
+            (JSON.parse(validation.message) as ZodIssue[]).map((item) => {
                 errors = { ...errors, [item.path.shift() as string]: item.message };
                 return errors;
-        });
+            });
 
-        // définir l'état affichant les messages d'erreur côté serveur
-        setServerErrors(errors);
-
-        return;
+            // définir l'état affichant les messages d'erreur côté serveur
+            setServerErrors(errors);
+            // stopper l'exécution du script
+            return;
         
-    }
+        }
         
-}
+        // Si la validation réussi
+        // si le formulaire contient un champ de fichier : envoyer vers l'API un objet de type formData
+        // formData : clé / valeur
+        const formData = new FormData();
+        // reprendre strictement le nom du champ du formulaire testé avec flashpost
+        formData.set("id", normalizeData.id as unknown as string)
+        formData.set("title", normalizeData.title as unknown as string)
+        formData.set("published_at", normalizeData.published_at as unknown as string)
+        formData.set("price", normalizeData.price as unknown as string)
+        formData.set("pages", normalizeData.pages as unknown as string)
+        formData.set("dimensions", normalizeData.dimensions as unknown as string)
+        formData.set("images", normalizeData.images as unknown as string)
+        formData.set("isbn", normalizeData.isbn as unknown as string)
+        formData.set("print", normalizeData.print as unknown as string)
+        formData.set("description", normalizeData.description as unknown as string)
+        formData.set("category_ids", normalizeData.category_ids as string)
+        formData.set("currentstate_ids", normalizeData.currentstate_ids as string)
+        formData.set("author_ids", normalizeData.author_ids as string)
+        
+        //    requête HTTP vers l'API
+        const process = await new BookApiService().insert(formData);
+        console.log(process);
+        
+        
+        
+    };
 
     return <>
         <div className={style.formulaire_crud}>
@@ -79,7 +106,8 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                 
             }
             <form className={style.formulaire_crud} encType="multipart/form-data" onSubmit={handleSubmit(submitForm)}>
-                {/* TITLE */}
+                
+            {/* TITLE */}
             <p>   
             <label htmlFor={titleId}>Titre</label>
                     <input type="text"
@@ -90,34 +118,25 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                         })} />
 
                     {/*afficher les messages d'erreur : utiliser le name du champ défini dans register  */}
-                    <p className={style.msg_erreur} role="alert">{ errors.title?.message ?? serverErrors?.title}</p>
                 </p> 
-                
-            {/* PUBLISHED_AT */}
-            <p>
-            <label htmlFor={published_atId}>Date de publication</label>
-                    <input type="date" id={published_atId} {...register('published_at', {
-                required : "La date est obligatoire"
-                    })} />
-                     <p className={style.msg_erreur} role="alert">{ errors.published_at?.message ?? serverErrors?.published_at}</p>
-                </p> 
+                <p className={style.msg_erreur} role="alert">{ errors.title?.message ?? serverErrors?.title}</p>
                 
                 {/* PRICE */}
                 <p>
             <label htmlFor={priceId}>Prix</label>
-                    <input type="text" id={priceId} {...register('price', {
+                    <input type="number" id={priceId} {...register('price', {
                 required: "le prix est obligatoire",
-                 min: {
+                 minLength: {
                      value: 1,
                      message: "le prix doit être de minimum 1 euro"
                  },
-                 max: {
+                 maxLength: {
                      value :999.99,
                      message: "le prix doit être de maximum 999,99 euros"
                  }
                     })} />
-            <p className={style.msg_erreur} role="alert">{ errors.price?.message ?? serverErrors?.price}</p>
                 </p> 
+                <p className={style.msg_erreur} role="alert">{ errors.price?.message ?? serverErrors?.price}</p>
 
             {/* PAGES */}
             <p>
@@ -129,8 +148,8 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                             message: "le nombre de caractère est limité à 20"
                         }
                     })} />
-                     <p className={style.msg_erreur} role="alert">{ errors.pages?.message ?? serverErrors?.pages}</p>
                 </p> 
+                <p className={style.msg_erreur} role="alert">{ errors.pages?.message ?? serverErrors?.pages}</p>
 
             {/* DIMENSIONS */}
             <p>
@@ -142,10 +161,19 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                             message: "le nombre de caractère est limité à 20"
                         }
                     })} />
-                     <p className={style.msg_erreur} role="alert">{ errors.dimensions?.message ?? serverErrors?.dimensions}</p>
                 </p> 
+                <p className={style.msg_erreur} role="alert">{ errors.dimensions?.message ?? serverErrors?.dimensions}</p>
+             
+                {/* PUBLISHED_AT */}
+            <p>
+            <label htmlFor={published_atId}>Date de publication</label>
+                    <input type="date" id={published_atId} {...register('published_at', {
+                        required: "La date est obligatoire"
+                    })} />
+                </p> 
+                <p className={style.msg_erreur} role="alert">{ errors.published_at?.message ?? serverErrors?.published_at}</p>
             
-            {/* IMAGE */}
+                {/* IMAGE */}
             <p>
             <label htmlFor={imagesId}>Charger une image</label>
                     <input type="text" id={imagesId} {...register('images', {
@@ -164,8 +192,8 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                             message: "le nombre de caractères est limité à 40"
                         }
                     })} />
-                     <p className={style.msg_erreur} role="alert">{ errors.isbn?.message ?? serverErrors?.isbn}</p>
                 </p> 
+                <p className={style.msg_erreur} role="alert">{ errors.isbn?.message ?? serverErrors?.isbn}</p>
 
             {/* PRINT */}
             <p>
@@ -177,9 +205,23 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                             message: "le nombre de caractères est limité à 100"
                         }
                     })} />
-                     <p className={style.msg_erreur} role="alert">{ errors.print?.message ?? serverErrors?.print}</p>
                 </p> 
+                 <p className={style.msg_erreur} role="alert">{ errors.print?.message ?? serverErrors?.print}</p>
             
+                {/* DESCRIPTION */}
+                 <p>
+            <label htmlFor={descriptionId}>Description</label>
+                    <input type="textarea" id={descriptionId} {...register('description', {
+                        required: "ce champ est obligatoire",
+                        maxLength: {
+                            value: 1000,
+                            message: "le nombre de caractères est limité à 1000"
+                        }
+                    })} />
+                </p> 
+                 <p className={style.msg_erreur} role="alert">{ errors.description?.message ?? serverErrors?.description}</p>
+                
+
             {/* ID HIDDEN */}
             <input type="hidden" id={idId} {...register('id')}/>
             
@@ -190,7 +232,7 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                 {
                     categories.map((item) => {
                         return (
-                            <p key={item.id}>
+                            <div key={item.id}>
                                 <input type="checkbox" value={item.id} id={item.id as unknown as string}
                                     
                                     {...register("category_ids", {
@@ -199,7 +241,7 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                                     })} />
                                 <label>{item.name}</label>
                                 <p className={style.msg_erreur} role="alert">{ errors.category_ids?.message ?? serverErrors?.category_ids}</p>
-                            </p>
+                            </div>
                         )
                     })
                 }
@@ -210,7 +252,7 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                 {
                     currentstates.map((item) => {
                         return (
-                            <p key={item.id}>
+                            <div key={item.id}>
                                 <input type="checkbox" value={item.id} id={item.id as unknown as string}
                                     
                                     {...register("currentstate_ids", {
@@ -219,7 +261,7 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                                     })} />
                                 <label>{item.statename}</label>
                                  <p className={style.msg_erreur} role="alert">{ errors.currentstate_ids?.message ?? serverErrors?.currentstate_ids}</p>
-                            </p>
+                            </div>
                         )
                     })
                 }
@@ -231,7 +273,7 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                 {
                     authors.map((item) => {
                         return (
-                            <p key={item.id}>
+                            <div key={item.id}>
                                <input type="checkbox" value={item.id} id={item.id as unknown as string}
                                     
                                     {...register("author_ids", {
@@ -240,7 +282,7 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
                                     })} />
                                 <label>{item.firstname}</label>
                                  <p className={style.msg_erreur} role="alert">{ errors.author_ids?.message ?? serverErrors?.author_ids}</p>
-                            </p>
+                            </div>
                         )
                     })
                 }

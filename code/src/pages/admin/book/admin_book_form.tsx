@@ -13,7 +13,7 @@ import AdminBookFormValidator from "../../../validator/admin_book_form_validator
 const AdminBookForm = () => {
     // récupérer les catégories 
     const categories = use(new CategoryApiService().selectAll()).data as Category[];
-    console.log(categories);
+    // console.log(categories);
 
     const authors = use(new AuthorApiService().selectAll()).data as Author[];
 

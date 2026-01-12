@@ -35,6 +35,44 @@ class BookApiService {
 
 		return results;
 	};
+
+	// insersion d'un enregistrement
+
+	/*
+		si le formulaire contient un champ de fichier: utiliser formData en paramètres
+		si le formulaire ne contient pas de champ de fichier : utiliser le type
+	*/
+
+	public insert = async (data:FormData): Promise<ApiResponse<Book>> => {
+		const request = new Request(
+			`${import.meta.env.VITE_API_URL}${this.prefix}`,
+			{
+				method: 'post',
+				/* 
+				Si le formulaire contient un champ de fichier :
+					la propriété body renvoie un objet FormData
+				Si le formulaire ne contient pas de champ de fichier
+					la propriété body renvoie du JSON : JSON.stringfy(...)
+					Ajouter l'en-tête Content-Type: application/json
+				*/
+
+				body: data,
+				/*
+					version sans fichiers :
+					body:JSON.stringfy(data)
+					headers: {
+					"Content-Type": application/json
+					},
+				*/
+				
+			},
+		);
+		const response = await fetch(request);
+
+		const results = await response.json();
+
+		return results;
+	};
 }
 
 export default BookApiService;

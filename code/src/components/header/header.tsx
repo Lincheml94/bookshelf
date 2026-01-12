@@ -6,7 +6,7 @@ import Nav from "../nav/navbar";
 const Header = () => {
 	return (
 		<header>
-			<LogoDessin />
+			{/* <LogoDessin /> */}
 			<LogoTitre />
 			<Nav />
 		</header>
