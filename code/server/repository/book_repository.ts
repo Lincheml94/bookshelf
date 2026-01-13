@@ -67,17 +67,17 @@ class BookRepository {
 
 				// table de jointure - CATEGORY
 				result.categories = (await new CategoryRepository().selectInList(
-					result.category_ids,
+					result.category_ids as string,
 				)) as Category[];
 
 				// table de jointure - CURRENTSTATE
 				result.currentstates = (await new CurrentstateRepository().selectInList(
-					result.currentstate_ids,
+					result.currentstate_ids as string,
 				)) as Currentstate[];
 
 				// table de jointure - CURRENTSTATE
 				result.authors = (await new AuthorRepository().selectInList(
-					result.author_ids,
+					result.author_ids as string,
 				)) as Author[];
 			}
 
@@ -152,17 +152,17 @@ class BookRepository {
 
 			// table de jointure - CATEGORY
 			result.categories = (await new CategoryRepository().selectInList(
-				result.category_ids,
+				result.category_ids as string,
 			)) as Category[];
 
 			// table de jointure - CURRENTSTATE
 			result.currentstates = (await new CurrentstateRepository().selectInList(
-				result.currentstate_ids,
+				result.currentstate_ids as string,
 			)) as Currentstate[];
 
 			// table de jointure - CURRENTSTATE
 			result.authors = (await new AuthorRepository().selectInList(
-				result.author_ids,
+				result.author_ids as string,
 			)) as Author[];
 
 			// retourner les résultats
@@ -230,17 +230,17 @@ class BookRepository {
 
 			// table de jointure - CATEGORY
 			result.categories = (await new CategoryRepository().selectInList(
-				result.category_ids,
+				result.category_ids as string,
 			)) as Category[];
 
 			// table de jointure - CURRENTSTATE
 			result.currentstates = (await new CurrentstateRepository().selectInList(
-				result.currentstate_ids,
+				result.currentstate_ids as string,
 			)) as Currentstate[];
 
 			// table de jointure - AUTHOR
 			result.authors = (await new AuthorRepository().selectInList(
-				result.author_ids,
+				result.author_ids as string,
 			)) as Author[];
 
 			return query;
@@ -295,7 +295,7 @@ class BookRepository {
 			await connection.execute(sql, data);
 
 			// troisième requête
-			const joinIds = data.category_ids
+			const joinIds = (data.category_ids as string)
 				?.split(",")
 				.map((value) => `(@id, ${value})`)
 				.join();
@@ -381,7 +381,7 @@ class BookRepository {
 			await connection.execute(sql, data);
 
 			// 5️⃣ filtrer les doublons dans category_ids
-		const categoryIds = data.category_ids
+		const categoryIds = (data.category_ids as string)
 			?.split(",")
 			.map(id => parseInt(id.trim()))
 			.filter((v, i, a) => a.indexOf(v) === i);
@@ -390,7 +390,7 @@ class BookRepository {
 			if (categoryIds && categoryIds.length > 0) {
 
 				// // troisième requête
-				const joinIds = data.category_ids
+				const joinIds = (data.category_ids as string)
 					?.split(",")
 					.map((value) => `(@id, ${value})`)
 					.join();

@@ -9,7 +9,7 @@ type AdminBookFormContentProps = {
     authors: Author[];
     currentstates: Currentstate[];
     validator: (data: Partial<Book>) => Promise<Partial<Book> | ZodError>;
-
+    dataToUpdate: Book | undefined;
 }
 
 export type { AdminBookFormContentProps };

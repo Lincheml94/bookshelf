@@ -1,5 +1,5 @@
 "use client";
-import { useId } from "react";
+import { use, useEffect, useId } from "react";
 import type { AdminBookFormContentProps } from "../../../models/props/admin/admin_book_form_content_props";
 import style from "../../../assets/css/formulaire_crud.module.css"
 import type { Book } from "../../../../models/book";
@@ -7,9 +7,10 @@ import { useForm } from "react-hook-form";
 import type { ZodIssue } from "zod/v3";
 import { useState } from "react";
 import BookApiService from "../../../services/book_api_service";
+import { data, useNavigate } from "react-router";
 
 // import { Link } from "react-router";
-const AdminBookFormContent = ({ categories, authors, currentstates, validator }: AdminBookFormContentProps) => {
+const AdminBookFormContent = ({ categories, authors, currentstates, validator , dataToUpdate}: AdminBookFormContentProps) => {
     // créer de identifiants pour chaque champs de formulaire
     const idId = useId();
     const titleId = useId();
@@ -22,17 +23,45 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
     const printId = useId();
     const descriptionId = useId();
 
+    // useNavigate permet de créer une redirection
+    const navigate = useNavigate();
+
     // stocker les messages d'erreur de validation côté serveur
     const [serverErrors, setServerErrors] = useState<Partial<Book>>();
+
+    const [message, setMessage] = useState<string>("");
+
      /*
         react hook form 
         register : 
             -remplace l'attribut name
             - permet de référencer un champ de saisie 
+        handleSubmit : permet de gérer la soumission des formulaires
+        reset :permet de pré-remplir les formulaires
             */
     
         const { register, handleSubmit, reset, formState: {errors} } = useForm<Partial<Book>>();
     
+    // Pré remplir le formulaire avant l'affichage du composant
+    useEffect(() => {
+        if (dataToUpdate) {
+
+            // normaliser les données saisies : se base sur les données testées dans flashport pour que les données (pour les cases à cocher)
+        const normalizeData = {
+            ...dataToUpdate,
+            category_ids: (dataToUpdate.category_ids as string).split(","),
+            currentstate_ids: (dataToUpdate.currentstate_ids as string).split(","),
+            author_ids: (dataToUpdate.author_ids as string).split(","),
+
+        };
+            
+        reset(dataToUpdate);
+        }
+        
+    }, [dataToUpdate, reset])
+    
+
+
         // soumission du formulaire
         // data stocke la saisie du formulaire
     const submitForm = async (data: Partial<Book>) => {
@@ -87,8 +116,20 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
         formData.set("author_ids", normalizeData.author_ids as string)
         
         //    requête HTTP vers l'API
-        const process = await new BookApiService().insert(formData);
-        console.log(process);
+        // const process = await new BookApiService().insert(formData);
+        const process = dataToUpdate
+            ? await new BookApiService().update(formData)
+            : await new BookApiService().insert(formData)
+        
+        // Si la requête HTTP a réussi : l'utilisateur.ice a ajouté un livre et est redirigé vers une autre page
+        // use navigate : hook qui permet de naviguer
+        if ([200, 201].indexOf(process.status) !== -1) {
+            // redirection
+            navigate("/admin/books");
+        } else if ([400].indexOf(process.status) !== -1) {
+            // afficher un message
+            setMessage(process.message as unknown as string);
+        }
         
         
         
@@ -96,7 +137,14 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator }:
 
     return <>
         <div className={style.formulaire_crud}>
-        <h2>Gérer les livres</h2>
+            <h2>Gérer les livres</h2>
+            {/* afficher le message (type de condition supportée par le html) 
+                Si le message existe, l'afficher, sinon, rien de s'affiche
+            */}
+            {
+                message ? <p role="alert">{ message }</p> : null
+            }
+
         {/* si le formulaire contient un champ de fichier : 
                 - ajouter attribut enctype=" multipart/form-data"
                 - pour les champs relation :

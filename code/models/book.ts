@@ -17,13 +17,13 @@ type Book = {
 	description: string;
 
 	// liste concaténée des identifiants des catégories
-	category_ids: string;
+	category_ids: string | string[];
 	categories: Category[];
 	// liste concaténée des identifiants des currentstates
-	currentstate_ids: string;
+	currentstate_ids: string | string[];
 	currentstates: Currentstate[];
 	// liste concaténée des identifiants des authors
-	author_ids: string;
+	author_ids: string | string[];
 	authors: Author[];
 };
 

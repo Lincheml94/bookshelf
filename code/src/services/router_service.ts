@@ -54,7 +54,7 @@ class RouterService {
 						},
 						{
 							id: "book_form",
-							path: "book_form",
+							path: "book_form/:id?",
 							lazy: () => import("../pages/admin/book/admin_book_form"),
 						},
 						],
