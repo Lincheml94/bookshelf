@@ -10,7 +10,7 @@ import BookApiService from "../../../services/book_api_service";
 import { data, useNavigate } from "react-router";
 
 // import { Link } from "react-router";
-const AdminBookFormContent = ({ categories, authors, currentstates, validator , dataToUpdate}: AdminBookFormContentProps) => {
+const AdminBookFormContent = ({ categories, authors, currentstates, validator, dataToUpdate}: AdminBookFormContentProps) => {
     // créer de identifiants pour chaque champs de formulaire
     const idId = useId();
     const titleId = useId();
@@ -50,17 +50,14 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator , 
         const normalizeData = {
             ...dataToUpdate,
             category_ids: (dataToUpdate.category_ids as string).split(","),
-            currentstate_ids: (dataToUpdate.currentstate_ids as string).split(","),
-            author_ids: (dataToUpdate.author_ids as string).split(","),
+            // currentstate_ids: (dataToUpdate.currentstate_ids as string).split(","),
+            // author_ids: (dataToUpdate.author_ids as string).split(","),
 
         };
-            
-        reset(dataToUpdate);
+        reset(normalizeData);
         }
         
     }, [dataToUpdate, reset])
-    
-
 
         // soumission du formulaire
         // data stocke la saisie du formulaire
@@ -116,7 +113,6 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator , 
         formData.set("author_ids", normalizeData.author_ids as string)
         
         //    requête HTTP vers l'API
-        // const process = await new BookApiService().insert(formData);
         const process = dataToUpdate
             ? await new BookApiService().update(formData)
             : await new BookApiService().insert(formData)
@@ -130,7 +126,6 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator , 
             // afficher un message
             setMessage(process.message as unknown as string);
         }
-        
         
         
     };

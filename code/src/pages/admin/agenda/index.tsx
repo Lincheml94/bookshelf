@@ -1,6 +1,12 @@
+import DashboardLeft from "../../../components/admin/accueil/dashboard";
+
 const Agenda = () => {
-    return <h2>Gestion des évènements</h2>
-    
+    return (
+        <>
+        <DashboardLeft />
+            <h2>Gérer la page des évènements</h2>
+            </>
+    )
 }
 
 export default Agenda;

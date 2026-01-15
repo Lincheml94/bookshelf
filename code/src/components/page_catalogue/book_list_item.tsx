@@ -10,7 +10,7 @@ const BookListItem = ({data}: BookListItemProps) => {
     return (
         <div className={styles.cartelivre}>
             <Link to={ `/book/${data.id}` }>
-					<img src={`/img${data.images}`} alt={data.title} />
+					<img src={`/img/book/${data.images}`} alt={data.title} />
                     <p>{data.title}</p>
                     
                         <ul>

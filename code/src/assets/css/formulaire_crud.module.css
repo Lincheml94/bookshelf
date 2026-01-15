@@ -13,4 +13,9 @@
             color: red;
         }
         }
+        
+.book_crud{
+    display: flex;
+    flex-direction: column;
+}
     

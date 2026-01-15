@@ -4,7 +4,7 @@ const AdminBookHomeContent = () => {
     return <>
         
             <Link to={"/admin/book_form"}>
-                <button type="submit">Ajouter un livre</button>
+                <button type="submit">Ajouter un évènement</button>
             </Link>
                
             {/* <Link to={"/"}> */}

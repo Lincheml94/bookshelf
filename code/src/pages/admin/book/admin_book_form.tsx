@@ -28,12 +28,12 @@ const AdminBookForm = ({ params }: AdminBookParams) => {
         // la méthode then équivaut à await : then
        dataToUpdate = use(new BookApiService().selectOne(id)).data as Book; 
     }
-    // console.log(dataToUpdate);
-    
+
+
     
     // récupérer les catégories 
+
     const categories = use(new CategoryApiService().selectAll()).data as Category[];
-    // console.log(categories);
 
     const authors = use(new AuthorApiService().selectAll()).data as Author[];
 

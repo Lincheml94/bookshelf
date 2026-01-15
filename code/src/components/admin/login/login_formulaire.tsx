@@ -13,7 +13,7 @@ const FormulaireLogin = () => {
 
                 <button type="submit">envoyer</button>
                 <Link to={"/admin/register"}><p>Créer un compte</p></Link>
-                <Link to={"/admin/dashboard"}><p>Dashboard</p></Link>
+                <Link to={"/admin"}><p>Dashboard</p></Link>
             </form >
             </>
       )

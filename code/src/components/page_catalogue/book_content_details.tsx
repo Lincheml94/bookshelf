@@ -5,7 +5,7 @@ import type { BookContentDetailsProps } from '../../models/props/book/book_conte
 const BookContentDetails = ({data}: BookContentDetailsProps) => {
     return <div>
         {data.title}
-        {data.images}
+        <img src={`/img/book/${data.images}`} alt={data.title} />
         <p>prix : {data.price} euros</p>
         <p>dimensions :{data.dimensions} cm</p>
         <p>parution :{data.published_at}</p>

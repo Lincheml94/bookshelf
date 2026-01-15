@@ -7,7 +7,7 @@ class BookRouter {
 	private router = express.Router();
 
 	// multer permet de gérer les transfert de fichiers
-	private multer = multer({ dest: "public" });
+	private multer = multer({ dest: `${process.env.PUBLIC_DIR}/img/book/`});
 
 	// liste des routes
 	public getRoutes = () => {

@@ -21,9 +21,9 @@ class BookRepository {
 
 		const sql = `
             SELECT ${this.table}.*, 
-			GROUP_CONCAT(category.id) AS category_ids,
-			GROUP_CONCAT(currentstate.id) AS currentstate_ids,
-			GROUP_CONCAT(author.id) AS author_ids
+			GROUP_CONCAT(DISTINCT category.id) AS category_ids,
+			GROUP_CONCAT(DISTINCT currentstate.id) AS currentstate_ids,
+			GROUP_CONCAT(DISTINCT author.id) AS author_ids
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
@@ -181,9 +181,9 @@ class BookRepository {
 
 		const sql = `
 		SELECT ${this.table}.*, 
-			GROUP_CONCAT(category.id) AS category_ids,
-			GROUP_CONCAT(currentstate.id) AS currentstate_ids,
-			GROUP_CONCAT(author.id) AS author_ids
+			GROUP_CONCAT(DISTINCT category.id) AS category_ids,
+			GROUP_CONCAT(DISTINCT currentstate.id) AS currentstate_ids,
+			GROUP_CONCAT(DISTINCT author.id) AS author_ids
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
@@ -295,7 +295,7 @@ class BookRepository {
 			await connection.execute(sql, data);
 
 			// troisième requête
-			const joinIds = (data.category_ids as string)
+			let joinIds = (data.category_ids as string)
 				?.split(",")
 				.map((value) => `(@id, ${value})`)
 				.join();
@@ -304,6 +304,40 @@ class BookRepository {
 			sql = `
 				INSERT INTO 
 					${process.env.MYSQL_DATABASE}.book_category (book_id, category_id)
+				VALUES
+						
+				${joinIds}
+				;
+			
+				`;
+			await connection.execute(sql, data);
+
+			joinIds = (data.currentstate_ids as string)
+				?.split(",")
+				.map((value) => `(@id, ${value})`)
+				.join();
+			console.log(joinIds);
+
+			sql = `
+				INSERT INTO 
+					${process.env.MYSQL_DATABASE}.book_currentstate (book_id, currentstate_id)
+				VALUES
+						
+				${joinIds}
+				;
+			
+				`;
+			await connection.execute(sql, data);
+
+			joinIds = (data.author_ids as string)
+				?.split(",")
+				.map((value) => `(@id, ${value})`)
+				.join();
+			console.log(joinIds);
+
+			sql = `
+				INSERT INTO 
+					${process.env.MYSQL_DATABASE}.book_author (book_id, author_id)
 				VALUES
 						
 				${joinIds}
@@ -448,7 +482,7 @@ class BookRepository {
 
 			// // execution de la requête
 
-			// // deuxième requête
+			// deuxième requête
 			sql = `
 				DELETE FROM
 					${process.env.MYSQL_DATABASE}.events
@@ -457,13 +491,13 @@ class BookRepository {
 				;
 
 			`;
-			// // exécution de la deuxième requête
+			// exécution de la deuxième requête
 			await connection.execute(sql, data);
 
 			// // deuxième requête
 			sql = `
 				DELETE FROM
-					${process.env.MYSQL_DATABASE}.book_currentstate
+					${process.env.MYSQL_DATABASE}.book_currentstate 
 				WHERE
 					book_currentstate.book_id = :id
 				;
