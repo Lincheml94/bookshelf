@@ -21,9 +21,9 @@ class BookRepository {
 
 		const sql = `
             SELECT ${this.table}.*, 
-			GROUP_CONCAT(DISTINCT category.id) AS category_ids,
-			GROUP_CONCAT(DISTINCT currentstate.id) AS currentstate_ids,
-			GROUP_CONCAT(DISTINCT author.id) AS author_ids
+			GROUP_CONCAT(category.id) AS category_ids,
+			GROUP_CONCAT(currentstate.id) AS currentstate_ids,
+			GROUP_CONCAT(author.id) AS author_ids
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
@@ -160,7 +160,7 @@ class BookRepository {
 				result.currentstate_ids as string,
 			)) as Currentstate[];
 
-			// table de jointure - CURRENTSTATE
+			// table de jointure - AUTHOR
 			result.authors = (await new AuthorRepository().selectInList(
 				result.author_ids as string,
 			)) as Author[];
@@ -181,9 +181,9 @@ class BookRepository {
 
 		const sql = `
 		SELECT ${this.table}.*, 
-			GROUP_CONCAT(DISTINCT category.id) AS category_ids,
-			GROUP_CONCAT(DISTINCT currentstate.id) AS currentstate_ids,
-			GROUP_CONCAT(DISTINCT author.id) AS author_ids
+			GROUP_CONCAT(category.id) AS category_ids,
+			GROUP_CONCAT(currentstate.id) AS currentstate_ids,
+			GROUP_CONCAT(author.id) AS author_ids
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
@@ -262,18 +262,19 @@ class BookRepository {
 		let sql = `
 		INSERT INTO 
 			${process.env.MYSQL_DATABASE}.${this.table}
-		VALUE 
+		VALUES 
 			(
 				NULL, 
 				:title, 
 				:published_at, 
+				:description,
 				:price, 
 				:pages,
 				:dimensions, 
 				:images, 
 				:isbn, 
 				:print
-				:description, 
+				
 			)
 			;
 		`;
@@ -286,8 +287,6 @@ class BookRepository {
 			// exécution de la première requête
 			await connection.execute(sql, data);
 
-			// execution de la requête
-
 			// deuxième requête
 			sql = `SET @id = LAST_INSERT_ID();`;
 			// exécution de la deuxième requête
@@ -298,7 +297,7 @@ class BookRepository {
 				?.split(",")
 				.map((value) => `(@id, ${value})`)
 				.join();
-			console.log(joinIds);
+			// console.log(joinIds);
 
 			sql = `
 				INSERT INTO 
@@ -324,7 +323,6 @@ class BookRepository {
 						
 				${joinIds}
 				;
-			
 				`;
 			await connection.execute(sql, data);
 
@@ -332,7 +330,7 @@ class BookRepository {
 				?.split(",")
 				.map((value) => `(@id, ${value})`)
 				.join();
-			console.log(joinIds);
+			// console.log(joinIds);
 
 			sql = `
 				INSERT INTO 
@@ -341,7 +339,6 @@ class BookRepository {
 						
 				${joinIds}
 				;
-			
 				`;
 			
 			const [query] = await connection.execute(sql, data);
@@ -365,9 +362,12 @@ class BookRepository {
 	public update = async (
 	data: Partial<Book>,
 ): Promise<QueryResult | unknown> => {
-console.log(data);
+// console.log(data);
 
-	const connection = await new MySQLService().connect();
+		const connection = await new MySQLService().connect();
+		
+		console.log(data);
+
 
 	let sql = `
 	UPDATE
@@ -394,12 +394,10 @@ console.log(data);
 			// exécution de la première requête
 			await connection.execute(sql, data);
 
-			// // execution de la requête
-
-			// // deuxième requête
+			 // deuxième requête
 			sql = `
 				DELETE FROM
-					${process.env.MYSQL_DATABASE}.book_category
+					${process.env.MYSQL_DATABASE}.book_category 
 				WHERE
 					book_category.book_id = :id
 				;
@@ -436,45 +434,48 @@ console.log(data);
 			// // troisième requête : BOOK_CATEGORY
 			let joinIds = (data.category_ids as string)
 				?.split(",")
-				.map((value) => `(${value}, :id)`)
+				// .filter(v => v)
+				.map((value) => `(:id, ${value})`)
 				.join();
 			// console.log(joinIds);
 
 			sql = `
 				INSERT INTO
-					${process.env.MYSQL_DATABASE}.book_category
+					${process.env.MYSQL_DATABASE}.book_category (book_id, category_id)
 				VALUES
 				${joinIds}
 	 	;
 	`;
 		
-		// CURRENTSTATE
 		await connection.execute(sql, data);
 
 			// // troisième requête : BOOK_CURRENTSTATE
 			joinIds = (data.currentstate_ids as string)
 				?.split(",")
-				.map((value) => `(${value}, :id)`)
+				// .filter(v => v)
+				.map((value) => `(:id, ${value})`)
 				.join();
-			console.log(joinIds);
 
 			sql = `
 				INSERT INTO
-					${process.env.MYSQL_DATABASE}.book_currentstate
+					${process.env.MYSQL_DATABASE}.book_currentstate (book_id, currentstate_id)
 				VALUES
 				${joinIds}
 	 	;
 	`;
+		await connection.execute(sql, data);
+		
 			// BOOK_AUTHOR
 			joinIds = (data.author_ids as string)
 				?.split(",")
-				.map((value) => `(${value}, :id)`)
+				// .filter(v => v)
+				.map((value) => `(:id, ${value})`)
 				.join();
-			console.log(joinIds);
+		
 
 			sql = `
 				INSERT INTO
-					${process.env.MYSQL_DATABASE}.book_author
+					${process.env.MYSQL_DATABASE}.book_author (book_id, author_id)
 				VALUES
 				${joinIds}
 	 	;
