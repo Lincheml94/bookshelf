@@ -22,6 +22,7 @@ const AdminBookForm = ({ params }: AdminBookParams) => {
 
     // récupérer les données à mettre à jour
     let dataToUpdate: Book | undefined; 
+    console.log(dataToUpdate);
 
     // si un identifiant est présent dans l'URL
     if (id) {
@@ -38,7 +39,7 @@ const AdminBookForm = ({ params }: AdminBookParams) => {
     const authors = use(new AuthorApiService().selectAll()).data as Author[];
 
     const currentstates = use(new CurrentStateApiService().selectAll()).data as Currentstate[];
-    
+   
 
     return  (
         <>

@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import BookRepository from "../repository/book_repository";
 import multer from "multer";
 import FileServices from "../service/file_service";
+import type { Book } from "../../models/book";
 
 class BookController {
 	// Méthode reliée à la route en GET située dans le routeur
@@ -90,6 +91,24 @@ class BookController {
 
 	public update = async (req: Request, res: Response) => {
 		console.log(req.body);
+
+		 // req.body : récupérer les données contenues dans la requête HTTP
+        // console.log(req.body);
+        const file = (req.files as Express.Multer.File[]).shift() as Express.Multer.File;
+
+        // Instancier le service de fichiers
+        const fileService = new FileServices();
+
+        let fullname: string;
+
+        if (file) {
+        // Renommer le fichier transféré et on recupere le nom complet avec extension
+         fullname = await fileService.rename(file);
+		} else {
+         fullname = (await new BookRepository().selectOne(req.body) as Book).images;
+        }
+
+        console.log(fullname);
 
 		// récupérer la variable de route
 		// req.body : permet de récupérer la propriété body de la requête http

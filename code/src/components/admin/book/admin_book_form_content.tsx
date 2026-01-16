@@ -8,6 +8,7 @@ import type { ZodIssue } from "zod/v3";
 import { useState } from "react";
 import BookApiService from "../../../services/book_api_service";
 import { data, useNavigate } from "react-router";
+import { date } from "zod";
 
 // import { Link } from "react-router";
 const AdminBookFormContent = ({ categories, authors, currentstates, validator, dataToUpdate}: AdminBookFormContentProps) => {
@@ -50,12 +51,16 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator, d
         const normalizeData = {
             ...dataToUpdate,
             category_ids: (dataToUpdate.category_ids as string).split(","),
-            // currentstate_ids: (dataToUpdate.currentstate_ids as string).split(","),
-            // author_ids: (dataToUpdate.author_ids as string).split(","),
+            currentstate_ids: (dataToUpdate.currentstate_ids as string).split(","),
+            author_ids: (dataToUpdate.author_ids as string).split(","),
+
 
         };
-        reset(normalizeData);
+            reset(normalizeData);
+            
         }
+        
+        
         
     }, [dataToUpdate, reset])
 
@@ -69,8 +74,11 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator, d
             category_ids: (data.category_ids as unknown as string[]).join(),
             currentstate_ids: (data.currentstate_ids as unknown as string[]).join(),
             author_ids: (data.author_ids as unknown as string[]).join(),
+            image: (data.images as string)[0],
 
         };
+        
+        
         
         // validation de la saisie avec le validateur côté serveur
         const validation = await validator(normalizeData);
@@ -126,8 +134,6 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator, d
             // afficher un message
             setMessage(process.message as unknown as string);
         }
-        
-        
     };
 
     return <>
@@ -219,8 +225,8 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator, d
                 {/* IMAGE */}
             <p>
             <label htmlFor={imagesId}>Charger une image</label>
-                    <input type="text" id={imagesId} {...register('images', {
-                required: "ce champ est obligatoire"
+                    <input type="file" id={imagesId} {...register('images', dataToUpdate ? {} : {
+                required: "ce champ est obligatoire",
             })} />
                 </p> 
                  <p className={style.msg_erreur} role="alert">{ errors.images?.message ?? serverErrors?.images}</p>

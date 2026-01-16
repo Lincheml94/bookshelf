@@ -10,6 +10,7 @@ class AdminBookFormValidator{
         "use server";
         
         // contraintes de validation
+        // union permet de donner deux types (nécessaire pour id, et pour image)
         const constraints = z.object({
             id: z.union([
                 z.string().nullable(),
@@ -35,7 +36,12 @@ class AdminBookFormValidator{
             dimensions: z
                 .string("la dimension est obligatoire")
                 .max(20, "le nombre de caractère est limité à 20"),
-	        images: z.string("ce champ est obligatoire"),
+          
+            images: z.union([
+                z.string("ce champ est obligatoire - zod3").nullable(),
+                z.file("ce champ est obligatoire - zod"),
+            ]),
+            
             isbn: z
                 .string("l'isbn est obligatoire")
                 .max(40, "le nombre de caractères est limité à 40"),

@@ -267,16 +267,15 @@ class BookRepository {
 				NULL, 
 				:title, 
 				:published_at, 
-				:description, 
 				:price, 
-				:pages, 
+				:pages,
 				:dimensions, 
 				:images, 
 				:isbn, 
 				:print
+				:description, 
 			)
 			;
-
 		`;
 
 		// try / catch : exécuter requête / récupérer les résultats ou une erreur
@@ -344,6 +343,7 @@ class BookRepository {
 				;
 			
 				`;
+			
 			const [query] = await connection.execute(sql, data);
 
 			// valider la transition SQL
@@ -359,45 +359,44 @@ class BookRepository {
 		}
 	};
 
-	// insérer un enregistrement
+	// Modifier un enregistrement
+	
+	
 	public update = async (
-		data: Partial<Book>,
-	): Promise<QueryResult | unknown> => {
-		// connexion au serveur mysql
-		const connection = await new MySQLService().connect();
+	data: Partial<Book>,
+): Promise<QueryResult | unknown> => {
+console.log(data);
 
-		// requête SQL
-		// Dans VALUE, on crée des variables de requête, pour éviter les injections SQL (les attaques)
-		// les variables s'écrivent avec deux points
-		let sql = `
-		UPDATE
-			${process.env.MYSQL_DATABASE}.${this.table}
-		SET
-			${this.table}.title = :title, 
-			${this.table}.published_at = :published_at, 
-			${this.table}.description = :description, 
-			${this.table}.price = :price, 
-			${this.table}.pages = :pages, 
-			${this.table}.dimensions = :dimensions, 
-			${this.table}.images = :images, 
-			${this.table}.isbn = :isbn, 
-			${this.table}.print = :print
-		WHERE	
-			${this.table}.id = :id
-			;
-		`;
+	const connection = await new MySQLService().connect();
 
-		// try / catch : exécuter requête / récupérer les résultats ou une erreur
-		try {
+	let sql = `
+	UPDATE
+		${process.env.MYSQL_DATABASE}.${this.table}
+	SET
+		${this.table}.title = :title, 
+		${this.table}.published_at = :published_at, 
+		${this.table}.description = :description, 
+		${this.table}.price = :price, 
+		${this.table}.pages = :pages, 
+		${this.table}.dimensions = :dimensions, 
+		${this.table}.images = :images, 
+		${this.table}.isbn = :isbn, 
+		${this.table}.print = :print
+	WHERE	
+		${this.table}.id = :id
+	;
+	`;
+
+	try {
 			// démarrer une transaction SQL
 			connection.beginTransaction();
 
-			// exécution de la première requête : mise à jour du livre
+			// exécution de la première requête
 			await connection.execute(sql, data);
 
-			// execution de la requête
+			// // execution de la requête
 
-			// deuxième requête : supprimer les anciennes relations book_category
+			// // deuxième requête
 			sql = `
 				DELETE FROM
 					${process.env.MYSQL_DATABASE}.book_category
@@ -406,52 +405,94 @@ class BookRepository {
 				;
 
 			`;
-			// définir @id pour l'INSERT des relations
-			        
-			await connection.execute(sql, data);
-			
+		
 			// // exécution de la deuxième requête
-			sql = `SET @id = :id;`;  
-			await connection.execute(sql, data);
+		await connection.execute(sql, data);
+		
+			sql = `
+				DELETE FROM
+					${process.env.MYSQL_DATABASE}.book_currentstate
+				WHERE
+					book_currentstate.book_id = :id
+				;
 
-			// 5️⃣ filtrer les doublons dans category_ids
-		const categoryIds = (data.category_ids as string)
-			?.split(",")
-			.map(id => parseInt(id.trim()))
-			.filter((v, i, a) => a.indexOf(v) === i);
+			`;
+		
+		// exécution de la deuxième requête
+		await connection.execute(sql, data);
+		
+			sql = `
+				DELETE FROM
+					${process.env.MYSQL_DATABASE}.book_author
+				WHERE
+					book_author.book_id = :id
+				;
 
-		// si il n'y a pas de category_ids, on ne fait rien
-			if (categoryIds && categoryIds.length > 0) {
+			`;
+			// // exécution de la deuxième requête
+		await connection.execute(sql, data);
+		
+// --------------------------------------------------------------------------------
+			// // troisième requête : BOOK_CATEGORY
+			let joinIds = (data.category_ids as string)
+				?.split(",")
+				.map((value) => `(${value}, :id)`)
+				.join();
+			// console.log(joinIds);
 
-				// // troisième requête
-				const joinIds = (data.category_ids as string)
-					?.split(",")
-					.map((value) => `(@id, ${value})`)
-					.join();
-				// console.log(joinIds);
-
-				sql = `
+			sql = `
 				INSERT INTO
-					${process.env.MYSQL_DATABASE}.book_category (book_id, category_id)
+					${process.env.MYSQL_DATABASE}.book_category
 				VALUES
 				${joinIds}
 	 	;
 	`;
-				const [query] = await connection.execute(sql, data);
 		
+		// CURRENTSTATE
+		await connection.execute(sql, data);
+
+			// // troisième requête : BOOK_CURRENTSTATE
+			joinIds = (data.currentstate_ids as string)
+				?.split(",")
+				.map((value) => `(${value}, :id)`)
+				.join();
+			console.log(joinIds);
+
+			sql = `
+				INSERT INTO
+					${process.env.MYSQL_DATABASE}.book_currentstate
+				VALUES
+				${joinIds}
+	 	;
+	`;
+			// BOOK_AUTHOR
+			joinIds = (data.author_ids as string)
+				?.split(",")
+				.map((value) => `(${value}, :id)`)
+				.join();
+			console.log(joinIds);
+
+			sql = `
+				INSERT INTO
+					${process.env.MYSQL_DATABASE}.book_author
+				VALUES
+				${joinIds}
+	 	;
+	`;
+
+			const [query] = await connection.execute(sql, data);
+
 			// valider la transition SQL
 			connection.commit();
 
 			// retourner les informations de la requête
-				return query;
-			}
+			return query;
 		} catch (error) {
-			// annuler une transaction
-			connection.rollback();
+		await connection.rollback();
+		return error;
+	}
+};
 
-			return error;
-		}
-	};
 
 	public delete = async (
 		data: Partial<Book>,
