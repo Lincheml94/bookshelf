@@ -51,7 +51,7 @@ class BookController {
 	};
 
 	public insert = async (req: Request, res: Response) => {
-		console.log(req.body);
+		// console.log(req.body);
 
 		// req.files permet de récupérer les fichiers transférés
 		// console.log(req.files);
@@ -90,14 +90,14 @@ class BookController {
 	};
 
 	public update = async (req: Request, res: Response) => {
-		console.log(req.body);
+		// console.log(req.body);
 
 		 // req.body : récupérer les données contenues dans la requête HTTP
         // console.log(req.body);
         const file = (req.files as Express.Multer.File[]).shift() as Express.Multer.File;
 
         // Instancier le service de fichiers
-        const fileService = new FileServices();
+		const fileService = new FileServices();
 
         let fullname: string;
 
@@ -108,11 +108,11 @@ class BookController {
          fullname = (await new BookRepository().selectOne(req.body) as Book).images;
         }
 
-        console.log(fullname);
+        // console.log(fullname);
 
 		// récupérer la variable de route
 		// req.body : permet de récupérer la propriété body de la requête http
-		const results = await new BookRepository().update(req.body);
+		const results = await new BookRepository().update({ ...req.body, images: fullname, });
 
 		// si la requête renvoie une erreur
 		if (results instanceof Error) {

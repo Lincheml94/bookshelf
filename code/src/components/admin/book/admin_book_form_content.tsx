@@ -53,33 +53,32 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator, d
             category_ids: (dataToUpdate.category_ids as string).split(","),
             currentstate_ids: (dataToUpdate.currentstate_ids as string).split(","),
             author_ids: (dataToUpdate.author_ids as string).split(","),
-
-
+            published_at: dataToUpdate.published_at
+                ? new Date(dataToUpdate.published_at).toISOString().split("T")[0]
+                : ""
         };
             reset(normalizeData);
-            
         }
-        
-        
         
     }, [dataToUpdate, reset])
 
         // soumission du formulaire
         // data stocke la saisie du formulaire
     const submitForm = async (data: Partial<Book>) => {
-            
+
         // normaliser les données saisies : se base sur les données testées dans flashport pour que les données
         const normalizeData = {
+
+            
             ...data,
             category_ids: (data.category_ids as unknown as string[]).join(),
             currentstate_ids: (data.currentstate_ids as unknown as string[]).join(),
             author_ids: (data.author_ids as unknown as string[]).join(),
-            image: (data.images as string)[0],
+            images: (data.images as string)[0],
 
         };
         
-        
-        
+    
         // validation de la saisie avec le validateur côté serveur
         const validation = await validator(normalizeData);
         // console.log(validation);
@@ -173,13 +172,13 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator, d
                 {/* PRICE */}
                 <p>
             <label htmlFor={priceId}>Prix</label>
-                    <input type="number" id={priceId} {...register('price', {
+                    <input type="number" step="0.01" id={priceId} {...register('price', {
                 required: "le prix est obligatoire",
-                 minLength: {
+                 min: {
                      value: 1,
                      message: "le prix doit être de minimum 1 euro"
                  },
-                 maxLength: {
+                 max: {
                      value :999.99,
                      message: "le prix doit être de maximum 999,99 euros"
                  }
@@ -260,7 +259,7 @@ const AdminBookFormContent = ({ categories, authors, currentstates, validator, d
                 {/* DESCRIPTION */}
                  <p>
             <label htmlFor={descriptionId}>Description</label>
-                    <input type="textarea" id={descriptionId} {...register('description', {
+                    <textarea id={descriptionId} {...register('description', {
                         required: "ce champ est obligatoire",
                         maxLength: {
                             value: 1000,

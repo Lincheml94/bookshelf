@@ -1,5 +1,4 @@
 import { fileTypeFromFile } from 'file-type'
-import { log } from 'node:console'
 import fs from 'node:fs/promises'
 
 /*
@@ -24,7 +23,7 @@ class FileServices {
     public rename = async (file:Express.Multer.File):Promise<string> => {
         // ajouter l'extension du fichier et récupérer le nom complet
         const fullname = `${file.filename}.${(await fileTypeFromFile(file.path))?.ext}`;
-        console.log(fullname);
+        // console.log(fullname);
        
 		// renommer le fichier avec le nom complet, avec l'ancien chemin (path) du fichier
 		await fs.rename(file.path, `${file.destination}/${fullname}`);
