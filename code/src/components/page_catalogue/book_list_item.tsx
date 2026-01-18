@@ -9,7 +9,8 @@ const BookListItem = ({data}: BookListItemProps) => {
     
     return (
         <div className={styles.cartelivre}>
-            <Link to={ `/book/${data.id}` }>
+            <Link to={`/book/${data.id}`}>
+                <div className={styles.legende}>
 					<img src={`/img/book/${data.images}`} alt={data.title} />
                     <p>{data.title}</p>
                     
@@ -20,7 +21,8 @@ const BookListItem = ({data}: BookListItemProps) => {
                                     <li key={item.id}>{item.firstname} {item.lastname}</li>))
                             }
             </ul>
-                <p>prix : {data.price}€</p>
+                    <p>prix : {data.price}€</p>
+                    </div>
                 </Link>
 				</div >
             )

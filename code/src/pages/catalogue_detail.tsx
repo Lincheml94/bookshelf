@@ -4,7 +4,6 @@ import { use } from "react";
 import BookApiService from "../services/book_api_service";
 import type { Book } from "../../models/book";
 import BookContentDetails from "../components/page_catalogue/book_content_details";
-import style from "../assets/css/page_book_details.module.css"
 // param permet de récupérer une variable d'URL
 
 const CatalogueDetail = ({ params }: CatalogueDetailsParams) => {
@@ -16,9 +15,9 @@ const CatalogueDetail = ({ params }: CatalogueDetailsParams) => {
 	console.log(result);
 	return <>
 		<Seo title={result.data?.title as string} description={result.data?.title as string} url={`/book/${id}`} />
-		<div className={style.book_detail}>
+		
 			<BookContentDetails data={result.data as Book} />
-			</div>
+			
 	</>
 	;
 };

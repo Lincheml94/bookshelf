@@ -1,4 +1,4 @@
-import DashboardLeft from "../../../components/admin/accueil/dashboard";
+import DashboardLeft from "../../../components/admin/accueil/dashboard_nav";
 
 const Agenda = () => {
     return (

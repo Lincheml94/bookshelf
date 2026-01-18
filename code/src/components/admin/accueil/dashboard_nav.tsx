@@ -1,9 +1,8 @@
 import { Link } from "react-router"
-import style from "../../../assets/css/admin/dashboard.css"
+import style from "../../../assets/css/admin/dashboard.module.css"
 
-const DashboardLeft = () => {
-    return <>
-        <div className="dashboard">
+const DashboardNav = () => {
+    return <div className={style.dashboard}>
             <Link to={"/admin"}><p>Dashboard</p></Link>
             
             <div className="links">
@@ -14,7 +13,7 @@ const DashboardLeft = () => {
        
             </div>
             </div>
-    </>
+   
 }
 
-export default DashboardLeft
+export default DashboardNav;

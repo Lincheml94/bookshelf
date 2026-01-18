@@ -42,11 +42,6 @@ class RouterService {
 							path: "agenda",
 							lazy: () => import("../pages/admin/agenda/index"),
 						},
-						// {
-						// 	id: "agenda_form",
-						// 	path: "agenda_form",
-						// 	lazy: () => import("../pages/admin/agenda/admin_agenda"),
-						// },
 						{
 							id: "admin_books",
 							path: "books",

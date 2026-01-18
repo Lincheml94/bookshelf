@@ -1,3 +1,22 @@
-.book_detail{
-    padding: 200px;
+/* PAGE LIVRE UNITE */
+
+
+.bookdetail{
+
+	display: flex;
+    gap: 6rem;
+    padding: 7rem;
+	img{
+		width: 15rem;
+	}
+
+    .legendedetail{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        h2{
+            font-size: 20px;
+        }
+    }
 }

@@ -1,0 +1,28 @@
+/* Nav dashboard */
+
+.dashboard{
+    width: 20vw;
+    height:100vh;
+    background-color: rgb(153, 66, 234);
+    padding: 10px;
+    position: fixed;
+    
+    
+
+    .links{
+       p{
+            margin-top: 15px;
+       }
+    }
+}
+
+/* Contenu dashboard : contient nav à gauche et contenu à droite */
+.dashboardcontent{
+    display: flex;
+
+
+}
+
+.dashboardcontentright{
+    padding-left: 20vw;
+}

@@ -12,6 +12,11 @@ a {
 	color: black;
 }
 
+li{
+	text-decoration: none;
+	list-style: none;
+}
+
 /* variables css */
 
 /* :root {
@@ -26,3 +31,4 @@ a {
 img {
 	width: 100%;
 }
+

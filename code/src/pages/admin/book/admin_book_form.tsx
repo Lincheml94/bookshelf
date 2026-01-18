@@ -8,11 +8,11 @@ import BookApiService from "../../../services/book_api_service";
 import type { Category } from "../../../../models/category";
 import type { Author } from "../../../../models/author";
 import type { Currentstate } from "../../../../models/currentstate";
-import style from "../../../assets/css/formulaire_crud.module.css"
+import style from "../../../assets/css/admin/dashboard.module.css"
 import AdminBookFormValidator from "../../../validator/admin_book_form_validator";
-import DashboardLeft from "../../../components/admin/accueil/dashboard";
 import type { AdminBookParams } from "../../../models/params/admin_book_params";
 import type { Book } from "../../../../models/book";
+import DashboardNav from "../../../components/admin/accueil/dashboard_nav";
 
 
 const AdminBookForm = ({ params }: AdminBookParams) => {
@@ -43,12 +43,10 @@ const AdminBookForm = ({ params }: AdminBookParams) => {
 
     return  (
         <>
-            <div className="dashboard-admin-book">
-            <DashboardLeft />
-            <div className={style.page_formulaire}>
-            <title> Gestion des livres - administration</title>
-
-                <AdminBookFormContent dataToUpdate={dataToUpdate} categories={categories} authors={authors} currentstates={currentstates} validator={ new AdminBookFormValidator().validate } />
+            <div className={style.dashboardcontent}>
+                <DashboardNav />
+                <div className={style.dashboardcontentright}>
+            <AdminBookFormContent dataToUpdate={dataToUpdate} categories={categories} authors={authors} currentstates={currentstates} validator={ new AdminBookFormValidator().validate } />
                 </div>
                 </div>
         </>
@@ -56,3 +54,5 @@ const AdminBookForm = ({ params }: AdminBookParams) => {
 }
 
 export default AdminBookForm;
+
+// Page FORMULAIRE d'ajout de livre
