@@ -340,7 +340,7 @@ class BookRepository {
 				${joinIds}
 				;
 				`;
-			
+
 			const [query] = await connection.execute(sql, data);
 
 			// valider la transition SQL
@@ -357,19 +357,17 @@ class BookRepository {
 	};
 
 	// Modifier un enregistrement
-	
-	
+
 	public update = async (
-	data: Partial<Book>,
-): Promise<QueryResult | unknown> => {
-// console.log(data);
+		data: Partial<Book>,
+	): Promise<QueryResult | unknown> => {
+		// console.log(data);
 
 		const connection = await new MySQLService().connect();
-		
+
 		console.log(data);
 
-
-	let sql = `
+		let sql = `
 	UPDATE
 		${process.env.MYSQL_DATABASE}.${this.table}
 	SET
@@ -387,14 +385,14 @@ class BookRepository {
 	;
 	`;
 
-	try {
+		try {
 			// démarrer une transaction SQL
 			connection.beginTransaction();
 
 			// exécution de la première requête
 			await connection.execute(sql, data);
 
-			 // deuxième requête
+			// deuxième requête
 			sql = `
 				DELETE FROM
 					${process.env.MYSQL_DATABASE}.book_category 
@@ -403,10 +401,10 @@ class BookRepository {
 				;
 
 			`;
-		
+
 			// // exécution de la deuxième requête
-		await connection.execute(sql, data);
-		
+			await connection.execute(sql, data);
+
 			sql = `
 				DELETE FROM
 					${process.env.MYSQL_DATABASE}.book_currentstate
@@ -415,10 +413,10 @@ class BookRepository {
 				;
 
 			`;
-		
-		// exécution de la deuxième requête
-		await connection.execute(sql, data);
-		
+
+			// exécution de la deuxième requête
+			await connection.execute(sql, data);
+
 			sql = `
 				DELETE FROM
 					${process.env.MYSQL_DATABASE}.book_author
@@ -428,9 +426,9 @@ class BookRepository {
 
 			`;
 			// // exécution de la deuxième requête
-		await connection.execute(sql, data);
-		
-// --------------------------------------------------------------------------------
+			await connection.execute(sql, data);
+
+			// --------------------------------------------------------------------------------
 			// // troisième requête : BOOK_CATEGORY
 			let joinIds = (data.category_ids as string)
 				?.split(",")
@@ -446,8 +444,8 @@ class BookRepository {
 				${joinIds}
 	 	;
 	`;
-		
-		await connection.execute(sql, data);
+
+			await connection.execute(sql, data);
 
 			// // troisième requête : BOOK_CURRENTSTATE
 			joinIds = (data.currentstate_ids as string)
@@ -463,15 +461,14 @@ class BookRepository {
 				${joinIds}
 	 	;
 	`;
-		await connection.execute(sql, data);
-		
+			await connection.execute(sql, data);
+
 			// BOOK_AUTHOR
 			joinIds = (data.author_ids as string)
 				?.split(",")
 				// .filter(v => v)
 				.map((value) => `(:id, ${value})`)
 				.join();
-		
 
 			sql = `
 				INSERT INTO
@@ -489,11 +486,10 @@ class BookRepository {
 			// retourner les informations de la requête
 			return query;
 		} catch (error) {
-		await connection.rollback();
-		return error;
-	}
-};
-
+			await connection.rollback();
+			return error;
+		}
+	};
 
 	public delete = async (
 		data: Partial<Book>,
@@ -520,6 +516,16 @@ class BookRepository {
 			connection.beginTransaction();
 
 			// exécution de la première requête
+			await connection.execute(sql, data);
+
+			sql = `
+                DELETE FROM
+                    ${process.env.MYSQL_DATABASE}.events_visitor
+                WHERE
+                    events_id IN (SELECT id FROM ${process.env.MYSQL_DATABASE}.events WHERE book_id = :id)
+                ;
+            `;
+			// exécution de la requête pour les visiteurs
 			await connection.execute(sql, data);
 
 			// // execution de la requête
