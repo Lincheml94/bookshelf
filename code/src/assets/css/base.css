@@ -8,6 +8,11 @@
 	font-family: BBBPoppins Regular;
 	src: url(/src/assets/font/BBBPoppinsTN-TextRegular.ttf);
 }
+
+@font-face {
+	font-family: Inter;
+	src: url(/src/assets/font/Inter-VariableFont_opsz\,wght.ttf);
+}
 body {
 	font-family: Dindong;
 }
