@@ -3,12 +3,11 @@
 .flexall {
 	display: flex;
 	flex-direction: column;
-	/* width: 90vw; */
-	justify-content: center;
+	width: 100%;
+	justify-content: left;
 	align-items: center;
 	position: relative;
 	padding-top: 120px;
-	
 }
 
 .flexcat {
@@ -16,27 +15,36 @@
 	width: 90vw;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 20px;
+	gap: 100px;
 	img {
-		width: 80px;
+		width: 150px;
 	}
 
 	.cartelivre {
 		width: 200px;
-		height: 200px;
-		border: rgb(123, 123, 123) 1px solid;
-		margin: 10px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-
-		.legende{
+		height: 300px;
+		/* border: rgb(123, 123, 123) 1px solid; */
+		a {
+			margin: 10px;
 			display: flex;
 			flex-direction: column;
-			align-items: center;
 			justify-content: center;
+			align-items: center;
+			gap: 10px;
+
+			.legende {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 3px;
+				/* img {
+					margin-bottom: 7px;
+				} */
+				p {
+					text-align: center;
+				}
+			}
 		}
 	}
 }
-

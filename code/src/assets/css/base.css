@@ -3,6 +3,11 @@
 	font-family: Dindong;
 	src: url(/src/assets/font/DINdong.ttf);
 }
+
+@font-face {
+	font-family: BBBPoppins Regular;
+	src: url(/src/assets/font/BBBPoppinsTN-TextRegular.ttf);
+}
 body {
 	font-family: Dindong;
 }
@@ -12,7 +17,7 @@ a {
 	color: black;
 }
 
-li{
+li {
 	text-decoration: none;
 	list-style: none;
 }
@@ -31,4 +36,3 @@ li{
 img {
 	width: 100%;
 }
-
