@@ -5,7 +5,6 @@ import type { Book } from "../../../../models/book";
 import type { Category } from "../../../../models/category";
 import type { Currentstate } from "../../../../models/currentstate";
 import style from "../../../assets/css/admin/dashboard.module.css";
-import DashboardNav from "../../../components/admin/accueil/dashboard_nav";
 import AdminBookFormContent from "../../../components/admin/book/admin_book_form_content";
 import type { AdminBookParams } from "../../../models/params/admin_book_params";
 import AuthorApiService from "../../../services/authors_api_service";
@@ -40,17 +39,14 @@ const AdminBookForm = ({ params }: AdminBookParams) => {
 		.data as Currentstate[];
 
 	return (
-		<div>
-			<DashboardNav />
-			<div className={style["content-dashboard"]}>
-				<AdminBookFormContent
-					dataToUpdate={dataToUpdate}
-					categories={categories}
-					authors={authors}
-					currentstates={currentstates}
-					validator={new AdminBookFormValidator().validate}
-				/>
-			</div>
+		<div className={style["content-dashboard"]}>
+			<AdminBookFormContent
+				dataToUpdate={dataToUpdate}
+				categories={categories}
+				authors={authors}
+				currentstates={currentstates}
+				validator={new AdminBookFormValidator().validate}
+			/>
 		</div>
 	);
 };
