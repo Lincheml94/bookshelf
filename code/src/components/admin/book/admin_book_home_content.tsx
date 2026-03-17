@@ -2,8 +2,8 @@ import { use } from "react";
 import { Link } from "react-router";
 import style from "../../../assets/css/formulaire_crud.module.css";
 import BookApiService from "../../../services/book_api_service";
-
-// import { map } from "zod";
+import EditIcon from "../../icones/edit";
+import BinIcon from "../../icones/trash";
 
 const AdminBookHomeContent = () => {
 	// récupération des menus
@@ -12,7 +12,9 @@ const AdminBookHomeContent = () => {
 	return (
 		<>
 			<Link to={"/admin/book_form"}>
-				<button type="submit">Ajouter un livre</button>
+				<button type="submit" className={style.button_add}>
+					Ajouter un livre
+				</button>
 			</Link>
 			{/* Affichage des livres */}
 			{results?.map((item) => {
@@ -21,11 +23,15 @@ const AdminBookHomeContent = () => {
 						<p>{item.title}</p>
 
 						<Link to={`/admin/book_form/${item.id}`}>
-							<button type="submit">Modifier un livre</button>
+							<button type="submit" className={style.button_crud}>
+								<EditIcon />
+							</button>
 						</Link>
 
 						<Link to={`/admin/book_delete/${item.id}`}>
-							<button type="submit">Supprimer un livre</button>
+							<button type="submit" className={style.button_crud}>
+								<BinIcon />
+							</button>
 						</Link>
 					</div>
 				);
