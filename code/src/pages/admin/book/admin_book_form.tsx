@@ -39,15 +39,13 @@ const AdminBookForm = ({ params }: AdminBookParams) => {
 		.data as Currentstate[];
 
 	return (
-		<div className={style["content-dashboard"]}>
-			<AdminBookFormContent
-				dataToUpdate={dataToUpdate}
-				categories={categories}
-				authors={authors}
-				currentstates={currentstates}
-				validator={new AdminBookFormValidator().validate}
-			/>
-		</div>
+		<AdminBookFormContent
+			dataToUpdate={dataToUpdate}
+			categories={categories}
+			authors={authors}
+			currentstates={currentstates}
+			validator={new AdminBookFormValidator().validate}
+		/>
 	);
 };
 
