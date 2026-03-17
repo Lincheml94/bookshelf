@@ -11,16 +11,16 @@ const DashboardNav = () => {
 
 			<div className="links">
 				<Link to={"/admin/books"}>
-					<p>books</p>
+					<p>livres</p>
 				</Link>
-				<Link to={"/admin/agenda"}>
-					<p>Agenda</p>
+				<Link to={"/admin/"}>
+					<p>évènements</p>
 				</Link>
-				<Link to={"/admin/books"}>
-					<p>Info</p>
+				<Link to={"/admin/"}>
+					<p>newsletter</p>
 				</Link>
-				<Link to={"/admin/books"}>
-					<p>page d'accueil</p>
+				<Link to={"/admin/"}>
+					<p>utilisateur.ice.s</p>
 				</Link>
 			</div>
 		</div>
