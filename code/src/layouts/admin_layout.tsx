@@ -9,7 +9,9 @@ const AdminLayout = () => {
 			<DashboardNav />
 			<div className={style["main-dashboard"]}>
 				<DashboardHeader />
-				<Outlet />
+				<div className={style["sub-dashboard"]}>
+					<Outlet />
+				</div>
 			</div>
 		</>
 	);

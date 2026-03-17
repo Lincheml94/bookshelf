@@ -1,4 +1,4 @@
-/* Page global */
+/* STYLE GENERAL : PARENT */
 
 .main-dashboard {
 	height: 100%;
@@ -8,7 +8,7 @@
 	padding-left: 200px;
 }
 
-/* Barre de navigation gauche */
+/* GENERAL - Barre de navigation gauche */
 
 .dashboard {
 	display: flex;
@@ -29,7 +29,7 @@
 	}
 }
 
-/* Header */
+/* GENERAL - Header */
 
 .header-dashboard {
 	width: calc(100% - 200px);
@@ -45,18 +45,27 @@
 	}
 }
 
-/* Contenu principal */
-.content-dashboard-accueil {
+/* CONTENU ENFANT - GENERAL */
+
+.sub-dashboard {
+	width: 100%;
+	min-height: 100vh;
 	margin-top: 72px;
+	background-color: #feffc8;
+	padding: 50px;
+}
+
+/* CONTENU ENFANT - CONTENU ACCUEIL */
+
+.content-dashboard-accueil {
 	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: #feffc8;
 	gap: 20px;
-	padding: 50px;
+
 	.msg {
 		text-align: center;
 		line-height: 41px;
