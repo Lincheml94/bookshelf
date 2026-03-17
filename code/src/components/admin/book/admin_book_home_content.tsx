@@ -22,7 +22,20 @@ const AdminBookHomeContent = () => {
 			{results?.map((item) => {
 				return (
 					<div className={style.book_crud} key={item.id}>
-						<p>{item.title}</p>
+						<img
+							src={`/img/book/${item.images}`}
+							alt={item.title}
+							className={style.img_form}
+						/>
+						<p>
+							{item.title},{" "}
+							{item.authors.map((item) => (
+								<li key={item.id}>
+									{item.firstname} {item.lastname}
+								</li>
+							))}
+						</p>
+
 						<div className={style.button_crud} key={item.id}>
 							<Link to={`/admin/book_form/${item.id}`}>
 								<button type="submit">

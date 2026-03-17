@@ -29,10 +29,15 @@ h2 {
 		display: flex;
 		align-items: center;
 		margin-bottom: 10px;
+		gap: 20px;
 
 		.button_crud {
 			position: absolute;
 			left: 600px;
+		}
+
+		.img_form {
+			width: 20px;
 		}
 	}
 	.book_crud:hover {
