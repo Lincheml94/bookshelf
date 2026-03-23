@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
-// import Content from "../components/content_accueil";
+import style from "../assets/css/content.module.css";
 import Header from "../components/header/header";
-import LoginButton from "../components/admin/login/login_button";
+import LoginButton from "../components/login/login_button";
 
 const PublicLayout = () => {
 	return (
@@ -14,7 +14,9 @@ const PublicLayout = () => {
 			<LoginButton />
 			{/* footer */}
 			{/* contenu de la page enfant : outlet */}
-			<Outlet />
+			<div className={style.container}>
+				<Outlet />
+			</div>
 		</>
 	);
 };

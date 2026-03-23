@@ -1,17 +1,12 @@
 -- Rôles
 INSERT INTO publishinghouse_dev.role (name) VALUES
 ('Admin'),
-('Éditeur'),
-('Auteur'),
-('Visiteur');
+('Éditeur');
 
 -- Utilisateurs
 INSERT INTO publishinghouse_dev.user (email, password, role_id) VALUES
-('admin@editions.fr', '$2a$10$N9qo8uLOickgx2ZMRZoMy.MrYQZ5X1Q5JqJ5J5J5J5J5J5J5J5J5J5', 1),
-('editeur1@editions.fr', '$2a$10$N9qo8uLOickgx2ZMRZoMy.MrYQZ5X1Q5JqJ5J5J5J5J5J5J5J5J5J5', 2),
-('auteur1@editions.fr', '$2a$10$N9qo8uLOickgx2ZMRZoMy.MrYQZ5X1Q5JqJ5J5J5J5J5J5J5J5J5J5', 3),
-('auteur2@editions.fr', '$2a$10$N9qo8uLOickgx2ZMRZoMy.MrYQZ5X1Q5JqJ5J5J5J5J5J5J5J5J5J5', 3),
-('visiteur1@editions.fr', '$2a$10$N9qo8uLOickgx2ZMRZoMy.MrYQZ5X1Q5JqJ5J5J5J5J5J5J5J5J5J5', 4);
+('admin@editions.fr', '$argon2i$v=19$m=16,t=2,p=1$OEJPT3p0WnYyaWh2SHloUA$VooCQepwOAaEmfksALt0UQ', 1),
+('editeur1@editions.fr', '$argon2i$v=19$m=16,t=2,p=1$U1ZnSXlmQkpDb0NpNndyTg$tsaNXBUn4tdz26KKQgn2XQ', 2);
 
 -- Newsletter
 INSERT INTO publishinghouse_dev.newsletter (email) VALUES

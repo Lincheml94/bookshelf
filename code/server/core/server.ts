@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import AuthorRouter from "../router/author_router";
 import BookRouter from "../router/book_router";
@@ -6,9 +7,9 @@ import Current_stateRouter from "../router/currentstate_router";
 import EventRouter from "../router/events_router";
 import HomepageRouter from "../router/homepage_router";
 import RoleRouter from "../router/role_router";
+import SecurityRouter from "../router/security_router";
 import UserRouter from "../router/user_router";
 import VisitorRouter from "../router/visitor_router";
-import cors from 'cors';
 
 class Server {
 	// propriétés pour stocker
@@ -21,9 +22,11 @@ class Server {
 		this.app.use(express.json());
 
 		// intégrer le middleware CORS - Cross Origin Ressource Sharing - qui permet d'autoriser l'accès aux ressouces à certaines origines différentes (protocole, port, sous-domaine)
-		this.app.use(cors({
-			origin:process.env.ORIGINS?.split(",")
-		}));
+		this.app.use(
+			cors({
+				origin: process.env.ORIGINS?.split(","),
+			}),
+		);
 
 		// relier le routeur à l'application
 		this.app.use(this.router);
@@ -44,6 +47,7 @@ class Server {
 		this.router.use("/api/role", new RoleRouter().getRoutes());
 		this.router.use("/api/events", new EventRouter().getRoutes());
 		this.router.use("/api/user", new UserRouter().getRoutes());
+		this.router.use("/api", new SecurityRouter().getRoutes());
 	};
 
 	// démarrer le serveur, comme c'est avec index.ts, c'est côté navigateur donc public

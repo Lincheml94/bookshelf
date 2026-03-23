@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
-import BookRepository from "../repository/book_repository";
 import multer from "multer";
-import FileServices from "../service/file_service";
 import type { Book } from "../../models/book";
+import BookRepository from "../repository/book_repository";
+import FileServices from "../service/file_service";
 
 class BookController {
 	// Méthode reliée à la route en GET située dans le routeur
@@ -55,7 +55,9 @@ class BookController {
 
 		// req.files permet de récupérer les fichiers transférés
 		// console.log(req.files);
-		const file = (req.files as Express.Multer.File[]).shift() as Express.Multer.File;
+		const file = (
+			req.files as Express.Multer.File[]
+		).shift() as Express.Multer.File;
 
 		// instancier le service de fichiers
 		const fileServices = new FileServices();
@@ -65,8 +67,11 @@ class BookController {
 
 		// récupérer la variable de route
 		// req.body : permet de récupérer la propriété body de la requête http
-		const results = await new BookRepository().insert({ ...req.body, images: fullname, });
-		
+		const results = await new BookRepository().insert({
+			...req.body,
+			images: fullname,
+		});
+
 		// si la requête renvoie une erreur
 		if (results instanceof Error) {
 			res.status(400).json({
@@ -77,7 +82,7 @@ class BookController {
 			return;
 		}
 
-			// renvoyer une réponse avec un code de statut HTTP et au format JSON
+		// renvoyer une réponse avec un code de statut HTTP et au format JSON
 		// code 200 : requête traitée avec succès (voir p 5 du pdf 14
 		// 201 : requête traitée avec succès, et création d'une ressource
 		res.status(200).json({
@@ -85,34 +90,38 @@ class BookController {
 			message: "Created",
 			data: results,
 		});
-		
-
 	};
 
 	public update = async (req: Request, res: Response) => {
 		// console.log(req.body);
 
-		 // req.body : récupérer les données contenues dans la requête HTTP
-        // console.log(req.body);
-        const file = (req.files as Express.Multer.File[]).shift() as Express.Multer.File;
+		// req.body : récupérer les données contenues dans la requête HTTP
+		// console.log(req.body);
+		const file = (
+			req.files as Express.Multer.File[]
+		).shift() as Express.Multer.File;
 
-        // Instancier le service de fichiers
+		// Instancier le service de fichiers
 		const fileService = new FileServices();
 
-        let fullname: string;
+		let fullname: string;
 
-        if (file) {
-        // Renommer le fichier transféré et on recupere le nom complet avec extension
-         fullname = await fileService.rename(file);
+		if (file) {
+			// Renommer le fichier transféré et on recupere le nom complet avec extension
+			fullname = await fileService.rename(file);
 		} else {
-         fullname = (await new BookRepository().selectOne(req.body) as Book).images;
-        }
+			fullname = ((await new BookRepository().selectOne(req.body)) as Book)
+				.images;
+		}
 
-        // console.log(fullname);
+		// console.log(fullname);
 
 		// récupérer la variable de route
 		// req.body : permet de récupérer la propriété body de la requête http
-		const results = await new BookRepository().update({ ...req.body, images: fullname, });
+		const results = await new BookRepository().update({
+			...req.body,
+			images: fullname,
+		});
 
 		// si la requête renvoie une erreur
 		if (results instanceof Error) {
@@ -133,6 +142,8 @@ class BookController {
 	};
 
 	public delete = async (req: Request, res: Response) => {
+		// console.log(req.body);
+
 		// récupérer la variable de route
 		// req.body : permet de récupérer la propriété body de la requête http
 		const results = await new BookRepository().delete(req.body);

@@ -9,7 +9,6 @@ import style from "../../../assets/css/formulaire_crud.module.css";
 import type { AdminBookFormContentProps } from "../../../models/props/admin/admin_book_form_content_props";
 import BookApiService from "../../../services/book_api_service";
 
-// import { Link } from "react-router";
 const AdminBookFormContent = ({
 	categories,
 	authors,
