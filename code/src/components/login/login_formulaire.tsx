@@ -2,7 +2,7 @@
 import type React from "react";
 import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import type { ZodIssue } from "zod/v3";
 import type { User } from "../../../models/user";
 import SecurityApiService from "../../services/security_api_service";
@@ -11,6 +11,8 @@ const FormulaireLogin = (): React.JSX.Element => {
 	const emailId = useId();
 	const passwordId = useId();
 
+	const navigate = useNavigate();
+
 	const {
 		register,
 		handleSubmit,
@@ -18,8 +20,22 @@ const FormulaireLogin = (): React.JSX.Element => {
 	} = useForm<Partial<User>>();
 
 	const submitForm = async (data: Partial<User>) => {
-		console.log(data);
-		const process = new SecurityApiService().register(data);
+		// console.log(data);
+		const process = await new SecurityApiService().login(data);
+
+		// si la requête HTTP a réussie
+
+		if ([200, 201].indexOf(process.status) !== -1) {
+			// récupérer l'utilisateur
+			const user = process.data as User;
+			// redirection vers une route react en fonction de son rôle
+			if (user.role.name === "Admin") {
+				navigate("/admin");
+				return;
+			}
+
+			navigate("/");
+		}
 	};
 
 	return (

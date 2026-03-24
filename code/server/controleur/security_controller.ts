@@ -7,7 +7,7 @@ class SecurityController {
 	// Enregistrement d'un.e utilisateur.ice
 
 	public register = async (req: Request, res: Response) => {
-		console.log(req);
+		// console.log(req);
 
 		const results = await new SecurityRepository().register({
 			...req.body,
