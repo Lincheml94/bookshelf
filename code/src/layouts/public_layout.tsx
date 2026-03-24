@@ -16,7 +16,7 @@ const PublicLayout = () => {
 			{/* contenu de la page enfant : outlet */}
 			<div className={style.container}>
 				<Outlet />
-				<Footer />
+				{/* <Footer /> */}
 			</div>
 		</>
 	);

@@ -43,19 +43,3 @@ const Nav = () => {
 };
 
 export default Nav;
-
-// import { NavLink } from "react-router";
-// import styles from "../assets/css/navbar.module.css";
-
-// const Nav = () => {
-// 	return (
-// 		<nav>
-// 			<NavLink to={"/catalogue"}>
-// 				Catalogue
-// 			</NavLink>
-// 			<NavLink to={"/agenda"}>
-// 				Agenda
-// 			</NavLink>
-// 			<NavLink to={"/info"}>
-// 				Info
-// 			</NavLink>
