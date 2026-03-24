@@ -1,15 +1,15 @@
 import { NavLink } from "react-router";
 import style from "../../../assets/css/admin/dashboard.module.css";
-import Logo from "../../accueil/logo";
+import Logo from "../../icones/logo";
 
 const DashboardNav = () => {
 	return (
-		<div className={style.dashboard}>
+		<div className={style.dashboardnav}>
 			<NavLink to={"/admin"}>
 				<Logo />
 			</NavLink>
 
-			<div className="links">
+			<div className={style.links}>
 				<NavLink to={"/admin/books"}>
 					<p>livres</p>
 				</NavLink>

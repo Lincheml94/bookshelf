@@ -1,6 +1,9 @@
+import style from "../../assets/css/icone.module.css";
+
 const Logo = () => {
 	return (
 		<svg
+			className={style.logo}
 			width="65"
 			height="76"
 			viewBox="0 0 65 76"

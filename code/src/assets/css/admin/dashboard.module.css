@@ -12,7 +12,7 @@
 
 /* GENERAL - Barre de navigation gauche */
 
-.dashboard {
+.dashboardnav {
 	display: flex;
 	flex-direction: column;
 	justify-content: first baseline;
@@ -49,7 +49,7 @@
 
 /* CONTENU ENFANT - GENERAL */
 
-.sub-dashboard {
+.content-dashboard-accueil {
 	width: 100%;
 	min-height: 100vh;
 	margin-top: 72px;
@@ -98,7 +98,7 @@
 /* Responsive - Tablette */
 
 @media only screen and (max-width: 900px) {
-	.dashboard {
+	.dashboardnav {
 		flex-direction: row;
 		gap: 10px;
 		align-items: center;
@@ -110,15 +110,15 @@
 		.links {
 			width: 100%;
 			display: flex;
-			flex-direction: row;
-			float: left;
+			gap: 20px;
+			justify-content: center;
 			p {
 				margin-top: unset;
 			}
 		}
 	}
 
-	.sub-dashboard {
+	.content-dashboard-accueil {
 		margin-top: 144px;
 	}
 
@@ -136,9 +136,17 @@
 
 @media only screen and (max-width: 700px) {
 	.header-dashboard {
+		height: 60px;
 		.title {
 			font-size: 24px;
 		}
+	}
+	.dashboardnav {
+		height: 60px;
+		top: 60px;
+	}
+	.content-dashboard-accueil {
+		margin-top: 60px;
 	}
 }
 
