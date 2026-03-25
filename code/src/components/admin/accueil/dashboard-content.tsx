@@ -20,7 +20,7 @@ const DashboardContent = () => {
 						</div>
 						<div className={`${style.stat} ${style.deux}`}>
 							{item.authors.map((item) => (
-								<h2 key={item.id}>{item.id} auteur.ice.s</h2>
+								<h2 key={item.id}>{item.firstname.length} auteur.ice.s</h2>
 							))}
 						</div>
 						<div className={`${style.stat} ${style.deux}`}>
