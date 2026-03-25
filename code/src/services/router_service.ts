@@ -26,11 +26,6 @@ class RouterService {
 								lazy: () => import("../pages/admin/index"),
 							},
 							{
-								id: "admin_login",
-								path: "login",
-								lazy: () => import("../pages/login"),
-							},
-							{
 								id: "admin_agenda",
 								path: "agenda",
 								lazy: () => import("../pages/admin/agenda/index"),
@@ -97,6 +92,11 @@ class RouterService {
 								id: "login",
 								path: "login",
 								lazy: () => import("../pages/login"),
+							},
+							{
+								id: "logout",
+								path: "logout",
+								lazy: () => import("../pages/logout"),
 							},
 							{
 								id: "admin_register",

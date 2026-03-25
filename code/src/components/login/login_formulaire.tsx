@@ -2,10 +2,10 @@
 import type React from "react";
 import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, Navigate, useNavigate } from "react-router";
-import type { ZodIssue } from "zod/v3";
+import { Link, useNavigate } from "react-router";
 import type { User } from "../../../models/user";
 import SecurityApiService from "../../services/security_api_service";
+import SecurityService from "../../services/security_service";
 
 const FormulaireLogin = (): React.JSX.Element => {
 	const emailId = useId();
@@ -28,6 +28,9 @@ const FormulaireLogin = (): React.JSX.Element => {
 		if ([200, 201].indexOf(process.status) !== -1) {
 			// récupérer l'utilisateur
 			const user = process.data as User;
+
+			// stocker l'utilisateur
+			new SecurityService().setUser(user);
 			// redirection vers une route react en fonction de son rôle
 			if (user.role.name === "Admin") {
 				navigate("/admin");

@@ -22,6 +22,9 @@ const DashboardNav = () => {
 				<NavLink to={"/admin/"}>
 					<p>utilisateur.ice.s</p>
 				</NavLink>
+				<NavLink to={"/logout"}>
+					<p>déconnection</p>
+				</NavLink>
 			</div>
 		</div>
 	);
