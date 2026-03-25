@@ -19,7 +19,7 @@ const DashboardNav = () => {
 				<NavLink to={"/admin/"}>
 					<p>newsletter</p>
 				</NavLink>
-				<NavLink to={"/admin/"}>
+				<NavLink to={"/admin/users"}>
 					<p>utilisateur.ice.s</p>
 				</NavLink>
 				<NavLink to={"/logout"}>
