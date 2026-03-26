@@ -1,9 +1,7 @@
 import { Outlet } from "react-router";
 import style from "../assets/css/content.module.css";
-import Footer from "../components/footer";
 import Header from "../components/header/header";
 import LoginButton from "../components/login/login_button";
-import UnlogButton from "../components/login/unlog_button";
 
 const PublicLayout = () => {
 	return (

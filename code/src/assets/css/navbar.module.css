@@ -4,15 +4,22 @@
 
 .navbar-mobile-visible {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	flex-wrap: wrap;
 	align-items: center;
 	gap: 30px;
 	position: absolute;
 	top: 45px;
 	left: 0;
 	width: 100vw;
-	height: 45px;
+	height: 100px;
 	background-color: rgba(0, 249, 71, 0.62);
+	.navlinks {
+		display: flex;
+		align-items: center;
+		gap: 30px;
+	}
 }
 
 .hamburger {
@@ -24,6 +31,11 @@
 	border-style: none;
 }
 
+.logostripe {
+	width: 20px;
+	height: 20px;
+}
+
 @media only screen and (min-width: 1100px) {
 	.menu {
 		display: flex;
@@ -31,6 +43,11 @@
 		gap: 10vw;
 		justify-content: center;
 		align-items: center;
+		.navlinks {
+			display: flex;
+			align-items: center;
+			gap: 30px;
+		}
 	}
 
 	.hamburger {
