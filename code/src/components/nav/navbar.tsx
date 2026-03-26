@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaUniversalAccess } from "react-icons/fa6";
 import { NavLink } from "react-router";
 import styles from "../../assets/css/navbar.module.css";
+import IconStripes from "../icones/icon_stripes";
 
 const Nav = () => {
 	// créer un état : hook use State
@@ -31,11 +32,16 @@ const Nav = () => {
 			<nav
 				className={`${styles.menu} ${navMobileSIsVisible ? styles["navbar-mobile-visible"] : ""}`}
 			>
-				<NavLink to={"/catalogue"}>Catalogue</NavLink>
-				<NavLink to={"/agenda"}>Agenda</NavLink>
-				<NavLink to={"/info"}>Info</NavLink>
-				<NavLink to={"/contact"}>Contact</NavLink>
-				<FaUniversalAccess />
+				<div className={styles.navlinks}>
+					<NavLink to={"/catalogue"}>Catalogue</NavLink>
+					<NavLink to={"/agenda"}>Agenda</NavLink>
+					<NavLink to={"/info"}>Info</NavLink>
+					<NavLink to={"/contact"}>Contact</NavLink>
+				</div>
+				<div className={styles.navlinks}>
+					<FaUniversalAccess />
+					<IconStripes />
+				</div>
 			</nav>
 		</div>
 	);
