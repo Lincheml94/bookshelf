@@ -13,7 +13,7 @@ class HomepageRouter {
 		// le prefixe des routes est dans le serveur
 		this.router.get(
 			"/",
-			new AuthorizationMiddleware().authorize(["Admin"]),
+
 			new HomepageController().index,
 		);
 		// retourner le routeur

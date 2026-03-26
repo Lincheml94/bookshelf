@@ -1,13 +1,14 @@
 import express from "express";
 import multer from "multer";
 import BookController from "../controleur/book_controller";
+import AuthorizationMiddleware from "../middleware/authorization_middleware";
 
 class BookRouter {
 	// routeur express
 	private router = express.Router();
 
 	// multer permet de gérer les transfert de fichiers
-	private multer = multer({ dest: `${process.env.PUBLIC_DIR}/img/book/`});
+	private multer = multer({ dest: `${process.env.PUBLIC_DIR}/img/book/` });
 
 	// liste des routes
 	public getRoutes = () => {
@@ -21,14 +22,28 @@ class BookRouter {
 
 		// insérér un enregistrement
 		// utilisation du middleware "multer"
-		this.router.post("/", this.multer.any(), new BookController().insert);
+		this.router.post(
+			"/",
+			this.multer.any(),
+			new AuthorizationMiddleware().authorize(["Admin", "Éditeur"]),
+			new BookController().insert,
+		);
 
 		// mettre à jour un enregistrement
 		// utilisation du middleware "multer"
-		this.router.put("/", this.multer.any(), new BookController().update);
+		this.router.put(
+			"/",
+			this.multer.any(),
+			new AuthorizationMiddleware().authorize(["Admin", "Éditeur"]),
+			new BookController().update,
+		);
 
 		// supprimer un enregistrement
-		this.router.delete("/", new BookController().delete);
+		this.router.delete(
+			"/",
+			new AuthorizationMiddleware().authorize(["Admin"]),
+			new BookController().delete,
+		);
 
 		// retourner le routeur
 		return this.router;
