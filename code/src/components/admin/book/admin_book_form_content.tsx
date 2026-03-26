@@ -1,13 +1,13 @@
 "use client";
-import { use, useEffect, useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
-import { data, useNavigate } from "react-router";
-import { date } from "zod";
+import { useNavigate } from "react-router";
 import type { ZodIssue } from "zod/v3";
 import type { Book } from "../../../../models/book";
 import style from "../../../assets/css/formulaire_crud.module.css";
 import type { AdminBookFormContentProps } from "../../../models/props/admin/admin_book_form_content_props";
 import BookApiService from "../../../services/book_api_service";
+import SecurityService from "../../../services/security_service";
 
 const AdminBookFormContent = ({
 	categories,
@@ -125,8 +125,14 @@ const AdminBookFormContent = ({
 
 		//    requête HTTP vers l'API
 		const process = dataToUpdate
-			? await new BookApiService().update(formData)
-			: await new BookApiService().insert(formData);
+			? await new BookApiService().update(
+					formData,
+					new SecurityService().getToken() as string,
+				)
+			: await new BookApiService().insert(
+					formData,
+					new SecurityService().getToken() as string,
+				);
 
 		// Si la requête HTTP a réussi : l'utilisateur.ice a ajouté un livre et est redirigé vers une autre page
 		// use navigate : hook qui permet de naviguer

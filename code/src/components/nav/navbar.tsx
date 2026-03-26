@@ -1,12 +1,8 @@
-// "use client";
 "use client";
 import { useState } from "react";
+import { FaUniversalAccess } from "react-icons/fa6";
 import { NavLink } from "react-router";
 import styles from "../../assets/css/navbar.module.css";
-
-// import SecurityService from "../../services/security_service";
-
-// import MenuHamburger from "./menu_ham";
 
 const Nav = () => {
 	// créer un état : hook use State
@@ -20,7 +16,7 @@ const Nav = () => {
 		// modifier la valeur de l'état : utiliser obligatoirement le setter de l'état
 		//  ! : négation, donc !navMobileSIsVisible : on va aller chercher la valeur contraire du boolean
 		setnavMobileSIsVisible(!navMobileSIsVisible);
-		console.log(navMobileSIsVisible);
+		// console.log(navMobileSIsVisible);
 	};
 
 	return (
@@ -39,6 +35,7 @@ const Nav = () => {
 				<NavLink to={"/agenda"}>Agenda</NavLink>
 				<NavLink to={"/info"}>Info</NavLink>
 				<NavLink to={"/contact"}>Contact</NavLink>
+				<FaUniversalAccess />
 			</nav>
 		</div>
 	);

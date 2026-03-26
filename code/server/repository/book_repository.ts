@@ -314,7 +314,7 @@ class BookRepository {
 				?.split(",")
 				.map((value) => `(@id, ${value})`)
 				.join();
-			console.log(joinIds);
+			// console.log(joinIds);
 
 			sql = `
 				INSERT INTO 

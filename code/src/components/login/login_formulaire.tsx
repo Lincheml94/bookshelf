@@ -31,6 +31,10 @@ const FormulaireLogin = (): React.JSX.Element => {
 
 			// stocker l'utilisateur
 			new SecurityService().setUser(user);
+			// stocker le token JWT
+			await new SecurityService().setToken(user);
+			// console.log(new SecurityService().getToken());
+
 			// redirection vers une route react en fonction de son rôle
 			if (user.role.name === "Admin") {
 				navigate("/admin");

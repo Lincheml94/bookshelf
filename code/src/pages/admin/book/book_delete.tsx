@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import type { Book } from "../../../../models/book";
 import type { AdminBookParams } from "../../../models/params/admin_book_params";
 import BookApiService from "../../../services/book_api_service";
+import SecurityService from "../../../services/security_service";
 
 const AdminBookDelete = ({ params }: AdminBookParams) => {
 	const { id } = params;
@@ -12,10 +13,12 @@ const AdminBookDelete = ({ params }: AdminBookParams) => {
 	const navigate = useNavigate();
 	// Pré remplir le formulaire avant l'affichage du composant
 	useEffect(() => {
-		new BookApiService().delete({ id: id } as Book).then(() => {
-			navigate("/admin/books");
-			return;
-		});
+		new BookApiService()
+			.delete({ id: id } as Book, new SecurityService().getToken() as string)
+			.then(() => {
+				navigate("/admin/books");
+				return;
+			});
 	}, [id, navigate]);
 
 	return (

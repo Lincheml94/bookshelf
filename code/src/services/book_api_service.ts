@@ -37,13 +37,15 @@ class BookApiService {
 	};
 
 	// insersion d'un enregistrement
-
 	/*
 		si le formulaire contient un champ de fichier: utiliser formData en paramètres
 		si le formulaire ne contient pas de champ de fichier : utiliser le type
 	*/
 
-	public insert = async (data: FormData): Promise<ApiResponse<Book>> => {
+	public insert = async (
+		data: FormData,
+		token: string,
+	): Promise<ApiResponse<Book>> => {
 		const request = new Request(
 			`${import.meta.env.VITE_API_URL}${this.prefix}`,
 			{
@@ -64,6 +66,9 @@ class BookApiService {
 					"Content-Type": application/json
 					},
 				*/
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			},
 		);
 		const response = await fetch(request);
@@ -78,7 +83,10 @@ class BookApiService {
 		si le formulaire ne contient pas de champ de fichier : utiliser le type
 	*/
 
-	public update = async (data: FormData): Promise<ApiResponse<Book>> => {
+	public update = async (
+		data: FormData,
+		token: string,
+	): Promise<ApiResponse<Book>> => {
 		const request = new Request(
 			`${import.meta.env.VITE_API_URL}${this.prefix}`,
 			{
@@ -99,6 +107,9 @@ class BookApiService {
 					"Content-Type": application/json
 					},
 				*/
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			},
 		);
 		const response = await fetch(request);
@@ -109,7 +120,10 @@ class BookApiService {
 	};
 
 	// Si il n'y a pas de formulaire, on utilise le type (data:Book)
-	public delete = async (data: Book): Promise<ApiResponse<Book>> => {
+	public delete = async (
+		data: Book,
+		token: string,
+	): Promise<ApiResponse<Book>> => {
 		const request = new Request(
 			`${import.meta.env.VITE_API_URL}${this.prefix}`,
 			{
@@ -124,6 +138,7 @@ class BookApiService {
 
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
 				},
 				body: JSON.stringify(data),
 				/*
