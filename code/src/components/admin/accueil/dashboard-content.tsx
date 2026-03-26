@@ -16,11 +16,13 @@ const DashboardContent = () => {
 				return (
 					<div className={style.subcontent} key={item.id}>
 						<div className={`${style.stat} ${style.un}`}>
-							<h2>{item.title.length} livres</h2>
+							<h2>
+								{results?.length || 0} livre{results?.length > 1 ? "s" : ""}
+							</h2>
 						</div>
 						<div className={`${style.stat} ${style.deux}`}>
 							{item.authors.map((item) => (
-								<h2 key={item.id}>{item.firstname.length} auteur.ice.s</h2>
+								<h2 key={item.id}>{item.firstname.length} auteur.ice.</h2>
 							))}
 						</div>
 						<div className={`${style.stat} ${style.deux}`}>
