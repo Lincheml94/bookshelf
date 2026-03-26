@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import * as jose from "jose";
 import type { JWTInvalid } from "jose/errors";
+import type { User } from "../../models/user";
 
 class AuthorizationMiddleware {
 	// But de cette fonction : vérifier le JWT contenu dans l'en-tête HTTP authorization
@@ -26,6 +27,20 @@ class AuthorizationMiddleware {
 				});
 				return;
 			}
+			// récupérer le payload contenant les données de l'utilisateur
+			const payload = jose.decodeJwt(token as string) as User;
+			// Si le rôle n'est pas autorisé
+			if (roles.indexOf(payload.role.name) === -1) {
+				res.status(401).json({
+					status: 401,
+					message:
+						process.env.NODE === "production"
+							? "error"
+							: "Unauthorized - Role not authorized",
+				});
+				return;
+			}
+			// console.log(payload.role.name);
 
 			// passer au middleware suivant
 			next();
