@@ -1,15 +1,17 @@
 import style from "../../assets/css/icone.module.css";
 
-const LogoLivre = () => {
+const LogoLivre = ({ displayMobile }: { displayMobile?: boolean }) => {
 	return (
 		<svg
-			className={style.logo}
+			className={`${style.logo} ${style["logo-in-nav"]} ${displayMobile ? style["logo-in-header"] : ""}`}
 			width="65"
 			height="76"
 			viewBox="0 0 65 76"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
+			aria-labelledby="logo-title"
 		>
+			<title>Logo de mon site</title>
 			<path
 				d="M0.232266 0.127854C0.493014 -0.0763037 0.865502 -0.0269648 1.06612 0.238388L20.9235 26.514C21.124 26.7794 21.0756 27.1585 20.8149 27.3627C20.5541 27.5669 20.1816 27.5176 19.981 27.2522L0.123671 0.9766C-0.076904 0.711195 -0.0284308 0.332054 0.232266 0.127854Z"
 				fill="black"

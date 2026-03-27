@@ -1,9 +1,14 @@
 "use client";
-import { MdOutlineModeEdit } from "react-icons/md";
 
 const Arrow = () => {
 	return (
-		<svg viewBox="0 0 167 85" fill="none" preserveAspectRatio="xMidYMax meet">
+		<svg
+			viewBox="0 0 167 85"
+			fill="none"
+			width="20"
+			height="auto"
+			preserveAspectRatio="xMidYMax meet"
+		>
 			<line
 				x1="9.18796"
 				y1="6.5"
@@ -13,6 +18,7 @@ const Arrow = () => {
 				stroke-width="13"
 				stroke-linecap="round"
 			/>
+			<title>Arrow Down</title>
 			<line
 				x1="84.2855"
 				y1="75.5965"
