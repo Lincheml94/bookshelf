@@ -1,6 +1,6 @@
 import style from "../../assets/css/icone.module.css";
 
-const Logo = () => {
+const LogoLivre = () => {
 	return (
 		<svg
 			className={style.logo}
@@ -84,4 +84,4 @@ const Logo = () => {
 	);
 };
 
-export default Logo;
+export default LogoLivre;
