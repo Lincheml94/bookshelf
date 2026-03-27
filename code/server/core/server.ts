@@ -3,6 +3,7 @@ import express from "express";
 import AuthorRouter from "../router/author_router";
 import BookRouter from "../router/book_router";
 import CategoryRouter from "../router/category_router";
+import ContactRouter from "../router/contact_router";
 import Current_stateRouter from "../router/currentstate_router";
 import EventRouter from "../router/events_router";
 import HomepageRouter from "../router/homepage_router";
@@ -48,6 +49,7 @@ class Server {
 		this.router.use("/api/events", new EventRouter().getRoutes());
 		this.router.use("/api/user", new UserRouter().getRoutes());
 		this.router.use("/api", new SecurityRouter().getRoutes());
+		this.router.use("/api/contact", new ContactRouter().getRoutes());
 	};
 
 	// démarrer le serveur, comme c'est avec index.ts, c'est côté navigateur donc public
