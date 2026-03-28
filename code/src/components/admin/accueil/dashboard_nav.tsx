@@ -13,7 +13,7 @@ const DashboardNav = () => {
 		// modifier la valeur de l'état : utiliser obligatoirement le setter de l'état
 		//  ! : négation, donc !navMobileSIsVisible : on va aller chercher la valeur contraire du boolean
 		setnavDbMobileSIsVisible(!navDbMobileSIsVisible);
-		console.log(navDbMobileSIsVisible);
+		// console.log(navDbMobileSIsVisible);
 	};
 	return (
 		<>
@@ -23,25 +23,60 @@ const DashboardNav = () => {
 				</button>
 			</div>
 			<nav
-				className={`${style["navbar-dashboard-mobile-visible"]} ${navDbMobileSIsVisible ? style.dashboardnav : ""}`}
+				className={`${style.dashboardnav} ${navDbMobileSIsVisible ? style["navbar-dashboard-mobile-visible"] : ""}`}
 			>
 				<NavLink to={"/admin"}>
 					<LogoLivre />
 				</NavLink>
 
 				<div className={style.links}>
-					<NavLink to={"/admin/books"}>
-						<p>livres</p>
-					</NavLink>
-					<NavLink to={"/admin/"}>
-						<p>évènements</p>
-					</NavLink>
-					<NavLink to={"/admin/"}>
-						<p>newsletter</p>
-					</NavLink>
-					<NavLink to={"/admin/"}>
-						<p>utilisateur.ice.s</p>
-					</NavLink>
+					<div className={style.navgroups}>
+						<NavLink to={"/admin/books"}>
+							<p>livres</p>
+						</NavLink>
+						<div className={style.navdetails}>
+							<NavLink to={"/admin/books"}>
+								<p>Gestions des livres</p>
+							</NavLink>
+							<NavLink to={"/admin/books"}>
+								<p>auteur.ice.s</p>
+							</NavLink>
+							<NavLink to={"/admin/books"}>
+								<p>catégories</p>
+							</NavLink>
+							<NavLink to={"/admin/books"}>
+								<p>états</p>
+							</NavLink>
+						</div>
+					</div>
+					<div className={style.navgroups}>
+						<NavLink to={"/admin/"}>
+							<p>évènements</p>
+						</NavLink>
+						<div className={style.navdetails}>
+							<NavLink to={"/admin/books"}>
+								<p>Gestion des évènements</p>
+							</NavLink>
+							<NavLink to={"/admin/books"}>
+								<p>Inscriptions</p>
+							</NavLink>
+						</div>
+					</div>
+
+					<div className={style.navgroups}>
+						<NavLink to={"/admin/"}>
+							<p>newsletter</p>
+						</NavLink>
+						<div className={style.navdetails}>
+							<div />
+						</div>
+						<div className={style.navgroups}>
+							<NavLink to={"/admin/"}>
+								<p>utilisateur.ice.s</p>
+							</NavLink>
+							<div className={style.navdetails}></div>
+						</div>
+					</div>
 				</div>
 			</nav>
 		</>
