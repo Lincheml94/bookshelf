@@ -9,16 +9,17 @@ const DashboardNav = () => {
 	const [navDbMobileSIsVisible, setnavDbMobileSIsVisible] =
 		useState<boolean>(false);
 
-	const handleClic = () => {
-		// modifier la valeur de l'état : utiliser obligatoirement le setter de l'état
-		//  ! : négation, donc !navMobileSIsVisible : on va aller chercher la valeur contraire du boolean
+	const toggleMenu = () => {
 		setnavDbMobileSIsVisible(!navDbMobileSIsVisible);
-		// console.log(navDbMobileSIsVisible);
+	};
+
+	const closeMenu = () => {
+		setnavDbMobileSIsVisible(false);
 	};
 	return (
 		<>
 			<div className={style.buttonarrow}>
-				<button type="button" onClick={handleClic}>
+				<button type="button" onClick={toggleMenu}>
 					<Arrow />
 				</button>
 			</div>
@@ -31,51 +32,49 @@ const DashboardNav = () => {
 
 				<div className={style.links}>
 					<div className={style.navgroups}>
-						<NavLink to={"/admin/books"}>
-							<p>livres</p>
-						</NavLink>
+						{/* <NavLink to={"/admin/books"} onClick={closeMenu}> */}
+						<p>livres</p>
+						{/* </NavLink> */}
 						<div className={style.navdetails}>
-							<NavLink to={"/admin/books"}>
+							<NavLink to={"/admin/books"} onClick={closeMenu}>
 								<p>Gestions des livres</p>
 							</NavLink>
-							<NavLink to={"/admin/books"}>
+							<NavLink to={"/admin/books"} onClick={closeMenu}>
 								<p>auteur.ice.s</p>
 							</NavLink>
-							<NavLink to={"/admin/books"}>
+							<NavLink to={"/admin/books"} onClick={closeMenu}>
 								<p>catégories</p>
 							</NavLink>
-							<NavLink to={"/admin/books"}>
+							<NavLink to={"/admin/books"} onClick={closeMenu}>
 								<p>états</p>
 							</NavLink>
 						</div>
 					</div>
 					<div className={style.navgroups}>
-						<NavLink to={"/admin/"}>
-							<p>évènements</p>
-						</NavLink>
+						{/* <NavLink to={"/admin/"} onClick={closeMenu}> */}
+						<p>évènements</p>
+						{/* </NavLink> */}
 						<div className={style.navdetails}>
-							<NavLink to={"/admin/books"}>
+							<NavLink to={"/admin/books"} onClick={closeMenu}>
 								<p>Gestion des évènements</p>
 							</NavLink>
-							<NavLink to={"/admin/books"}>
+							<NavLink to={"/admin/books"} onClick={closeMenu}>
 								<p>Inscriptions</p>
 							</NavLink>
 						</div>
 					</div>
 
 					<div className={style.navgroups}>
-						<NavLink to={"/admin/"}>
+						<NavLink to={"/admin/"} onClick={closeMenu}>
 							<p>newsletter</p>
 						</NavLink>
-						<div className={style.navdetails}>
-							<div />
-						</div>
-						<div className={style.navgroups}>
-							<NavLink to={"/admin/"}>
-								<p>utilisateur.ice.s</p>
-							</NavLink>
-							<div className={style.navdetails}></div>
-						</div>
+						<div className={style.navdetails}></div>
+					</div>
+					<div className={style.navgroups}>
+						<NavLink to={"/admin/"} onClick={closeMenu}>
+							<p>utilisateur.ice.s</p>
+						</NavLink>
+						<div className={style.navdetails}></div>
 					</div>
 				</div>
 			</nav>
