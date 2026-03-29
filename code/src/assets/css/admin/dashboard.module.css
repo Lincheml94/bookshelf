@@ -4,6 +4,11 @@
 .buttonarrow {
 	display: none;
 }
+button {
+	border: unset;
+	background: unset;
+	padding: 0;
+}
 .main-dashboard {
 	height: 100%;
 	width: 100%;
@@ -21,14 +26,20 @@
 	flex-direction: column;
 	justify-content: first baseline;
 	gap: 50px;
-	align-items: center;
 	width: 200px;
 	height: 100vh;
 	background-color: #ffffe7;
 	padding: 10px;
 	position: fixed;
-	.navdetails {
-		padding-left: 20px;
+
+	.navgroups {
+		.navdetails {
+			padding-left: 20px;
+			display: none;
+		}
+		.navlinks-visible {
+			display: block;
+		}
 	}
 	p {
 		margin-top: 15px;
@@ -126,8 +137,9 @@
 		flex-direction: column;
 		gap: 10px;
 		align-items: center;
+		padding-left: 20px;
 		width: 100%;
-		height: 300px;
+		height: auto;
 		top: 72px;
 		position: fixed;
 		display: flex;
@@ -137,14 +149,18 @@
 			width: 100%;
 			padding-top: 2rem;
 			display: flex;
-			gap: 4rem;
-			justify-content: center;
-			.navdetails {
-				padding-left: unset;
-				padding-top: 20px;
-			}
-			p {
-				margin-top: unset;
+			gap: 2 rem;
+			justify-content: flex-start;
+			.navgroups {
+				width: 100%;
+				.navdetails {
+					padding-left: unset;
+					padding-top: 20px;
+				}
+				p {
+					margin-top: unset;
+					padding-bottom: 1rem;
+				}
 			}
 		}
 	}
@@ -195,7 +211,12 @@
 		height: 100%;
 		.links {
 			flex-direction: column;
-			align-items: center;
+			align-items: flex-start;
+			padding-left: 40%;
+			p,
+			button {
+				text-align: left;
+			}
 		}
 	}
 	.content-dashboard-accueil {

@@ -6,16 +6,25 @@ import Arrow from "../../icones/arrow";
 import LogoLivre from "../../icones/logo_livre";
 
 const DashboardNav = () => {
-	const [navDbMobileSIsVisible, setnavDbMobileSIsVisible] =
+	const [navDbMobileIsVisible, setnavDbMobileIsVisible] =
 		useState<boolean>(false);
 
 	const toggleMenu = () => {
-		setnavDbMobileSIsVisible(!navDbMobileSIsVisible);
+		setnavDbMobileIsVisible(!navDbMobileIsVisible);
 	};
 
 	const closeMenu = () => {
-		setnavDbMobileSIsVisible(false);
+		setnavDbMobileIsVisible(false);
 	};
+
+	const [navIsVisible, setnavIsVisible] = useState<boolean>(false);
+
+	const handleClick = () => {
+		setnavIsVisible(!navIsVisible);
+		// console.log(navIsVisible);
+		// console.log("clic !");
+	};
+
 	return (
 		<>
 			<div className={style.buttonarrow}>
@@ -24,7 +33,7 @@ const DashboardNav = () => {
 				</button>
 			</div>
 			<nav
-				className={`${style.dashboardnav} ${navDbMobileSIsVisible ? style["navbar-dashboard-mobile-visible"] : ""}`}
+				className={`${style.dashboardnav} ${navDbMobileIsVisible ? style["navbar-dashboard-mobile-visible"] : ""}`}
 			>
 				<NavLink to={"/admin"}>
 					<LogoLivre />
@@ -33,9 +42,13 @@ const DashboardNav = () => {
 				<div className={style.links}>
 					<div className={style.navgroups}>
 						{/* <NavLink to={"/admin/books"} onClick={closeMenu}> */}
-						<p>livres</p>
+						<button type="button" onClick={handleClick}>
+							livres
+						</button>
 						{/* </NavLink> */}
-						<div className={style.navdetails}>
+						<div
+							className={`${style.navdetails} ${navIsVisible ? style["navlinks-visible"] : ""}`}
+						>
 							<NavLink to={"/admin/books"} onClick={closeMenu}>
 								<p>Gestions des livres</p>
 							</NavLink>
@@ -52,9 +65,13 @@ const DashboardNav = () => {
 					</div>
 					<div className={style.navgroups}>
 						{/* <NavLink to={"/admin/"} onClick={closeMenu}> */}
-						<p>évènements</p>
+						<button type="button" onClick={handleClick}>
+							Evènements
+						</button>
 						{/* </NavLink> */}
-						<div className={style.navdetails}>
+						<div
+							className={`${style.navdetails} ${navIsVisible ? style["navlinks-visible"] : ""}`}
+						>
 							<NavLink to={"/admin/books"} onClick={closeMenu}>
 								<p>Gestion des évènements</p>
 							</NavLink>
