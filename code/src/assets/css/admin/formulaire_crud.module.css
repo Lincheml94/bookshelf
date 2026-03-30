@@ -1,6 +1,6 @@
 /* PAGE ACCUEIL LIVRES : AJOUTER / MODIFIER / SUPPRIMER*/
 h2 {
-	font-weight: bold;
+	/* font-weight: bold; */
 	margin-bottom: 20px;
 }
 
@@ -51,6 +51,7 @@ h2 {
 /* FORMULAIRE LIVRE */
 .formulaire_crud {
 	padding: 20px;
+	width: 60px;
 
 	label,
 	input {
