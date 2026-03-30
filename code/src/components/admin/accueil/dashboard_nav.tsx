@@ -18,6 +18,8 @@ const DashboardNav = () => {
 	};
 
 	const [navIsVisible, setnavIsVisible] = useState<boolean>(false);
+	const [livresVisible, setLivresVisible] = useState(false);
+	const [evenementsVisible, setEvenementsVisible] = useState(false);
 
 	const handleClick = () => {
 		setnavIsVisible(!navIsVisible);
@@ -41,13 +43,16 @@ const DashboardNav = () => {
 
 				<div className={style.links}>
 					<div className={style.navgroups}>
-						{/* <NavLink to={"/admin/books"} onClick={closeMenu}> */}
-						<button type="button" onClick={handleClick}>
+						<button
+							type="button"
+							onClick={() => setLivresVisible(!livresVisible)}
+							className={style.navbutton}
+						>
 							livres
 						</button>
 						{/* </NavLink> */}
 						<div
-							className={`${style.navdetails} ${navIsVisible ? style["navlinks-visible"] : ""}`}
+							className={`${style.navdetails} ${livresVisible ? style["navlinks-visible"] : ""}`}
 						>
 							<NavLink to={"/admin/books"} onClick={closeMenu}>
 								<p>Gestions des livres</p>
@@ -65,12 +70,16 @@ const DashboardNav = () => {
 					</div>
 					<div className={style.navgroups}>
 						{/* <NavLink to={"/admin/"} onClick={closeMenu}> */}
-						<button type="button" onClick={handleClick}>
+						<button
+							type="button"
+							onClick={() => setEvenementsVisible(!evenementsVisible)}
+							className={style.navbutton}
+						>
 							Evènements
 						</button>
 						{/* </NavLink> */}
 						<div
-							className={`${style.navdetails} ${navIsVisible ? style["navlinks-visible"] : ""}`}
+							className={`${style.navdetails} ${evenementsVisible ? style["navlinks-visible"] : ""}`}
 						>
 							<NavLink to={"/admin/books"} onClick={closeMenu}>
 								<p>Gestion des évènements</p>
@@ -82,15 +91,24 @@ const DashboardNav = () => {
 					</div>
 
 					<div className={style.navgroups}>
-						<NavLink to={"/admin/"} onClick={closeMenu}>
-							<p>newsletter</p>
-						</NavLink>
+						<button
+							type="button"
+							onClick={handleClick}
+							className={style.navbutton}
+						>
+							<NavLink to={"/admin"}>newsletter</NavLink>
+						</button>
+
 						<div className={style.navdetails}></div>
 					</div>
 					<div className={style.navgroups}>
-						<NavLink to={"/admin/"} onClick={closeMenu}>
-							<p>utilisateur.ice.s</p>
-						</NavLink>
+						<button
+							type="button"
+							onClick={handleClick}
+							className={style.navbutton}
+						>
+							<NavLink to={"/admin"}>utilisateur.ice.s</NavLink>
+						</button>
 						<div className={style.navdetails}></div>
 					</div>
 				</div>
