@@ -1,0 +1,8 @@
+.infobox {
+	display: flex;
+	position: relative;
+	width: 70vw;
+	left: 30vw;
+	top: 45px;
+	z-index: 1;
+}
