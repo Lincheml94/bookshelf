@@ -4,8 +4,8 @@ const LogoLivre = ({ displayMobile }: { displayMobile?: boolean }) => {
 	return (
 		<svg
 			className={`${style.logo} ${style["logo-in-nav"]} ${displayMobile ? style["logo-in-header"] : ""}`}
-			width="65"
-			height="76"
+			width="45"
+			height="auto"
 			viewBox="0 0 65 76"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
