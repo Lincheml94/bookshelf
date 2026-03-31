@@ -16,7 +16,7 @@ h3 {
 	z-index: 1;
 	height: 20px;
 	width: 100%;
-	background: rgba(0, 249, 71, 0.5);
+	background: var(--more-transparent-green);
 	position: fixed;
 	top: 45px;
 	vertical-align: center;
@@ -41,7 +41,7 @@ h3 {
 	overflow-y: auto;
 	padding-left: 1rem;
 	z-index: 1;
-	background: rgba(254, 255, 193, 0.9);
+	background: var(--transparent-beige);
 }
 /* Filtres Catégories et auteurs : état normal */
 .filter-visible {

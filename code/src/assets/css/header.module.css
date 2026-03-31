@@ -1,6 +1,6 @@
 header {
 	/* mobile first */
-	background-color: rgba(0, 249, 71, 0.62);
+	background-color: var(--transparent-green);
 	height: 45px;
 	z-index: 10;
 	display: flex;

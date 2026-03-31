@@ -29,9 +29,21 @@ li {
 
 /* variables css */
 
-/* :root {
-} */
-
+:root {
+	--transparent-green: rgba(0, 249, 71, 0.62);
+	--more-transparent-green: rgba(0, 249, 71, 0.5);
+	--transparent-dark-green: rgba(173, 227, 146, 0.6);
+	--yellow: #fbff00;
+	--beige: #feffc1;
+	--transparent-beige: rgba(254, 255, 193, 0.9);
+	--light-purple: #e6e0f5;
+	--light-beige: #ffffe8;
+	--light-grey: #f8f8f8;
+	--admin-white: #ffffff;
+	--admin-blue: #aaeaff;
+	--admin-light-blue: #ccf2e9;
+	--admin-beige: #ffffe7;
+}
 /* balises HTML */
 
 * {
