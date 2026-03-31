@@ -22,7 +22,7 @@ const FilterBar = () => {
 				</button>
 			</div>
 			<div
-				className={`${style["filter-nav"]} ${filtreIsVisible ? style["filter-invisible"] : ""}`}
+				className={`${style["filter-nav"]} ${filtreIsVisible ? style["filter-visible"] : ""}`}
 			>
 				<div className={style["filter-nav-categories"]}>
 					<h3>Catégories</h3>

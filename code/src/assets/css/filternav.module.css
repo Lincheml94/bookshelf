@@ -31,7 +31,7 @@ h3 {
 /* Filtres Catégories et auteurs : état visible */
 .filter-nav {
 	padding: 1rem;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	gap: 2rem;
 	position: fixed;
@@ -44,8 +44,8 @@ h3 {
 	background: rgba(254, 255, 193, 0.9);
 }
 /* Filtres Catégories et auteurs : état normal */
-.filter-invisible {
-	display: none;
+.filter-visible {
+	display: flex;
 }
 
 /* Filtres Catégories et auteurs : état visible */
