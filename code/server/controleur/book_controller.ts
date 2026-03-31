@@ -85,8 +85,8 @@ class BookController {
 		// renvoyer une réponse avec un code de statut HTTP et au format JSON
 		// code 200 : requête traitée avec succès (voir p 5 du pdf 14
 		// 201 : requête traitée avec succès, et création d'une ressource
-		res.status(200).json({
-			status: 200,
+		res.status(201).json({
+			status: 201,
 			message: "Created",
 			data: results,
 		});

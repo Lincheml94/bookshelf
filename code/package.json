@@ -9,7 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "server": "npx tsx watch --env-file .env.development server/index.ts",
-    "test": "vitest",
+    "test": "vitest --mode test",
     "test:coverage": "vitest --coverage"
   },
   "dependencies": {

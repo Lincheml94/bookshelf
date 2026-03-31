@@ -1,3 +1,11 @@
+button {
+	background: unset;
+	border: unset;
+}
+button:hover {
+	cursor: pointer;
+}
+
 ul li,
 h3 {
 	font-size: 12px;
