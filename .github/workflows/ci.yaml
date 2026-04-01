@@ -32,5 +32,10 @@ jobs:
           mysql -uroot -proot -e "source script.test.sql;"
           mysql -uroot -proot -e "source ia.test.sql;"
           mysql -uroot -proot -e "show databases;"
+      -
+        name: démarrer les tests
+        working-directory: code
+        run: npm run test
+         
       
 
