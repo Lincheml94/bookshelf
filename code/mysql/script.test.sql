@@ -84,7 +84,7 @@ CREATE TABLE publishinghouse_test.book_currentstate(
     book_id SMALLINT UNSIGNED NOT NULL,
     currentstate_id TINYINT(1) UNSIGNED NOT NULL,
     FOREIGN KEY (book_id) REFERENCES publishinghouse_test.book(id),
-    FOREIGN KEY (currentstate_id) REFERENCES publishinghouse_dev.currentstate(id),
+    FOREIGN KEY (currentstate_id) REFERENCES publishinghouse_test.currentstate(id),
     PRIMARY KEY (book_id, currentstate_id)
 );
 
@@ -145,7 +145,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- ROLE
 
--- INSERT INTO publishinghouse_dev.role
+-- INSERT INTO publishinghouse_test.role
 -- VALUES
 --     ( NULL, "admin" ),
 --     ( NULL, "user" )
@@ -155,7 +155,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 -- -- admin@admin.fr / mdp : admin
 -- -- user@user.fr / user
 
--- INSERT INTO publishinghouse_dev.user
+-- INSERT INTO publishinghouse_test.user
 -- VALUES 
 --     ( NULL, "admin@admin.fr", "$argon2i$v=19$m=16,t=2,p=1$dGxwUTRIRmgyR1g3eTdEMg$E+Xj10nHDrbt4PR8MjaMkQ", 1 ),
 --     ( NULL, "user@user.fr", "$argon2i$v=19$m=16,t=2,p=1$UWdtVFBxaWRST1pzeGFpMw$L9Gxkg/BfFsGKSsxaQQqlQ", 2 )
@@ -163,14 +163,14 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- NEWSLETTER--------------------------
 
--- INSERT INTO publishinghouse_dev.newsletter
+-- INSERT INTO publishinghouse_test.newsletter
 -- VALUES
 --     ( NULL, "visitor1@newsletter.fr" )
 -- ;
 
 -- -- VISITOR---------------------------------------------
 
--- INSERT INTO publishinghouse_dev.visitor
+-- INSERT INTO publishinghouse_test.visitor
 -- VALUES
 --     ( NULL, "visitor1@visitor.fr", "Solène", "Colin"),
 --     ( NULL, "visitor2@visitor.fr", "Caro", "Rheims"),
@@ -179,7 +179,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- -CURRENT STATE------------------------------
 
--- INSERT INTO publishinghouse_dev.currentstate
+-- INSERT INTO publishinghouse_test.currentstate
 -- VALUES
 --     ( NULL, "en rupture de stock" ),
 --     ( NULL, "en stock" ),
@@ -189,7 +189,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- AUTHOR--------------------------------------------
 
--- INSERT INTO publishinghouse_dev.author
+-- INSERT INTO publishinghouse_test.author
 -- VALUES
 --     (NULL, 'Héloise', 'Brézillon', 'Héloise Brézillon est autrice~chercheure. Son travail hybride poésie, théorie & SF. En 2018 naît Mange tes mots, une bulle poétique créée avec Margot Ferrera, où reprendre son souffle le temps d''une scène ouverte, d''un atelier d''écriture ou d''un podcast. Ses textes ont été performés avec sa bouche partout en France et publiés en revues. T3M est son premier livre.'),
 --     (NULL, 'Elodie', 'Petit', 'Elodie Petit alias Gorge Bataille, née en 1985, est une performeuse et poétesse queer française.'),
@@ -208,7 +208,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- BOOK ---------------------------------------------------------------
 
--- INSERT INTO publishinghouse_dev.book
+-- INSERT INTO publishinghouse_test.book
 -- VALUES
 --     (
 --         NULL,
@@ -404,7 +404,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- CATEGORY ------------------------------------------------------------------------------------------------
 
--- INSERT INTO publishinghouse_dev.category
+-- INSERT INTO publishinghouse_test.category
 -- VALUES
 --     ( NULL, "Fiction" ), 
 --     ( NULL, "Poésie" ), 
@@ -415,7 +415,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- EVENTS
 
--- INSERT INTO publishinghouse_dev.events
+-- INSERT INTO publishinghouse_test.events
 -- VALUES
 --     ( NULL, 
 --     "Séance de dédicace : Héloise Brézillon", 
@@ -425,7 +425,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 --     )
 -- ;
 
--- INSERT INTO publishinghouse_dev.book_author (book_id, author_id) VALUES
+-- INSERT INTO publishinghouse_test.book_author (book_id, author_id) VALUES
 -- (1, 1),
 -- (2, 3),
 -- (3, 3),
@@ -443,7 +443,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 -- (15, 13),
 -- (16, 14);
 
--- INSERT INTO publishinghouse_dev.book_currentstate (book_id, currentstate_id) VALUES
+-- INSERT INTO publishinghouse_test.book_currentstate (book_id, currentstate_id) VALUES
 -- (1, 2),
 -- (2, 3),
 -- (3, 3),
@@ -461,7 +461,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 -- (15, 3),
 -- (16, 2);
 
--- INSERT INTO publishinghouse_dev.book_category (book_id, category_id) VALUES
+-- INSERT INTO publishinghouse_test.book_category (book_id, category_id) VALUES
 -- (1, 1),
 -- (2, 1),
 -- (3, 1),
@@ -480,7 +480,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 -- (16, 1);
 
 -- Jointure : Livre - État
--- INSERT INTO publishinghouse_dev.book_currentstate (book_id, currentstate_id) VALUES
+-- INSERT INTO publishinghouse_test.book_currentstate (book_id, currentstate_id) VALUES
 -- (1, 1), -- Les Misérables : Disponible
 -- (2, 1), -- L'Étranger : Disponible
 -- (3, 3), -- Mémoires d'Hadrien : Précommande
@@ -488,7 +488,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 -- (5, 1); -- Harry Potter : Disponible
 
 -- -- Jointure : Livre - Auteur
--- INSERT INTO publishinghouse_dev.book_author (book_id, author_id) VALUES
+-- INSERT INTO publishinghouse_test.book_author (book_id, author_id) VALUES
 -- (1, 1), -- Les Misérables : Victor Hugo
 -- (2, 2), -- L'Étranger : Albert Camus
 -- (3, 3), -- Mémoires d'Hadrien : Marguerite Yourcenar
@@ -496,7 +496,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 -- (5, 5); -- Harry Potter : J.K. Rowling
 
 -- -- Jointure : Livre - Catégorie
--- INSERT INTO publishinghouse_dev.book_category (book_id, category_id) VALUES
+-- INSERT INTO publishinghouse_test.book_category (book_id, category_id) VALUES
 -- (1, 1), -- Les Misérables : Roman
 -- (2, 1), -- L'Étranger : Roman
 -- (3, 1), -- Mémoires d'Hadrien : Roman
@@ -504,7 +504,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 -- (5, 5); -- Harry Potter : Jeunesse
 
 -- -- Jointure : Événement - Visiteur
--- INSERT INTO publishinghouse_dev.events_visitor (events_id, visitor_id) VALUES
+-- INSERT INTO publishinghouse_test.events_visitor (events_id, visitor_id) VALUES
 -- (1, 1), -- Rencontre Victor Hugo : Jean Dupont
 -- (1, 2), -- Rencontre Victor Hugo : Marie Martin
 -- (2, 3), -- Conférence Camus : Pierre Durand
@@ -529,7 +529,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- START TRANSACTION;
 
--- INSERT INTO publishinghouse_dev.book
+-- INSERT INTO publishinghouse_test.book
 -- VALUE 
 --     (NULL, "FATAL.E",
 --         "2025-10-11",
@@ -548,7 +548,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- requÃªte 2
 
--- INSERT INTO publishinghouse_dev.book_author
+-- INSERT INTO publishinghouse_test.book_author
 -- VALUES 
 --     (2, @book_id)
 -- ;
@@ -559,12 +559,12 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- START TRANSACTION;
 
--- -- INSERT INTO publishinghouse_dev.book
+-- -- INSERT INTO publishinghouse_test.book
 -- -- VALUE
 -- --     (NULL, 1)
 -- -- ;
 
--- INSERT INTO publishinghouse_dev.book_author
+-- INSERT INTO publishinghouse_test.book_author
 -- VALUE
 --     ( 1, 2 )
 -- ;
@@ -574,7 +574,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 -- -- --Mon corps de ferme
 -- START TRANSACTION;
 
--- INSERT INTO publishinghouse_dev.book
+-- INSERT INTO publishinghouse_test.book
 -- VALUES
 --     ( NULL,
 --         "Mon corps de ferme",
@@ -589,7 +589,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 --     )
 -- ;
 
--- INSERT INTO publishinghouse_dev.author
+-- INSERT INTO publishinghouse_test.author
 -- VALUE
 --     (NULL, "AurÃ©lie", "Olivier", "AurÃ©lie Olivier est une jeune autrice dont le premier roman Mon Corps de Ferme l'a fait connaitre")
 -- ;
@@ -597,19 +597,19 @@ CREATE TABLE publishinghouse_test.events_visitor(
 -- SET @book_id = LAST_INSERT_ID();
 -- SET @author_id = LAST_INSERT_ID();
 
--- INSERT INTO publishinghouse_dev.book_author
+-- INSERT INTO publishinghouse_test.book_author
 -- VALUES
 --     (@book_id, @author_id)
 -- ;
 
--- INSERT INTO publishinghouse_dev.book_category
+-- INSERT INTO publishinghouse_test.book_category
 -- VALUES 
 --     (@book_id, 1),
 --     (@book_id, 3)
 
 -- ;
 
--- INSERT INTO publishinghouse_dev.book_currentstate
+-- INSERT INTO publishinghouse_test.book_currentstate
 -- VALUES
 --     (@book_id, 3)
 -- ;
@@ -622,14 +622,14 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- START TRANSACTION;
 
--- -- INSERT INTO publishinghouse_dev.book
+-- -- INSERT INTO publishinghouse_test.book
 -- -- VALUE
 -- --     (NULL, 1)
 -- --     ;
 
 -- -- -- requÃªte 2
 
--- -- INSERT INTO publishinghouse_dev.book_category
+-- -- INSERT INTO publishinghouse_test.book_category
 -- -- VALUES 
 -- --     (1, book_id)
 -- -- ;
@@ -640,12 +640,12 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- START TRANSACTION;
 
--- -- INSERT INTO publishinghouse_dev.book
+-- -- INSERT INTO publishinghouse_test.book
 -- -- VALUE  
 -- --     ( NULL, 2)
 -- -- ;
 
--- -- INSERT INTO publishinghouse_dev.book_category
+-- -- INSERT INTO publishinghouse_test.book_category
 -- -- VALUE
 -- --     (2, book_id)
 -- -- ;
@@ -661,7 +661,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 
 
--- -- INSERT INTO publishinghouse_dev.book_currentstate
+-- -- INSERT INTO publishinghouse_test.book_currentstate
 -- -- VALUES
 -- --     (1, 3)
 -- -- ;
@@ -672,13 +672,13 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- START TRANSACTION;
 
--- -- INSERT INTO publishinghouse_dev.book
+-- -- INSERT INTO publishinghouse_test.book
 
 -- -- VALUES
 -- --     ( NULL, 2)
 -- -- ;
 
--- -- INSERT INTO publishinghouse_dev.book_currentstate
+-- -- INSERT INTO publishinghouse_test.book_currentstate
 
 -- -- VALUES
 -- --     ( 3, book_id)
@@ -689,7 +689,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- START TRANSACTION;-----------------------------supprimÃ© par une commande DELETE--------------------
 
--- -- INSERT INTO publishinghouse_dev.book
+-- -- INSERT INTO publishinghouse_test.book
 -- -- VALUE
 -- --     (NULL, "La bÃªte humaine",
 -- --         "1875-10-11",
@@ -708,7 +708,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- -- requÃªte 2
 
--- -- INSERT INTO publishinghouse_dev.book_currentstate
+-- -- INSERT INTO publishinghouse_test.book_currentstate
 -- -- VALUES 
 -- --     (3, book_id)
 -- -- ;
@@ -721,7 +721,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- START TRANSACTION;
 
--- INSERT INTO publishinghouse_dev.events
+-- INSERT INTO publishinghouse_test.events
 -- VALUE
 --     ( NULL, 
 --     "SÃ©ance de dÃ©dicace : Elodie Petit, alias Gorge Bataille", 
@@ -734,7 +734,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- SET @events_id = LAST_INSERT_ID();
 
--- INSERT INTO publishinghouse_dev.events_visitor
+-- INSERT INTO publishinghouse_test.events_visitor
 -- VALUES 
 --     (@events_id, 1)
 -- ;
@@ -748,7 +748,7 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- mettre Ã  jour un enregistrement : UPDATE
 
--- -- UPDATE publishinghouse_dev.book
+-- -- UPDATE publishinghouse_test.book
 -- -- SET 
 -- --     book.title = 'T4M', 
 -- --     book.price = 15
@@ -765,12 +765,12 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- requÃªte 1
 
--- -- DELETE FROM publishinghouse_dev.book_currentstate
+-- -- DELETE FROM publishinghouse_test.book_currentstate
 -- -- WHERE 
 -- --     book_currentstate.book_id = 3
 -- -- ;
 
--- -- DELETE FROM publishinghouse_dev.book
+-- -- DELETE FROM publishinghouse_test.book
 -- -- WHERE 
 -- --     book.id = 3
 -- -- ;
@@ -779,16 +779,16 @@ CREATE TABLE publishinghouse_test.events_visitor(
 
 -- -- sÃ©lectionner toutes les colonnes d'une table
 -- -- SELECT book.*
--- -- FROM publishinghouse_dev.book;
+-- -- FROM publishinghouse_test.book;
 -- -- -- Ã  copier dans la console
 
 -- -- SELECT book.title, book.price
--- -- FROM publishinghouse_dev.book
+-- -- FROM publishinghouse_test.book
 -- -- WHERE book.price > 5
 -- -- AND book.category LIKE "f%"
 -- -- ;
 -- -- SELECT book.title, book.price
--- -- FROM publishinghouse_dev.book
+-- -- FROM publishinghouse_test.book
 -- -- WHERE book.price > 5
 -- -- AND book.category LIKE "f%"
 -- -- ;
@@ -797,8 +797,8 @@ CREATE TABLE publishinghouse_test.events_visitor(
 -- jointure
 
 -- SELECT user.*, role.name
--- FROM publishinghouse_dev.user
--- JOIN publishinghouse_dev.role
+-- FROM publishinghouse_test.user
+-- JOIN publishinghouse_test.role
 -- ON role.id = user.role_id
 -- \G
 
