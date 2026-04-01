@@ -44,7 +44,6 @@ CREATE TABLE publishinghouse_test.visitor(
 CREATE TABLE publishinghouse_test.currentstate(
     id TINYINT(1) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     statename VARCHAR(20) NOT NULL
-
 );
 
 -- AUTHOR
