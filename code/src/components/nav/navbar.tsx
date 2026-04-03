@@ -25,7 +25,7 @@ const Nav = () => {
 			<button className={styles.hamburger} type="button" onClick={handleClic}>
 				<img
 					className={styles.menuham}
-					src="/img/icons8-menu-50.png"
+					src="/img/icones/icons8-menu-50.png"
 					alt="button"
 				/>
 			</button>

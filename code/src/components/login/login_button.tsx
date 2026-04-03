@@ -15,14 +15,19 @@ const LoginButton = () => {
 	return new SecurityService().getUser() ? (
 		// si l'utilisateur est connecté
 
-		<button type="submit" className={style.button_login}>
-			<NavLink to={"/logout"}>x</NavLink>
-		</button>
+		<NavLink to={"/logout"}>
+			<button type="submit" className={style.button_login}>
+				x
+			</button>
+		</NavLink>
 	) : (
 		// si l'utilisateur n'est pas connecté
-		<button type="submit" className={style.button_login}>
-			<NavLink to={"/login"}>@</NavLink>
-		</button>
+
+		<NavLink to={"/login"}>
+			<button type="submit" className={style.button_login}>
+				@
+			</button>
+		</NavLink>
 	);
 };
 export default LoginButton;
