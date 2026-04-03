@@ -14,6 +14,7 @@ class CategoryRouter {
 
 		// variable de route ; précédée par un :; suivie du nom de la variable
 		this.router.get("/:id", new CategoryController().selectOne);
+		this.router.post("/", new CategoryController().insert);
 		// retourner le routeur
 		return this.router;
 	};
