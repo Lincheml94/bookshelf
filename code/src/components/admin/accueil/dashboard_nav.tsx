@@ -81,34 +81,38 @@ const DashboardNav = () => {
 						<div
 							className={`${style.navdetails} ${evenementsVisible ? style["navlinks-visible"] : ""}`}
 						>
-							<NavLink to={"/admin/books"} onClick={closeMenu}>
+							<NavLink to={"/admin/agenda"} onClick={closeMenu}>
 								<p>Gestion des évènements</p>
 							</NavLink>
-							<NavLink to={"/admin/books"} onClick={closeMenu}>
+							<NavLink to={"/admin/agenda"} onClick={closeMenu}>
 								<p>Inscriptions</p>
 							</NavLink>
 						</div>
 					</div>
 
 					<div className={style.navgroups}>
-						<button
-							type="button"
-							onClick={handleClick}
-							className={style.navbutton}
-						>
-							<NavLink to={"/admin"}>newsletter</NavLink>
-						</button>
+						<NavLink to={"/admin/newsletter"}>
+							<button
+								type="button"
+								onClick={handleClick}
+								className={style.navbutton}
+							>
+								newsletter
+							</button>
+						</NavLink>
 
 						<div className={style.navdetails}></div>
 					</div>
 					<div className={style.navgroups}>
-						<button
-							type="button"
-							onClick={handleClick}
-							className={style.navbutton}
-						>
-							<NavLink to={"/admin"}>utilisateur.ice.s</NavLink>
-						</button>
+						<NavLink to={"/admin/users"}>
+							<button
+								type="button"
+								onClick={handleClick}
+								className={style.navbutton}
+							>
+								utilisateur.ice.s
+							</button>
+						</NavLink>
 						<div className={style.navdetails}></div>
 					</div>
 				</div>

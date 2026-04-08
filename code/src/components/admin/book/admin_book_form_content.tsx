@@ -411,7 +411,9 @@ const AdminBookFormContent = ({
 						})}
 					</div>
 
-					<button type="submit">Créer un livre</button>
+					<button className={style.button_add} type="submit">
+						Créer un livre
+					</button>
 				</form>
 			</div>
 		</div>

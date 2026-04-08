@@ -42,6 +42,30 @@
 	}
 }
 
+.skipLink {
+	position: absolute;
+	left: -10000px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* Affiche le lien uniquement lors de la navigation au clavier */
+.skipLink:focus {
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	width: auto;
+	height: auto;
+	padding: 10px 20px;
+	background-color: #ffffff;
+	color: #000000;
+	border: 2px solid #000;
+	z-index: 9999;
+	text-decoration: none;
+}
+
 /* Tablette */
 @media only screen and (min-width: 630px) {
 	.contenu_accueil {

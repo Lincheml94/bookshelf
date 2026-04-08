@@ -22,7 +22,13 @@ const Nav = () => {
 
 	return (
 		<div className={styles.navbar}>
-			<button className={styles.hamburger} type="button" onClick={handleClic}>
+			<button
+				className={styles.hamburger}
+				type="button"
+				onClick={handleClic}
+				aria-expanded={navMobileSIsVisible}
+				aria-label="Menu de navigation"
+			>
 				<img
 					className={styles.menuham}
 					src="/img/icones/icons8-menu-50.png"
@@ -30,7 +36,9 @@ const Nav = () => {
 				/>
 			</button>
 			<nav
+				id="main-nav"
 				className={`${styles.menu} ${navMobileSIsVisible ? styles["navbar-mobile-visible"] : ""}`}
+				aria-label="Navigation principale"
 			>
 				<div className={styles.navlinks}>
 					<NavLink to={"/catalogue"}>Catalogue</NavLink>
@@ -39,8 +47,8 @@ const Nav = () => {
 					<NavLink to={"/contact"}>Contact</NavLink>
 				</div>
 				<div className={styles.navlinks}>
-					<FaUniversalAccess />
-					<IconStripes />
+					{/* <FaUniversalAccess /> */}
+					{/* <IconStripes /> */}
 				</div>
 			</nav>
 		</div>

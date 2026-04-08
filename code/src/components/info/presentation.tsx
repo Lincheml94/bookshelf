@@ -11,16 +11,11 @@ const Presentation = () => {
 
 				<div className={style.un}>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-						fringilla rutrum nunc non pellentesque. Fusce mollis mollis diam,
-						vitae vehicula felis ultricies in. Aliquam vulputate euismod arcu,
-						et tempor urna posuere ac. Nulla non accumsan libero. Pellentesque
-						pharetra et massa tempor fringilla. Sed tristique, risus at
-						imperdiet mollis, ante velit pulvinar augue, eget mollis tellus leo
-						sed massa. Morbi tempor, enim vitae semper viverra, est felis
-						ultrices sem, quis feugiat neque est eget odio. Phasellus posuere,
-						purus vel imperdiet imperdiet, diam nisl fringilla lectus, vitae
-						malesuada ante dolor ut risus.
+						Bookshelf Editions est une maison d'édition indépendante fondée en
+						2015 par deux pasisonnées de litterature et de poésie. Nous avons à
+						coeur de soutenir des auteur.ice.s émergent.e.s.
+						<br /> Nous organisons régulièrement des évènements pour que vous
+						puissiez rencontrer ces nouveaux acteurs de la scène littéraire.
 					</p>
 				</div>
 				<div className={style.un}>
@@ -28,23 +23,18 @@ const Presentation = () => {
 				</div>
 				<div className={style.un}>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-						fringilla rutrum nunc non pellentesque. Fusce mollis mollis diam,
-						vitae vehicula felis ultricies in. Aliquam vulputate euismod arcu,
-						et tempor urna posuere ac. Nulla non accumsan libero. Pellentesque
-						pharetra et massa tempor fringilla. Sed tristique, risus at
-						imperdiet mollis, ante velit pulvinar augue, eget mollis tellus leo
-						sed massa. Morbi tempor, enim vitae semper viverra, est felis
-						ultrices sem, quis feugiat neque est eget odio. Phasellus posuere,
-						purus vel imperdiet imperdiet, diam nisl fringilla lectus, vitae
-						malesuada ante dolor ut risus.
+						Emma B., co-fondatrice de Bookshelf Editions, responsable éditoriale
 					</p>
+					<br />
+					<p>Amina F., responsable en communication</p>
+					<br />
+					<p>Julia P., graphiste</p>
 				</div>
 			</div>
 			<div className={style.infolinks}>
 				<NavLink to={"/mentions_legales"}>mentions légales</NavLink>
 				<Link to={""}>instagram</Link>
-				<Link to={""}>instagram</Link>
+				<Link to={""}>contact@bookshelfeditions.com</Link>
 			</div>
 		</div>
 	);

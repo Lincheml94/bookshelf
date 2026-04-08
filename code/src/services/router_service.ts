@@ -36,6 +36,11 @@ class RouterService {
 								lazy: () => import("../pages/admin/users/index"),
 							},
 							{
+								id: "admin_newsletter",
+								path: "newsletter",
+								lazy: () => import("../pages/admin/newsletter/index"),
+							},
+							{
 								id: "admin_books",
 								path: "books",
 								lazy: () => import("../pages/admin/book/index"),

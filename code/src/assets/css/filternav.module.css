@@ -4,6 +4,7 @@ button {
 }
 button:hover {
 	cursor: pointer;
+	background: unset;
 }
 
 ul li,

@@ -7,9 +7,7 @@ import LogoTitre from "./logo_titre";
 const Header = () => {
 	return (
 		<header>
-			{/* <LogoDessin /> */}
 			<LogoTitre />
-			{/* <LogoPrincipal /> */}
 			<Nav />
 		</header>
 	);

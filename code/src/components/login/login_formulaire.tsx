@@ -79,9 +79,9 @@ const FormulaireLogin = (): React.JSX.Element => {
 			<Link to={"/register"}>
 				<p>Créer un compte</p>
 			</Link>
-			<Link to={"/admin"}>
+			{/* <Link to={"/admin"}>
 				<p>Dashboard</p>
-			</Link>
+			</Link> */}
 		</form>
 	);
 };
