@@ -402,7 +402,9 @@ const AdminBookFormContent = ({
 											required: "cochez au moins une case",
 										})}
 									/>
-									<label>{item.firstname}</label>
+									<label>
+										{item.firstname} {item.lastname}
+									</label>
 									<p className={style.msg_erreur} role="alert">
 										{errors.author_ids?.message ?? serverErrors?.author_ids}
 									</p>

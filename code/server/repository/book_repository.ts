@@ -86,7 +86,6 @@ class BookRepository {
 			return error;
 		}
 	};
-
 	// sélectionner un enregistrement
 	// Partial : on va utiliser une partie des propriétés d'un objet
 	// exemple : on veut seulement l'id et non l'id ET le name (etc)
@@ -171,7 +170,6 @@ class BookRepository {
 			return error;
 		}
 	};
-
 	// sélectionner plusieurs enregistrements dans une list
 	public selectInList = async (list: string): Promise<Book[] | unknown> => {
 		// connexion au serveur MySQL
@@ -355,9 +353,7 @@ class BookRepository {
 			return error;
 		}
 	};
-
 	// Modifier un enregistrement
-
 	public update = async (
 		data: Partial<Book>,
 	): Promise<QueryResult | unknown> => {
@@ -490,7 +486,6 @@ class BookRepository {
 			return error;
 		}
 	};
-
 	public delete = async (
 		data: Partial<Book>,
 	): Promise<QueryResult | unknown> => {

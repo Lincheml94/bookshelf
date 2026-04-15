@@ -1,7 +1,7 @@
 .agenda {
-	width: 45vw;
+	width: 75vw;
 	position: relative;
-	left: 45vw;
+	left: 16vw;
 	top: 100px;
 	right: 12vw;
 	display: flex;
@@ -14,5 +14,10 @@
 		height: 300px;
 		width: 90%;
 		background: aquamarine;
+	}
+
+	@media only screen and (min-width: 700px) {
+		width: 55vw;
+		left: 33vw;
 	}
 }

@@ -52,16 +52,13 @@ class BookController {
 
 	public insert = async (req: Request, res: Response) => {
 		// console.log(req.body);
-
 		// req.files permet de récupérer les fichiers transférés
 		// console.log(req.files);
 		const file = (
 			req.files as Express.Multer.File[]
 		).shift() as Express.Multer.File;
-
 		// instancier le service de fichiers
 		const fileServices = new FileServices();
-
 		// Ajouter l'extension du fichiers
 		const fullname = await fileServices.rename(file);
 
@@ -71,7 +68,6 @@ class BookController {
 			...req.body,
 			images: fullname,
 		});
-
 		// si la requête renvoie une erreur
 		if (results instanceof Error) {
 			res.status(400).json({

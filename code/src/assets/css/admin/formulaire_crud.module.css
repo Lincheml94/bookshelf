@@ -33,9 +33,7 @@ h2 {
 		align-items: center;
 		margin-bottom: 10px;
 		gap: 20px;
-		p {
-			word-break: break-all;
-		}
+		width: 600px;
 
 		.button_crud {
 			position: absolute;
@@ -88,6 +86,7 @@ h2 {
 @media only screen and (max-width: 900px) {
 	.book_crud_accueil {
 		.book_crud {
+			width: 600px;
 			.button_crud {
 				left: 600px;
 			}
@@ -98,6 +97,7 @@ h2 {
 @media only screen and (max-width: 700px) {
 	.book_crud_accueil {
 		.book_crud {
+			width: 500px;
 			.button_crud {
 				left: 500px;
 			}
@@ -109,6 +109,8 @@ h2 {
 	.book_crud_accueil {
 		.book_crud {
 			flex-direction: column;
+			width: auto;
+			padding: 0.8rem;
 			.button_crud {
 				position: unset;
 			}
