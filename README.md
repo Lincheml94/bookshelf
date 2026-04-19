@@ -1,7 +1,7 @@
 # bookshelf
 
-# 📋 **DOCUMENTATION COMPLÈTE - PROJET CODEFILLES**
-![title](code/public/img/.png)
+# 📋 **DOCUMENTATION - BOOKSHELF EDITIONS**
+![title](code/public/img/logo_bookshelf_version2_plain_double_line2.svg)
 ## 🏢Description
 
 **Bookshelf Editions** est le catalogue de notre maison d'édition. Ce site vitrine propose également un espace d'administration.
@@ -14,7 +14,7 @@ de persistance **polyglotte** : **MySQL** (données relationnelles) et **MongoDB
 - **Espace public** : Accueil, catalogue, Agenda, infos, login, Contact
 - **Authentification** : inscription + connexion
 - **Espace admin** (`/admin`) :
-  - CRUD Livres
+- CRUD Livres
 - **Sécurité** : contrôle d’accès par rôle `admin` via JWT + middleware d’autorisation
 
 ## 🏗️ Technologies (stack)
@@ -81,8 +81,8 @@ Exemples de variables :
 - `PORT=3000`
 - `VITE_API_URL=http://127.0.0.1:3000`
 - `ORIGINS=http://127.0.0.1:5173,http://localhost:5173`
-- `MYSQL_HOST=mysql`, `MYSQL_DATABASE=codefilles`
-- `MONGODB_HOST=mongodb`, `MONGODB_DATABASE=codefilles_dev`
+- `MYSQL_HOST=mysql`, `MYSQL_DATABASE=publishinghouse`
+- `MONGODB_HOST=mongodb`, `MONGODB_DATABASE=publishinghouse_dev`
 - `VITE_JWT_SECRET=secret`
 
 ## Procédure de test
