@@ -1,7 +1,6 @@
 # bookshelf
 
 # 📋 **DOCUMENTATION - BOOKSHELF EDITIONS**
-![title](code/public/img/logo_bookshelf_version2_plain_double_line2.svg)
 ## 🏢Description
 
 **Bookshelf Editions** est le catalogue de notre maison d'édition. Ce site vitrine propose également un espace d'administration.
