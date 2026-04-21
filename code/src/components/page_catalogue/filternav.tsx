@@ -24,7 +24,7 @@ const FilterBar = ({
 
 		setselectedCategory(selectedcategory);
 
-		console.log(selectedcategory);
+		// console.log(selectedcategory);
 	};
 
 	return (
