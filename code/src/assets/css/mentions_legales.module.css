@@ -8,6 +8,10 @@
 	padding: 2rem;
 	margin: 0 auto;
 	margin-bottom: 5rem;
+	a {
+		color: blue;
+		text-decoration: underline;
+	}
 }
 
 @media only screen and (min-width: 700px) {
