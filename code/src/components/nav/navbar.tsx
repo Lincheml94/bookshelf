@@ -19,6 +19,9 @@ const Nav = () => {
 		setnavMobileSIsVisible(!navMobileSIsVisible);
 		// console.log(navMobileSIsVisible);
 	};
+	const closeMenu = () => {
+		setnavMobileSIsVisible(false);
+	};
 
 	return (
 		<div className={styles.navbar}>
@@ -40,7 +43,7 @@ const Nav = () => {
 				className={`${styles.menu} ${navMobileSIsVisible ? styles["navbar-mobile-visible"] : ""}`}
 				aria-label="Navigation principale"
 			>
-				<div className={styles.navlinks}>
+				<div className={styles.navlinks} onClick={closeMenu}>
 					<NavLink to={"/catalogue"}>Catalogue</NavLink>
 					<NavLink to={"/agenda"}>Agenda</NavLink>
 					<NavLink to={"/info"}>Info</NavLink>
