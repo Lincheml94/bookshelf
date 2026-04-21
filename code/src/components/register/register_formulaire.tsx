@@ -9,6 +9,7 @@ import SecurityApiService from "../../services/security_api_service";
 const FormulaireRegister = (): React.JSX.Element => {
 	const emailId = useId();
 	const passwordId = useId();
+	const navigate = useNavigate();
 
 	const {
 		register,
@@ -16,10 +17,26 @@ const FormulaireRegister = (): React.JSX.Element => {
 		formState: { errors },
 	} = useForm<Partial<User>>();
 
-	const submitForm = async (data: Partial<User>) => {
-		console.log(data);
+	// const submitForm = async (data: Partial<User>) => {
+	// 	// console.log(data);
+	// 	const process = new SecurityApiService().register(data);
+	// 	if ([201].indexOf(process.status) !== -1) {
+	// 		navigate("/");
+	// 	}
+	// };
 
-		const process = new SecurityApiService().register(data);
+	const submitForm = async (data: Partial<User>) => {
+		// 1. On attend la réponse (comme dans ton login)
+		const process = await new SecurityApiService().register(data);
+
+		// 2. On vérifie le statut (On reste à l'intérieur du bloc de la fonction)
+		if ([200, 201].indexOf(process.status) !== -1) {
+			// 3. Redirection si succès
+			navigate("/");
+		} else {
+			// Optionnel : gérer le cas où ça échoue (ex: email déjà pris)
+			console.log("Échec de l'inscription", process.status);
+		}
 	};
 
 	return (
