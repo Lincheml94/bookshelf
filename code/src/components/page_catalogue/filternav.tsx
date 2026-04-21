@@ -5,7 +5,9 @@ import type { FilterCategoriesProps } from "../../models/props/category/filter_c
 
 const FilterBar = ({
 	categories,
+	authors,
 	setselectedCategory,
+	setselectedAuthor,
 }: FilterCategoriesProps) => {
 	const [filtreIsVisible, setfiltreIsVisible] = useState<boolean>(false);
 
@@ -19,12 +21,22 @@ const FilterBar = ({
 		// console.log("clic");
 	};
 
-	const FilterClic = (e: MouseEvent) => {
-		const selectedcategory = e.currentTarget.innerHTML;
+	const FilterClicCategory = (e: MouseEvent) => {
+		// 1. On vide l'auteur pour ne pas cumuler les deux filtres
+		setselectedAuthor("");
 
+		// 2. On récupère le nom de la catégorie cliquée
+		const selectedcategory = e.currentTarget.textContent?.trim() || "";
 		setselectedCategory(selectedcategory);
+	};
 
-		// console.log(selectedcategory);
+	const FilterClicAuthor = (e: MouseEvent) => {
+		// 1. On vide la catégorie pour ne pas cumuler les deux filtres
+		setselectedCategory("");
+
+		// 2. On récupère le nom de l'auteur cliqué
+		const selectedauthor = e.currentTarget.textContent?.trim() || "";
+		setselectedAuthor(selectedauthor);
 	};
 
 	return (
@@ -41,7 +53,7 @@ const FilterBar = ({
 					<h3>Catégories</h3>
 					<ul>
 						{categories.map((item) => (
-							<li key={item.id} onClick={FilterClic}>
+							<li key={item.id} onClick={FilterClicCategory}>
 								{item.name}
 							</li>
 						))}
@@ -50,26 +62,11 @@ const FilterBar = ({
 				<div className={style["filter-nav-auteurs"]}>
 					<h3>Auteurs</h3>
 					<ul className={style["auteur-name"]}>
-						<li>Marguerite Duras</li>
-						<li>Dorothy Allison</li>
-						<li>Victor Hugo</li>
-						<li>Alain Guiraudie</li>
-						<li>Alain Guiraudie</li>
-						<li>Alain Guiraudie</li>
-						<li>Marguerite Duras</li>
-						<li>Dorothy Allison</li>
-						<li>Victor Hugo</li>
-						<li>Alain Guiraudie</li>
-						<li>Alain Guiraudie</li>
-						<li>Alain Guiraudie</li>
-						<li>Marguerite Duras</li>
-						<li>Dorothy Allison</li>
-						<li>Victor Hugo</li>
-						<li>Alain Guiraudie</li>
-						<li>Alain Guiraudie</li>
-						<li>Alain Guiraudie</li>
-						<li>Marguerite Duras</li>
-						<li>Dorothy Allison</li>
+						{authors?.map((item) => (
+							<li key={item.id} onClick={FilterClicAuthor}>
+								{item.firstname} {item.lastname}
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>
