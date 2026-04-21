@@ -17,14 +17,6 @@ const FormulaireRegister = (): React.JSX.Element => {
 		formState: { errors },
 	} = useForm<Partial<User>>();
 
-	// const submitForm = async (data: Partial<User>) => {
-	// 	// console.log(data);
-	// 	const process = new SecurityApiService().register(data);
-	// 	if ([201].indexOf(process.status) !== -1) {
-	// 		navigate("/");
-	// 	}
-	// };
-
 	const submitForm = async (data: Partial<User>) => {
 		// 1. On attend la réponse (comme dans ton login)
 		const process = await new SecurityApiService().register(data);
