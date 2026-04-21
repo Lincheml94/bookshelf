@@ -11,6 +11,8 @@ type FilterCategoriesProps = {
 	books: Book[];
 	setselectedCategory: Dispatch<SetStateAction<string>>;
 	setselectedAuthor: Dispatch<SetStateAction<string>>;
+	selectedCategory: string;
+	selectedAuthor: string;
 };
 
 export type { FilterCategoriesProps };
