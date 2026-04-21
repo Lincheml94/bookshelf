@@ -8,6 +8,8 @@ const FilterBar = ({
 	authors,
 	setselectedCategory,
 	setselectedAuthor,
+	selectedCategory,
+	selectedAuthor,
 }: FilterCategoriesProps) => {
 	const [filtreIsVisible, setfiltreIsVisible] = useState<boolean>(false);
 
@@ -28,6 +30,7 @@ const FilterBar = ({
 		// 2. On récupère le nom de la catégorie cliquée
 		const selectedcategory = e.currentTarget.textContent?.trim() || "";
 		setselectedCategory(selectedcategory);
+		setfiltreIsVisible(false);
 	};
 
 	const FilterClicAuthor = (e: MouseEvent) => {
@@ -37,6 +40,12 @@ const FilterBar = ({
 		// 2. On récupère le nom de l'auteur cliqué
 		const selectedauthor = e.currentTarget.textContent?.trim() || "";
 		setselectedAuthor(selectedauthor);
+		setfiltreIsVisible(false);
+	};
+
+	const handleReset = () => {
+		setselectedCategory("");
+		setselectedAuthor("");
 	};
 
 	return (
@@ -45,6 +54,11 @@ const FilterBar = ({
 				<button type="button" onClick={handleClic}>
 					<p>filtres</p>
 				</button>
+				{(selectedCategory !== "" || selectedAuthor !== "") && (
+					<button type="button" onClick={handleReset}>
+						<p>Réinitialiser</p>
+					</button>
+				)}
 			</div>
 			<div
 				className={`${style["filter-nav"]} ${filtreIsVisible ? style["filter-visible"] : ""}`}

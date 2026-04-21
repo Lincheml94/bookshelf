@@ -85,6 +85,8 @@ const CatalogueContent = ({
 				setselectedCategory={setselectedCategory}
 				setselectedAuthor={setselectedAuthor}
 				books={books}
+				selectedCategory={selectedCategory}
+				selectedAuthor={selectedAuthor}
 			/>
 
 			{/* Comme ton ami, on gère le cas où il n'y a pas de résultat */}
