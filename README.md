@@ -3,7 +3,7 @@
 # 📋 **DOCUMENTATION - BOOKSHELF EDITIONS**
 ## 🏢Description
 
-**Bookshelf Editions** est le catalogue de notre maison d'édition. Ce site vitrine propose également un espace d'administration.
+**Bookshelf Editions** est une application web et web mobile composée d'un site vitrine d'une maison d'édition et d'un espace d'administration pour gérer son contenu.
 
 Le projet est structuré en **client (React)** + **serveur (API REST Express)**, avec une stratégie
 de persistance **polyglotte** : **MySQL** (données relationnelles) et **MongoDB** (messages de contact).
@@ -98,7 +98,7 @@ Couverture (si besoin) :
 npm run test:coverage
 ```
 
-Les rapports de couverture HTML sont générés dans `code/test/coverage/`.
+Les rapports de couverture HTML sont générés dans `code/tests/coverage/`.
 
 ## Points d’accès (endpoints) de l’API REST
 
@@ -117,7 +117,7 @@ Méthode HTTP | Route | Description
 ---|---|---
 GET | `/api/` | Réponse simple (vérifier que l’API répond)
 
-### Articles (MySQL + upload image)
+### Livres (MySQL + upload image)
 
 Méthode HTTP | Route | Description
 ---|---|---
@@ -127,34 +127,29 @@ POST | `/api/book` | Créer un livre + upload image (**admin**, JWT)
 PUT | `/api/book` | Modifier un livre + upload image (**admin**, JWT)
 DELETE | `/api/book` | Supprimer un livre (**admin**, JWT)
 
-### Ateliers (MySQL)
+### Categories (MySQL)
 
 Méthode HTTP | Route | Description
 ---|---|---
-GET | `/api/atelier` | Lister les ateliers
-GET | `/api/atelier/:id` | Détail d’un atelier
-POST | `/api/atelier` | Créer un atelier (**admin**, JWT)
-PUT | `/api/atelier` | Modifier un atelier (**admin**, JWT)
-DELETE | `/api/atelier` | Supprimer un atelier (**admin**, JWT)
+GET | `/api/category` | Lister les catégories
+GET | `/api/category/:id` | Détail d’une catégorie
 
-### Inspirations (MySQL + upload image)
+### Etats (MySQL + upload image)
 
 Méthode HTTP | Route | Description
 ---|---|---
-GET | `/api/inspirations` | Lister les inspirations
-GET | `/api/inspirations/:id` | Détail d’une inspiration
-POST | `/api/inspirations` | Créer une inspiration + upload image (**admin**, JWT)
-PUT | `/api/inspirations` | Modifier une inspiration + upload image optionnel (**admin**, JWT)
-DELETE | `/api/inspirations` | Supprimer une inspiration (**admin**, JWT)
+GET | `/api/currentstate` | Lister les états
+GET | `/api/currentstate/:id` | Détail d’un état
 
-### Formations (MySQL)
+
+### Auteurs (MySQL)
 
 Méthode HTTP | Route | Description
 ---|---|---
-GET | `/api/formation` | Lister les formations
-GET | `/api/formation/:id` | Détail d’une formation
+GET | `/api/author` | Lister les auteurs
+GET | `/api/author/:id` | Détail d’un auteur
 
-### Centres de formation (MySQL)
+### Evènements (MySQL)
 
 Méthode HTTP | Route | Description
 ---|---|---
@@ -168,19 +163,12 @@ Méthode HTTP | Route | Description
 GET | `/api/categorie` | Lister les catégories
 GET | `/api/categorie/:id` | Détail d’une catégorie
 
-### Équivalences (MySQL)
+### Role (MySQL)
 
 Méthode HTTP | Route | Description
 ---|---|---
-GET | `/api/equivalence` | Lister les équivalences
-GET | `/api/equivalence/:id` | Détail d’une équivalence
-
-### Rôles (MySQL)
-
-Méthode HTTP | Route | Description
----|---|---
-GET | `/api/role` | Lister les rôles
-GET | `/api/role/:id` | Détail d’un rôle
+GET | `/api/role` | Lister les roles
+GET | `/api/role/:id` | Détail d’un role
 
 ### Utilisateurs (MySQL)
 
@@ -198,6 +186,6 @@ POST | `/api/contact` | Créer un message de contact (stocké en MongoDB)
 
 ## Documents
 
-- Cahier des charges / dossier professionnel (PDF) : `docs/My projet web developer.pdf`
+- Cahier des charges / dossier professionnel (PDF) : `docs/.pdf`
 message.txt
 6 Ko
