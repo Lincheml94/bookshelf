@@ -48,14 +48,14 @@ class CategoryController {
 	};
 
 	public insert = async (req: Request, res: Response) => {
-		console.log(req.body);
+		// console.log(req.body);
 
 		// récupérer la variable de route
 		// req.body : permet de récupérer la propriété body de la requête http
 		const results = await new CategoryRepository().insert({
 			...req.body,
 		});
-		console.log(results);
+		// console.log(results);
 
 		// si la requête renvoie une erreur
 		if (results instanceof Error) {
