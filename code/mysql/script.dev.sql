@@ -137,356 +137,103 @@ CREATE TABLE publishinghouse_dev.events_visitor(
     PRIMARY KEY (events_id, visitor_id)
 );
 
--- -----------------------------------------------------------------------------------------------------
+-- Rôles
+INSERT INTO publishinghouse_dev.role (name) VALUES
+('Admin'),
+('Éditeur');
 
--- --------------------------------------INSERER LES DONNEES----------------------------------------------
+-- Utilisateurs
+INSERT INTO publishinghouse_dev.user (email, password, role_id) VALUES
+('admin@editions.fr', '$argon2i$v=19$m=16,t=2,p=1$OEJPT3p0WnYyaWh2SHloUA$VooCQepwOAaEmfksALt0UQ', 1),
+('editeur1@editions.fr', '$argon2i$v=19$m=16,t=2,p=1$U1ZnSXlmQkpDb0NpNndyTg$tsaNXBUn4tdz26KKQgn2XQ', 2);
 
--- on doit les insérer dans un ordre logique : comme au dessus, d'abord les tables qui n'ont pas de relations. On peut suivre l'ordre ci-dessus et suivre l'ordre des colonnes
--- NULL pour définir les clés primaires : le système va décider
+-- -- Newsletter
+-- INSERT INTO publishinghouse_dev.newsletter (email) VALUES
+-- ('news1@editions.fr'),
+-- ('news2@editions.fr'),
+-- ('news3@editions.fr'),
+-- ('news4@editions.fr'),
+-- ('news5@editions.fr');
 
--- ROLE
+-- -- Visiteurs
+-- INSERT INTO publishinghouse_dev.visitor (email, firstname, lastname) VALUES
+-- ('visiteur1@editions.fr', 'Jean', 'Dupont'),
+-- ('visiteur2@editions.fr', 'Marie', 'Martin'),
+-- ('visiteur3@editions.fr', 'Pierre', 'Durand'),
+-- ('visiteur4@editions.fr', 'Sophie', 'Lambert'),
+-- ('visiteur5@editions.fr', 'Luc', 'Bernard');
 
--- INSERT INTO publishinghouse_dev.role
--- VALUES
---     ( NULL, "admin" ),
---     ( NULL, "user" )
--- ;
+-- États des livres
+-- INSERT INTO publishinghouse_dev.currentstate (statename) VALUES
+-- ('Disponible'),
+-- ('Épuisé'),
+-- ('Précommande'),
+-- ('Archivé');
 
--- -- USER
--- -- admin@admin.fr / mdp : admin
--- -- user@user.fr / user
+-- Auteurs
+-- INSERT INTO publishinghouse_dev.author (firstname, lastname, bio) VALUES
+-- ('Victor', 'Hugo', 'Écrivain, poète et dramaturge romantique français, auteur des Misérables et de Notre-Dame de Paris.'),
+-- ('Albert', 'Camus', "Écrivain, philosophe et prix Nobel de littérature, connu pour L\'Étranger et La Peste."),
+-- ('Marguerite', 'Yourcenar', "Première femme élue à l\'Académie française, auteure de Mémoires d\'Hadrien."),
+-- ('George', 'Orwell', "Écrivain britannique, célèbre pour 1984 et La Ferme des animaux."),
+-- ('J.K.', 'Rowling', 'Auteure britannique, créatrice de la saga Harry Potter.');
 
--- INSERT INTO publishinghouse_dev.user
--- VALUES 
---     ( NULL, "admin@admin.fr", "$argon2i$v=19$m=16,t=2,p=1$dGxwUTRIRmgyR1g3eTdEMg$E+Xj10nHDrbt4PR8MjaMkQ", 1 ),
---     ( NULL, "user@user.fr", "$argon2i$v=19$m=16,t=2,p=1$UWdtVFBxaWRST1pzeGFpMw$L9Gxkg/BfFsGKSsxaQQqlQ", 2 )
--- ;
+-- INSERT INTO publishinghouse_dev.author (firstname, lastname, bio) VALUES
+-- ('Phoebe', 'Hadjimarkos Clark', 'Écrivaine et traductrice franco-américaine, auteure de "Aliène".'),
+-- ('Virginia', 'Woolf', 'Femme de lettres britannique, figure majeure du modernisme littéraire au XXe siècle.'),
+-- ('Alain', 'Guiraudie', 'Réalisateur et écrivain français, connu pour son style singulier et ses récits audacieux.'),
+-- ('Marguerite', 'Yourcenar', "Première femme élue à l\'Académie française, auteure de Mémoires d\'Hadrien."),
+-- ('George', 'Orwell', "Écrivain britannique, célèbre pour 1984 et La Ferme des animaux."),
+-- ('Albert', 'Camus', "Écrivain, philosophe et prix Nobel de littérature, connu pour L\'Étranger et La Peste."),
+-- ('Dorothy', 'Allison', 'Écrivaine américaine, figure de la littérature prolétarienne et féministe.'),
+-- ('Octavia', 'Butler', "Romancière américaine, pionnière de la science-fiction et de l\'afrofuturisme.");
 
--- -- NEWSLETTER--------------------------
+-- -- Livres
+-- INSERT INTO publishinghouse_dev.book (title, published_at, description, price, pages, dimensions, images, isbn, print) VALUES
+-- ('Les Misérables', '1862-01-01', 'Un roman monumental qui suit la vie de Jean Valjean, ancien forçat en quête de rédemption.', 12.99, '1488', '15x23', 'miserables.jpg', '9782070401119', 'Poche'),
+-- ("L\'Étranger', '1942-01-01', 'Un roman existentialiste qui explore l\'absurdité de la condition humaine à travers Meursault.", 8.99, '160', '13x20', 'etranger.jpg', '9782070360024', 'Broché'),
+-- ("Mémoires d\'Hadrien', '1951-01-01", "Un roman épistolaire qui retrace la vie de l\'empereur romain Hadrien.", 10.99, '416', '14x22', 'hadrien.jpg', '9782070299013', 'Relié'),
+-- ('1984', '1949-06-08', 'Une dystopie sur la surveillance totale et le totalitarisme, dans un monde où Big Brother vous observe.', 9.99, '328', '13x20', '1984.jpg', '9780451524935', 'Poche'),
+-- ("Harry Potter à l\'école des sorciers", '1997-06-26', 'Le premier tome de la saga Harry Potter, où un jeune sorcier découvre le monde de la magie.', 14.99, '312', '15x23', 'harry_potter1.jpg', '9782070518520', 'Broché');
 
--- INSERT INTO publishinghouse_dev.newsletter
--- VALUES
---     ( NULL, "visitor1@newsletter.fr" )
--- ;
+-- INSERT INTO publishinghouse_dev.book (title, published_at, description, price, pages, dimensions, images, isbn, print) VALUES
+-- ("Aliène", "2021-01-14", "Un premier roman puissant explorant les marges et les identités à travers une écriture poétique.", 19.00, "192", "14x20", "aliene.jpg", "9782370211422", "Broché"),
+-- ("Vers le phare", "1927-05-05", "Une œuvre majeure du modernisme explorant la subjectivité et le passage du temps au sein de la famille Ramsay.", 8.50, "320", "11x18", "phare.jpg", "9782253003458", "Poche"),
+-- ("Rabalaïre", "2021-11-04", "Une épopée picaresque et charnelle dans le Sud de la France, portée par une langue inventive.", 22.00, "448", "15x22", "rabalaire.jpg", "9782370552860", "Broché"),
+-- ("Mémoires d'Hadrien", "1951-12-05", "Un roman historique épistolaire où l'empereur Hadrien médite sur sa vie, son pouvoir et son amour pour Antinoüs.", 10.50, "368", "12x19", "hadrien.jpg", "9782070369218", "Poche"),
+-- ("1984", "1949-06-08", "Le chef-d'œuvre de la dystopie décrivant un régime totalitaire fondé sur la surveillance de masse et la manipulation du langage.", 9.20, "376", "11x18", "1984.jpg", "9782070409207", "Poche"),
+-- ("L'Étranger", "1942-05-19", "Un récit fondamental sur l'absurdité de l'existence, mettant en scène Meursault face à un monde dénué de sens.", 7.90, "160", "11x18", "etranger.jpg", "9782070360024", "Poche"),
+-- ("L'Histoire de Dorothy", "1992-03-12", "Un récit poignant et brut sur la pauvreté, la survie et la résilience dans l'Amérique rurale du Sud.", 23.00, "416", "14x22", "bastard.jpg", "9782264024343", "Broché"),
+-- ("Liens de sang", "1979-06-01", "Une œuvre phare de la science-fiction où une jeune femme noire est transportée dans le passé esclavagiste de sa famille.", 21.00, "352", "13x20", "kindred.jpg", "9782354611484", "Broché");
 
--- -- VISITOR---------------------------------------------
+-- -- Catégories
+-- INSERT INTO publishinghouse_dev.category (name) VALUES
+-- ('Roman'),
+-- ('Poésie'),
+-- ('Essai'),
+-- ('Science-Fiction'),
+-- ('Jeunesse'),
+-- ('Histoire'),
+-- ('Biographie');
 
--- INSERT INTO publishinghouse_dev.visitor
--- VALUES
---     ( NULL, "visitor1@visitor.fr", "Solène", "Colin"),
---     ( NULL, "visitor2@visitor.fr", "Caro", "Rheims"),
---     ( NULL, "visitor3@visitor.fr", "Julia", "Piccolo")
--- ;
-
--- -- -CURRENT STATE------------------------------
-
--- INSERT INTO publishinghouse_dev.currentstate
--- VALUES
---     ( NULL, "en rupture de stock" ),
---     ( NULL, "en stock" ),
---     ( NULL, "Paru" ),
---     ( NULL, "A paraitre" )
--- ;
-
--- -- AUTHOR--------------------------------------------
-
--- INSERT INTO publishinghouse_dev.author
--- VALUES
---     (NULL, 'Héloise', 'Brézillon', 'Héloise Brézillon est autrice~chercheure. Son travail hybride poésie, théorie & SF. En 2018 naît Mange tes mots, une bulle poétique créée avec Margot Ferrera, où reprendre son souffle le temps d''une scène ouverte, d''un atelier d''écriture ou d''un podcast. Ses textes ont été performés avec sa bouche partout en France et publiés en revues. T3M est son premier livre.'),
---     (NULL, 'Elodie', 'Petit', 'Elodie Petit alias Gorge Bataille, née en 1985, est une performeuse et poétesse queer française.'),
---     (NULL, 'Dorothy', 'Allison', 'Dorothy Allison est une romancière, poétesse et essayiste américaine, connue pour ses œuvres explorant la classe, la sexualité et la violence. Son roman Bastard Out of Carolina est un classique de la littérature queer et féministe.'),
---     (NULL, 'Goliarda', 'Sapienza', 'Goliarda Sapienza était une écrivaine italienne, célèbre pour son roman L''Art de la joie, une œuvre audacieuse et féministe qui explore la liberté et la quête de soi.'),
---     (NULL, 'Fatima', 'Daas', 'Fatima Daas est une autrice française, connue pour son roman La Petite Dernière, où elle aborde les thèmes de l''identité, de la religion et de la sexualité à travers une narration poétique et intime.'),
---     (NULL, 'Wendy', 'Delorme', 'Wendy Delorme est une écrivaine et performeuse française, dont les œuvres, comme Quatrième génération, explorent la transidentité, la famille et la mémoire.'),
---     (NULL, 'Mariana', 'Enriquez', 'Mariana Enriquez est une journaliste et écrivaine argentine, autrice de Nos choses, un recueil de nouvelles horrifiques ancrées dans la réalité sociale et politique de l''Argentine.'),
---     (NULL, 'Laura', 'Vazquez', 'Laura Vazquez est une écrivaine et poétesse française, dont les textes, comme La Vie sexuelle des fleurs, mêlent érotisme, nature et quête d''identité.'),
---     (NULL, 'Joan', 'Nestle', 'Joan Nestle est une historienne et écrivaine américaine, cofondatrice des Lesbian Herstory Archives. Ses œuvres, comme A Restricted Country, explorent la mémoire lesbienne et la résistance.'),
---     (NULL, 'Phoebe', 'Hadjimarkos Clark', 'Phoebe Hadjimarkos Clark est une écrivaine et artiste américaine, connue pour ses textes expérimentaux et son engagement dans les communautés queer et trans.'),
---     (NULL, 'Leslie', 'Feinberg', 'Leslie Feinberg était une militante transgenre et écrivaine américaine, autrice de Stone Butch Blues, un roman culte sur la vie des personnes trans et la lutte des classes.'),
---     (NULL, 'Karim', 'Kattan', 'Karim Kattan est un écrivain palestinien, dont les œuvres, comme La Maison des absents, explorent l''exil, la mémoire et l''identité palestinienne.'),
---     (NULL, 'Alison', 'Bechdel', 'Alison Bechdel est une autrice de bandes dessinées américaine, célèbre pour Fun Home, une autobiographie graphique explorant le coming out de l''autrice et sa relation avec son père.'),
---     (NULL, 'Violette', 'Leduc', 'Violette Leduc (1907-1972) est une écrivaine française, figure majeure de la littérature autobiographique. Son œuvre, souvent audacieuse et intime, explore la quête d''amour, la sexualité, la jalousie et la souffrance, avec un style lyrique et sans concession. Elle fut proche de Simone de Beauvoir et de Jean Genet.');
-
--- -- BOOK ---------------------------------------------------------------
-
--- INSERT INTO publishinghouse_dev.book
--- VALUES
---     (
---         NULL,
---         "T3M",
---         "2024-10-11",
---         "et ça te comporte. ça te comporte sans que tu ne le saches. tu roules les jours à l'aveugle. tu as un monde en toi, un petit monde dont tu n'as jamais fait la carte et tu roules dedans, hors piste. il faut la faire la carte, oui, c'est important. pour ne pas être triste.",
---         14,
---         "120 pages",
---         "20 x 11 cm",
---         "t3m.jpg",
---         "979-10-95630-78-4",
---         "livre broché"
---     ),
---     (   
---         NULL,
---         "Bastard Out of Carolina", 
---         "1992-06-01", 
---         "Un roman poignant sur une jeune fille grandissant dans une famille pauvre et violente du Sud des États-Unis, explorant les thèmes de la résilience et de l'identité.", 
---         12.99, 
---         "320", 
---         "14x21", 
---         "bastard_out_of_carolina.jpg", 
---         "9780452273281", 
---         "Plume"
---     ),
---     (   
---         NULL,
---         "Cavedweller", 
---         "1998-05-15", 
---         "L'histoire d'une femme qui retourne dans sa ville natale de Géorgie pour retrouver ses filles, après une vie tumultueuse à Los Angeles.", 
---         13.50, 
---         "384", 
---         "14x21", 
---         "cavedweller.jpg", 
---         "9780452280128", 
---         "Plume"
---     ),
---     (   NULL, 
---         "L'Art de la joie", 
---         "2008-09-15", 
---         "Une épopée féministe et sensuelle sur la vie de Modesta, une femme sicilienne en quête de liberté et de bonheur au début du XXe siècle.", 
---         14.50, 
---         "400", 
---         "15x23", 
---         "art_de_la_joie.jpg", 
---         "9782070396071", 
---         "Gallimard"
---     ),
---     (   
---         NULL,
---         "La Petite Dernière", 
---         "2020-08-20", 
---         "Un roman intime et poétique sur une jeune femme française d'origine algérienne, en quête d'identité entre religion, famille et sexualité.", 
---         11.90, 
---         "160", 
---         "13x20", 
---         "petite_derniere.jpg", 
---         "9782072894567", 
---         "Noir sur Blanc"
---     ),
---     (   
---         NULL,
---         "Jouer le jeu", 
---         "2024-01-11", 
---         "Un roman sur l''amitié, l''amour et les jeux de pouvoir, explorant les relations humaines dans un Paris contemporain.", 
---         11.90, 
---         "192", 
---         "13x20", 
---         "jouer_le_jeu.jpg", 
---         "9782073021456", 
---         "Noir sur Blanc"
---     ),
---     (
---         NULL,
---         "Quatrième génération", 
---         "2017-03-10", 
---         "Un récit autobiographique et politique sur la transidentité, la filiation et la mémoire familiale.", 
---         10.50, 
---         "192", 
---         "12x19", 
---         "quatrieme_generation.jpg", 
---         "9782367440556", 
---         "Cambourakis"
---     ),
---     (   
---         NULL,
---         "Viendra le temps du feu", 
---         "2021-08-26", 
---         "Un récit poétique et politique sur la transmission, la mémoire et la résistance, entre autobiographie et fiction.", 
---         12.90, 
---         "176", 
---         "12x19", 
---         "viendra_le_temps_du_feu.jpg", 
---         "9782367441560", 
---         "Cambourakis"
---     ),
---     (
---         NULL,
---         "Nos choses", 
---         "2019-11-07", 
---         "Un recueil de nouvelles horrifiques et sociales, ancrées dans la réalité argentine, où le surnaturel côtoie le quotidien.", 
---         13.99, 
---         "224", 
---         "14x22", 
---         "nos_choses.jpg", 
---         "9782378870256", 
---         "Grasset"
---     ),
---     (
---         NULL,
---         "La Vie sexuelle des fleurs", 
---         "2021-05-13", 
---         "Un recueil de poèmes et de textes hybrides, explorant l'érotisme, la nature et la quête d''identité.", 
---         9.90, 
---         "128", 
---         "11x18", 
---         "vie_sexuelle_fleurs.jpg", 
---         "9782378870560", 
---         "Grasset"
---     ),
---     (   
---         NULL,
---         "A Restricted Country", 
---         "1987-05-01", 
---         "Un recueil d'essais et de récits sur la mémoire lesbienne, la résistance et la construction d'une histoire collective.", 
---         15.99, 
---         "256", 
---         "15x23", 
---         "restricted_country.jpg", 
---         "9780918393300", 
---         "Firebrand Books"
---     ),
---     (   
---         NULL,
---         "Stone Butch Blues", 
---         "1993-06-01", 
---         "Un roman culte sur la vie d'une personne butch dans les années 1950-1970, mêlant lutte des classes et quête d''identité de genre.", 
---         14.99, 
---         "352", 
---         "14x21", 
---         "stone_butch_blues.jpg", 
---         "9781573441189", 
---         "Firebrand Books"
---     ),
---     (
---         NULL,
---         "La Maison des absents", 
---         "2021-09-02", 
---         "Un roman sur l''exil, la mémoire et l'identité palestinienne, à travers les histoires d''une famille dispersée.", 
---         12.50, 
---         "208", 
---         "13x20", 
---         "maison_absents.jpg", 
---         "9782367190556", 
---         "Actes Sud"
---     ),
---     (   
---         NULL,
---         "L'Éden à l'aube", "2024-08-22", 
---         "Un roman qui explore les thèmes de l'exil, de la mémoire et de la quête d'identité palestinienne, à travers une narration poétique et intime.", 
---         14.90, 
---         "224", 
---         "13x20", 
---         "eden_a_l_aube.jpg", 
---         "9782367191232", 
---         "Actes Sud"
---     ),
---     (   
---         NULL,
---         "Fun Home", 
---         "2006-06-08", 
---         "Une autobiographie graphique explorant le coming out de l'autrice et sa relation complexe avec son père, entre secrets et littérature.", 
---         18.99, 
---         "240", 
---         "17x23", 
---         "fun_home.jpg", 
---         "9780618871711", 
---         "Houghton Mifflin"
---     ),
---     (   
---         NULL,
---         "Ravages", 
---         "1955-01-01", 
---         "Roman autobiographique où Violette Leduc raconte sa passion destructrice pour une femme mariée, 'Hermine', explorant la jalousie, la souffrance et la quête d'absolu. Une œuvre majeure de la littérature lesbienne et intime.", 
---         12.50, 
---         "256", 
---         "14x22", 
---         "ravages_violette_leduc.jpg", 
---         "9782070293456", 
---         "Gallimard"
---     );
-
-
--- -- CATEGORY ------------------------------------------------------------------------------------------------
-
--- INSERT INTO publishinghouse_dev.category
--- VALUES
---     ( NULL, "Fiction" ), 
---     ( NULL, "Poésie" ), 
---     ( NULL, "Autofiction" ), 
---     ( NULL, "Bande dessinée" ), 
---     ( NULL, "Essai" )
--- ;
-
--- -- EVENTS
-
--- INSERT INTO publishinghouse_dev.events
--- VALUES
---     ( NULL, 
---     "Séance de dédicace : Héloise Brézillon", 
---     "2025-12-02", 
---     "Venez vous faire dédicasser votre livre par l'autrice la plus innovante de sa génération !", 
---     "Librairie Les mots à la bouche", false, 1 
---     )
--- ;
-
--- INSERT INTO publishinghouse_dev.book_author (book_id, author_id) VALUES
--- (1, 1),
--- (2, 3),
--- (3, 3),
--- (4, 4),
--- (5, 5),
--- (6, 1),
--- (7, 6),
--- (8, 7),
--- (9, 7),
--- (10, 8),
--- (11, 9),
--- (12, 10),
--- (13, 11),
--- (14, 12),
--- (15, 13),
--- (16, 14);
-
--- INSERT INTO publishinghouse_dev.book_currentstate (book_id, currentstate_id) VALUES
--- (1, 2),
--- (2, 3),
--- (3, 3),
--- (4, 4),
--- (5, 2),
--- (6, 2),
--- (7, 2),
--- (8, 2),
--- (9, 3),
--- (10, 2),
--- (11, 3),
--- (12, 3),
--- (13, 2),
--- (14, 2),
--- (15, 3),
--- (16, 2);
-
--- INSERT INTO publishinghouse_dev.book_category (book_id, category_id) VALUES
--- (1, 1),
--- (2, 1),
--- (3, 1),
--- (4, 1),
--- (5, 1),
--- (6, 1),
--- (7, 1),
--- (8, 2),
--- (9, 1),
--- (10, 2),
--- (11, 1),
--- (12, 1),
--- (13, 1),
--- (14, 1),
--- (15, 4),
--- (16, 1);
-
--- Jointure : Livre - État
+-- -- Jointure : Livre - État
 -- INSERT INTO publishinghouse_dev.book_currentstate (book_id, currentstate_id) VALUES
 -- (1, 1), -- Les Misérables : Disponible
 -- (2, 1), -- L'Étranger : Disponible
 -- (3, 3), -- Mémoires d'Hadrien : Précommande
 -- (4, 1), -- 1984 : Disponible
 -- (5, 1); -- Harry Potter : Disponible
+
+-- Table de jointure : État actuel des stocks (book_currentstate)
+-- INSERT INTO publishinghouse_dev.book_currentstate (book_id, currentstate_id) VALUES
+-- (1, 1), -- "Aliène" : Disponible
+-- (2, 1), -- "Vers le phare" : Disponible
+-- (3, 1), -- "Rabalaïre" : Disponible
+-- (4, 3), -- "Mémoires d'Hadrien" : Précommande
+-- (5, 1), -- "1984" : Disponible
+-- (6, 1), -- "L'Étranger" : Disponible
+-- (7, 1), -- "L'Histoire de Dorothy" : Disponible
+-- (8, 1); -- "Liens de sang" : Disponible
 
 -- -- Jointure : Livre - Auteur
 -- INSERT INTO publishinghouse_dev.book_author (book_id, author_id) VALUES
@@ -504,6 +251,14 @@ CREATE TABLE publishinghouse_dev.events_visitor(
 -- (4, 4), -- 1984 : Science-Fiction
 -- (5, 5); -- Harry Potter : Jeunesse
 
+-- -- Événements
+-- INSERT INTO publishinghouse_dev.events (title, date, description_, location, isComplete, book_id) VALUES
+-- ('Rencontre avec Victor Hugo', '2025-12-15 18:00:00', 'Soirée de dédicace et lecture autour des Misérables.', 'Librairie Parisienne, Paris', FALSE, 1),
+-- ("Conférence sur l\'absurde", '2026-01-20 19:00:00', "Analyse de L\'Étranger par des spécialistes de Camus.", 'Université de Lyon', TRUE, 2),
+-- ("Lancement Mémoires d\'Hadrien", '2026-02-10 20:00:00', 'Soirée de lancement du nouveau tirage.', 'Bibliothèque Nationale, Paris', FALSE, 3),
+-- ('Débat sur la dystopie', '2026-03-05 18:30:00', "Table ronde autour de 1984 et de sa pertinence aujourd\'hui.", 'Médiathèque de Bordeaux', FALSE, 4),
+-- ('Nuit Harry Potter', '2026-03-12 20:00:00', 'Soirée spéciale pour les 25 ans de la saga, avec quiz et projections.', 'Librairie Fantastique, Lille', FALSE, 5);
+
 -- -- Jointure : Événement - Visiteur
 -- INSERT INTO publishinghouse_dev.events_visitor (events_id, visitor_id) VALUES
 -- (1, 1), -- Rencontre Victor Hugo : Jean Dupont
@@ -513,301 +268,3 @@ CREATE TABLE publishinghouse_dev.events_visitor(
 -- (4, 5), -- Débat dystopie : Luc Bernard
 -- (5, 1), -- Nuit Harry Potter : Jean Dupont
 -- (5, 2); -- Nuit Harry Potter : Marie Martin
-
-
--- ----------------------------------------------------------------------------------------
--- ---------------------------------TABLES DE JOINTURE ----------------------------------
-
--- pour les tables de jointures, on doit créer deux tables, on crée une transaction
--- choisir la table principale pour la transaction
--- créer une variable sql : une fonction sql qui va permettre de récupÃ©rer le dernier identifiant inséré
-
-
-
--- BOOK_AUTHOR----------------------------------------------------------------------------
-
--- requête 1
-
--- START TRANSACTION;
-
--- INSERT INTO publishinghouse_dev.book
--- VALUE 
---     (NULL, "FATAL.E",
---         "2025-10-11",
---         "et ça te comporte. Ã§a te comporte sans que tu ne le saches. tu roules les jours Ã  l'aveugle. tu as un monde en toi, un petit monde dont tu nâ€™as jamais fait la carte et tu roules dedans, hors piste. il faut la faire la carte, oui, câ€™est important. pour ne pas être triste.",
---         14, 
---         "220 pages",
---         "20 x 11 cm",
---         "fatal_e.jpg",
---         "977-10-95630-78-4",
---         "livre brochÃ©")
---         ;
-
--- -- variable qui stocke le dernier id insÃ©rÃ©:
-
--- SET @book_id = LAST_INSERT_ID();
-
--- -- requÃªte 2
-
--- INSERT INTO publishinghouse_dev.book_author
--- VALUES 
---     (2, @book_id)
--- ;
-
--- COMMIT;
-
--- -- T3M - HELOISE BREZILLON
-
--- START TRANSACTION;
-
--- -- INSERT INTO publishinghouse_dev.book
--- -- VALUE
--- --     (NULL, 1)
--- -- ;
-
--- INSERT INTO publishinghouse_dev.book_author
--- VALUE
---     ( 1, 2 )
--- ;
-
--- COMMIT;
-
--- -- --Mon corps de ferme
--- START TRANSACTION;
-
--- INSERT INTO publishinghouse_dev.book
--- VALUES
---     ( NULL,
---         "Mon corps de ferme",
---         "2021-07-11",
---         "Mon corps de ferme est un sublime livre de poÃ©sie traitant de la vie rurale",
---         30,
---         "120 pages",
---         "20 x 11 cm",
---         "mcdf.jpg",
---         "279-10-95630-90-4",
---         "livre brochÃ©"
---     )
--- ;
-
--- INSERT INTO publishinghouse_dev.author
--- VALUE
---     (NULL, "AurÃ©lie", "Olivier", "AurÃ©lie Olivier est une jeune autrice dont le premier roman Mon Corps de Ferme l'a fait connaitre")
--- ;
-
--- SET @book_id = LAST_INSERT_ID();
--- SET @author_id = LAST_INSERT_ID();
-
--- INSERT INTO publishinghouse_dev.book_author
--- VALUES
---     (@book_id, @author_id)
--- ;
-
--- INSERT INTO publishinghouse_dev.book_category
--- VALUES 
---     (@book_id, 1),
---     (@book_id, 3)
-
--- ;
-
--- INSERT INTO publishinghouse_dev.book_currentstate
--- VALUES
---     (@book_id, 3)
--- ;
-
-
--- COMMIT;
-
--- -- BOOK_CATEGORY-------------------------------------------------------------------
--- -- T3M
-
--- -- START TRANSACTION;
-
--- -- INSERT INTO publishinghouse_dev.book
--- -- VALUE
--- --     (NULL, 1)
--- --     ;
-
--- -- -- requÃªte 2
-
--- -- INSERT INTO publishinghouse_dev.book_category
--- -- VALUES 
--- --     (1, book_id)
--- -- ;
-
--- -- COMMIT;
-
--- -- Fatal.e-----------------------------------------------------------------------------
-
--- -- START TRANSACTION;
-
--- -- INSERT INTO publishinghouse_dev.book
--- -- VALUE  
--- --     ( NULL, 2)
--- -- ;
-
--- -- INSERT INTO publishinghouse_dev.book_category
--- -- VALUE
--- --     (2, book_id)
--- -- ;
-
--- -- COMMIT;
-
-
-
--- -- BOOK_CURRENTSTATE----------------------------------------------------------------------
--- -- T3M------------------------------------------
-
--- -- START TRANSACTION;
-
-
-
--- -- INSERT INTO publishinghouse_dev.book_currentstate
--- -- VALUES
--- --     (1, 3)
--- -- ;
-
--- -- COMMIT;
-
--- -- -- Fatal.e
-
--- -- START TRANSACTION;
-
--- -- INSERT INTO publishinghouse_dev.book
-
--- -- VALUES
--- --     ( NULL, 2)
--- -- ;
-
--- -- INSERT INTO publishinghouse_dev.book_currentstate
-
--- -- VALUES
--- --     ( 3, book_id)
--- -- ;
-
--- -- COMMIT;
-
-
--- -- START TRANSACTION;-----------------------------supprimÃ© par une commande DELETE--------------------
-
--- -- INSERT INTO publishinghouse_dev.book
--- -- VALUE
--- --     (NULL, "La bÃªte humaine",
--- --         "1875-10-11",
--- --         "et Ã§a te comporte. Ã§a te comporte sans que tu ne le saches. tu roules les jours Ã  lâ€™aveugle. tu as un monde en toi, un petit monde dont tu nâ€™as jamais fait la carte et tu roules dedans, hors piste. il faut la faire la carte, oui, câ€™est important. pour ne pas Ãªtre triste.",
--- --         14, 
--- --         "560 pages",
--- --         "20 x 11 cm",
--- --         "la_bete_humaine.jpg",
--- --         "977-10-96370-78-4",
--- --         "livre brochÃ©")
--- --     ;
-
--- -- -- variable
-
--- -- SET @book_id = LAST_INSERT_ID();
-
--- -- -- requÃªte 2
-
--- -- INSERT INTO publishinghouse_dev.book_currentstate
--- -- VALUES 
--- --     (3, book_id)
--- -- ;
-
--- -- COMMIT;
-
-
-
--- -- EVENT_VISITOR---------------------------------------------------------------------------
-
--- START TRANSACTION;
-
--- INSERT INTO publishinghouse_dev.events
--- VALUE
---     ( NULL, 
---     "SÃ©ance de dÃ©dicace : Elodie Petit, alias Gorge Bataille", 
---     "2025-12-28", 
---     "Venez vous faire dÃ©dicasser votre livre par l'autrice la plus innovante de sa gÃ©nÃ©ration !", 
---     "Librairie Les mots Ã  la bouche", 
---     false, 
---     2 )
--- ;
-
--- SET @events_id = LAST_INSERT_ID();
-
--- INSERT INTO publishinghouse_dev.events_visitor
--- VALUES 
---     (@events_id, 1)
--- ;
-
--- COMMIT;
-
-
-
--- -- -----------------------------------------------------------------------------------------------
--- -- --------------------------------------- CRUD -------------------------------------------------------------
-
--- -- mettre Ã  jour un enregistrement : UPDATE
-
--- -- UPDATE publishinghouse_dev.book
--- -- SET 
--- --     book.title = 'T4M', 
--- --     book.price = 15
-   
--- -- WHERE
--- --     book.id = 1
--- -- ;
-
-
--- -- Supprimer un enregistrement -----------------------------------------------------
-
-
--- -- START TRANSACTION;
-
--- -- requÃªte 1
-
--- -- DELETE FROM publishinghouse_dev.book_currentstate
--- -- WHERE 
--- --     book_currentstate.book_id = 3
--- -- ;
-
--- -- DELETE FROM publishinghouse_dev.book
--- -- WHERE 
--- --     book.id = 3
--- -- ;
-
--- -- COMMIT;
-
--- -- sÃ©lectionner toutes les colonnes d'une table
--- -- SELECT book.*
--- -- FROM publishinghouse_dev.book;
--- -- -- Ã  copier dans la console
-
--- -- SELECT book.title, book.price
--- -- FROM publishinghouse_dev.book
--- -- WHERE book.price > 5
--- -- AND book.category LIKE "f%"
--- -- ;
--- -- SELECT book.title, book.price
--- -- FROM publishinghouse_dev.book
--- -- WHERE book.price > 5
--- -- AND book.category LIKE "f%"
--- -- ;
-
-
--- jointure
-
--- SELECT user.*, role.name
--- FROM publishinghouse_dev.user
--- JOIN publishinghouse_dev.role
--- ON role.id = user.role_id
--- \G
-
-
-
-
-
-
-
-
-

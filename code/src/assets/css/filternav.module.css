@@ -7,6 +7,15 @@ ul li:hover {
 	cursor: pointer;
 }
 
+.msg_erreur_filtre {
+	height: 100vh;
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .filter-nav-principale {
 	z-index: 1;
 	height: 20px;
@@ -56,16 +65,16 @@ ul li:hover {
 .filter-nav-categories {
 	display: flex;
 	gap: 10rem;
-	align-items: center;
+	align-items: flex-start;
 }
 
 .filter-nav-auteurs {
 	display: flex;
-	gap: 10rem;
+	gap: 10.8rem;
 	align-items: flex-start;
 	.auteur-name {
 		height: 100px;
-		width: 100%;
+		width: 40%;
 		display: flex;
 		flex-direction: column;
 		flex-wrap: nowrap;
@@ -79,9 +88,9 @@ ul li:hover {
 	.filter-nav-auteurs {
 		.auteur-name {
 			flex-wrap: wrap;
-			li {
+			/* li {
 				padding-left: 1rem;
-			}
+			} */
 		}
 	}
 }

@@ -69,6 +69,7 @@ button {
 	align-items: center;
 	position: fixed;
 	background: #ffffff;
+	z-index: 3;
 	.title {
 		font-size: 30px;
 		font-family: BBBPoppins Regular;

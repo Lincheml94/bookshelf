@@ -91,7 +91,7 @@
 
 @media only screen and (min-width: 1100px) {
 	.contenu_accueil {
-		padding-top: 120px;
+		/* padding-top: 120px; */
 		padding-left: 30px;
 		padding-right: 30px;
 		padding-bottom: 120px;
@@ -112,15 +112,15 @@
 		}
 
 		img {
-			height: 50vh;
+			height: 20rem;
 			width: auto;
 			display: block;
 			box-shadow: 10px 5px 15px black;
 		}
 
 		.event_accueil {
-			width: 15vw;
-			height: 50vh;
+			width: 15rem;
+			height: 20rem;
 			background-color: white;
 			display: flex;
 			flex-direction: column;

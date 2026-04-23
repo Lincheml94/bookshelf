@@ -20,11 +20,11 @@ class CurrentstateRepository {
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book_currentstate
 			ON 
 				book_currentstate.currentstate_id = currentstate.id
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book
 			ON 
 				book.id = book_currentstate.book_id
@@ -72,11 +72,11 @@ class CurrentstateRepository {
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book_currentstate
 			ON 
 				book_currentstate.currentstate_id = currentstate.id
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book
 			ON 
 				book.id = book_currentstate.book_id
@@ -126,11 +126,11 @@ class CurrentstateRepository {
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book_currentstate
 			ON 
 				book_currentstate.currentstate_id = currentstate.id
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book
 			ON 
 				book.id = book_currentstate.book_id

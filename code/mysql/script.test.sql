@@ -78,7 +78,7 @@ CREATE TABLE publishinghouse_test.category(
 );
 
 
--- Table de jointure : BOOK - CURRENT STATE
+Table de jointure : BOOK - CURRENT STATE
 
 CREATE TABLE publishinghouse_test.book_currentstate(
     book_id SMALLINT UNSIGNED NOT NULL,

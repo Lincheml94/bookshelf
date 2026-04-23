@@ -20,11 +20,11 @@ class AuthorRepository {
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book_author
 			ON 
 				book_author.author_id = author.id
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book
 			ON 
 				book.id = book_author.book_id
@@ -71,11 +71,11 @@ class AuthorRepository {
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book_author
 			ON 
 				book_author.author_id = author.id
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book
 			ON 
 				book.id = book_author.book_id
@@ -123,11 +123,11 @@ class AuthorRepository {
 
             FROM 
 				${process.env.MYSQL_DATABASE}.${this.table}
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book_author
 			ON 
 				book_author.author_id = author.id
-			JOIN 
+			LEFT JOIN 
 				${process.env.MYSQL_DATABASE}.book
 			ON 
 				book.id = book_author.book_id
