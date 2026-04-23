@@ -356,7 +356,10 @@ const AdminBookFormContent = ({
 											required: "cochez au moins une case",
 										})}
 									/>
-									<label>{item.name}</label>
+									<label>
+										<input type="text" />
+										{item.name}
+									</label>
 									<p className={style.msg_erreur} role="alert">
 										{errors.category_ids?.message ?? serverErrors?.category_ids}
 									</p>
@@ -378,7 +381,10 @@ const AdminBookFormContent = ({
 											required: "cochez au moins une case",
 										})}
 									/>
-									<label>{item.statename}</label>
+									<label>
+										<input type="text" />
+										{item.statename}
+									</label>
 									<p className={style.msg_erreur} role="alert">
 										{errors.currentstate_ids?.message ??
 											serverErrors?.currentstate_ids}
@@ -403,6 +409,7 @@ const AdminBookFormContent = ({
 										})}
 									/>
 									<label>
+										<input type="text" />
 										{item.firstname} {item.lastname}
 									</label>
 									<p className={style.msg_erreur} role="alert">
