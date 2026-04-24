@@ -152,7 +152,7 @@ const AdminBookFormContent = ({
 				{/* afficher le message (type de condition supportée par le html) 
                 Si le message existe, l'afficher, sinon, rien de s'affiche
             */}
-				{message ? <p role="alert">{message}</p> : null}
+				{/* {message ? <p role="alert">{message}</p> : null} */}
 
 				{/* si le formulaire contient un champ de fichier : 
                 - ajouter attribut enctype=" multipart/form-data"
@@ -348,15 +348,17 @@ const AdminBookFormContent = ({
 						{categories.map((item) => {
 							return (
 								<div key={item.id}>
-									<input
-										type="checkbox"
-										value={item.id}
-										id={item.id as unknown as string}
-										{...register("category_ids", {
-											required: "cochez au moins une case",
-										})}
-									/>
-									<label>{item.name}</label>
+									<label>
+										<input
+											type="checkbox"
+											value={item.id}
+											id={item.id as unknown as string}
+											{...register("category_ids", {
+												required: "cochez au moins une case",
+											})}
+										/>
+										{item.name}
+									</label>
 									<p className={style.msg_erreur} role="alert">
 										{errors.category_ids?.message ?? serverErrors?.category_ids}
 									</p>
@@ -370,15 +372,17 @@ const AdminBookFormContent = ({
 						{currentstates.map((item) => {
 							return (
 								<div key={item.id}>
-									<input
-										type="checkbox"
-										value={item.id}
-										id={item.id as unknown as string}
-										{...register("currentstate_ids", {
-											required: "cochez au moins une case",
-										})}
-									/>
-									<label>{item.statename}</label>
+									<label>
+										<input
+											type="checkbox"
+											value={item.id}
+											id={item.id as unknown as string}
+											{...register("currentstate_ids", {
+												required: "cochez au moins une case",
+											})}
+										/>
+										{item.statename}
+									</label>
 									<p className={style.msg_erreur} role="alert">
 										{errors.currentstate_ids?.message ??
 											serverErrors?.currentstate_ids}
@@ -394,15 +398,15 @@ const AdminBookFormContent = ({
 						{authors.map((item) => {
 							return (
 								<div key={item.id}>
-									<input
-										type="checkbox"
-										value={item.id}
-										id={item.id as unknown as string}
-										{...register("author_ids", {
-											required: "cochez au moins une case",
-										})}
-									/>
 									<label>
+										<input
+											type="checkbox"
+											value={item.id}
+											id={item.id as unknown as string}
+											{...register("author_ids", {
+												required: "cochez au moins une case",
+											})}
+										/>
 										{item.firstname} {item.lastname}
 									</label>
 									<p className={style.msg_erreur} role="alert">

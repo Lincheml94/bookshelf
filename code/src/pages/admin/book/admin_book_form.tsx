@@ -4,7 +4,6 @@ import type { Author } from "../../../../models/author";
 import type { Book } from "../../../../models/book";
 import type { Category } from "../../../../models/category";
 import type { Currentstate } from "../../../../models/currentstate";
-import style from "../../../assets/css/admin/dashboard.module.css";
 import AdminBookFormContent from "../../../components/admin/book/admin_book_form_content";
 import type { AdminBookParams } from "../../../models/params/admin_book_params";
 import AuthorApiService from "../../../services/authors_api_service";
@@ -20,7 +19,7 @@ const AdminBookForm = ({ params }: AdminBookParams) => {
 
 	// récupérer les données à mettre à jour
 	let dataToUpdate: Book | undefined;
-	// console.log(dataToUpdate);
+	console.log(dataToUpdate);
 
 	// si un identifiant est présent dans l'URL
 	if (id) {

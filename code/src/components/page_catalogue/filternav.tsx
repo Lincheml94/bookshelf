@@ -31,6 +31,7 @@ const FilterBar = ({
 		const selectedcategory = e.currentTarget.textContent?.trim() || "";
 		setselectedCategory(selectedcategory);
 		setfiltreIsVisible(false);
+		// console.log(selectedcategory);
 	};
 
 	const FilterClicAuthor = (e: MouseEvent) => {

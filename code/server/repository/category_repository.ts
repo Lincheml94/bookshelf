@@ -164,70 +164,70 @@ class CategoryRepository {
 		}
 	};
 
-	public insert = async (
-		data: Partial<Category>,
-	): Promise<QueryResult | unknown> => {
-		// connexion au serveur mysql
-		const connection = await new MySQLService().connect();
+	// public insert = async (
+	// 	data: Partial<Category>,
+	// ): Promise<QueryResult | unknown> => {
+	// 	// connexion au serveur mysql
+	// 	const connection = await new MySQLService().connect();
 
-		// requête SQL
-		// Dans VALUE, on crée des variables de requête, pour éviter les injections SQL (les attaques)
-		// les variables s'écrivent avec deux points
-		let sql = `
-			INSERT INTO 
-				${process.env.MYSQL_DATABASE}.${this.table}
-			VALUES 
-				(
-					NULL, 
-					:name
-				)
-				;
-			`;
+	// 	// requête SQL
+	// 	// Dans VALUE, on crée des variables de requête, pour éviter les injections SQL (les attaques)
+	// 	// les variables s'écrivent avec deux points
+	// 	let sql = `
+	// 		INSERT INTO
+	// 			${process.env.MYSQL_DATABASE}.${this.table}
+	// 		VALUES
+	// 			(
+	// 				NULL,
+	// 				:name
+	// 			)
+	// 			;
+	// 		`;
 
-		// try / catch : exécuter requête / récupérer les résultats ou une erreur
-		try {
-			// démarrer une transaction SQL
-			connection.beginTransaction();
+	// 	// try / catch : exécuter requête / récupérer les résultats ou une erreur
+	// 	try {
+	// 		// démarrer une transaction SQL
+	// 		connection.beginTransaction();
 
-			// exécution de la première requête
-			await connection.execute(sql, data);
+	// 		// exécution de la première requête
+	// 		await connection.execute(sql, data);
 
-			// deuxième requête
-			sql = `SET @id = LAST_INSERT_ID();`;
-			// exécution de la deuxième requête
-			await connection.execute(sql, data);
+	// 		// deuxième requête
+	// 		sql = `SET @id = LAST_INSERT_ID();`;
+	// 		// exécution de la deuxième requête
+	// 		await connection.execute(sql, data);
 
-			// troisième requête
-			const joinIds = (data.book_ids as string)
-				?.split(",")
-				.map((value) => `(@id, ${value})`)
-				.join();
-			// console.log(joinIds);
+	// 		// troisième requête
+	// 		const joinIds = (data.book_ids as string)
+	// 			?.split(",")
+	// 			.map((value) => `(@id, ${value})`)
+	// 			.join();
+	// 		// console.log(joinIds);
 
-			sql = `
-					INSERT INTO 
-						${process.env.MYSQL_DATABASE}.book_category (book_id, category_id)
-					VALUES
-							
-					${joinIds}
-					;
-				
-					`;
+	// 		sql = `
+	// 				INSERT INTO
+	// 					${process.env.MYSQL_DATABASE}.book_category (book_id, category_id)
+	// 				VALUES
 
-			const [query] = await connection.execute(sql, data);
+	// 				${joinIds}
+	// 				;
 
-			// valider la transition SQL
-			connection.commit();
+	// 				`;
 
-			// retourner les informations de la requête
-			return query;
-		} catch (error) {
-			// annuler une transaction
-			connection.rollback();
+	// 		const [query] = await connection.execute(sql, data);
 
-			return error;
-		}
-	};
+	// 		// valider la transition SQL
+	// 		connection.commit();
+
+	// 		// retourner les informations de la requête
+	// 		return query;
+	// 	} catch (error) {
+	// 		// annuler une transaction
+	// 		connection.rollback();
+
+	// 		return error;
+	// 	}
+	// };
 
 	// public update = async (
 	// 	data: Partial<Book>,
