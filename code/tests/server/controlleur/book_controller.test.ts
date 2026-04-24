@@ -81,7 +81,7 @@ describe("book controller test suites", async () => {
 			.field("author_ids", data.author_ids as string)
 			.field("currentstate_ids", data.currentstate_ids as string);
 
-		// console.log(response);
+		console.log(response);
 
 		const actual = response.status;
 		// assert
