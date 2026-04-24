@@ -16,6 +16,7 @@ const Catalogue = () => {
 	const authors = use(new AuthorApiService().selectAll()).data as Author[];
 	return (
 		<>
+			{/* <h1>Catalogue</h1> */}
 			<Seo title="Catalogue" description="Catalogue - desc" url="/catalogue" />
 			<Fondcatalogue />
 			<CatalogueContent
