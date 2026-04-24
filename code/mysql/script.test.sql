@@ -355,7 +355,7 @@ INSERT INTO publishinghouse_test.category (name) VALUES
 -- (4, 1), -- 1984 : Disponible
 -- (5, 1); -- Harry Potter : Disponible
 
-Table de jointure : État actuel des stocks (book_currentstate)
+-- Table de jointure : État actuel des stocks (book_currentstate)
 INSERT INTO publishinghouse_test.book_currentstate (book_id, currentstate_id) VALUES
 (1, 1), -- "Aliène" : Disponible
 (2, 1), -- "Vers le phare" : Disponible
