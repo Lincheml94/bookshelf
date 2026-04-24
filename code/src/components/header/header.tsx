@@ -1,12 +1,12 @@
 import styles from "../../assets/css/header.module.css";
+import LogoPrincipal from "../icones/logo_principal";
+import Nav from "../nav/navbar";
 import LogoDessin from "./logo_dessin";
 import LogoTitre from "./logo_titre";
-import Nav from "../nav/navbar";
 
 const Header = () => {
 	return (
 		<header>
-			{/* <LogoDessin /> */}
 			<LogoTitre />
 			<Nav />
 		</header>

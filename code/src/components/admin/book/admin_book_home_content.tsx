@@ -1,36 +1,58 @@
 import { use } from "react";
 import { Link } from "react-router";
-import style from "../../../assets/css/formulaire_crud.module.css";
+import style from "../../../assets/css/admin/formulaire_crud.module.css";
 import BookApiService from "../../../services/book_api_service";
-
-// import { map } from "zod";
+import EditIcon from "../../icones/edit";
+import BinIcon from "../../icones/trash";
 
 const AdminBookHomeContent = () => {
 	// récupération des menus
 	const results = use(new BookApiService().selectAll()).data;
 
 	return (
-		<>
-			<Link to={"/admin/book_form"}>
-				<button type="submit">Ajouter un livre</button>
-			</Link>
+		<div className={style.book_crud_accueil}>
+			<div>
+				<Link to={"/admin/book_form"}>
+					<button type="submit" className={style.button_add}>
+						Ajouter un livre
+					</button>
+				</Link>
+			</div>
 			{/* Affichage des livres */}
 			{results?.map((item) => {
 				return (
 					<div className={style.book_crud} key={item.id}>
-						<p>{item.title}</p>
+						<img
+							src={`/img/book/${item.images}`}
+							alt={item.title}
+							className={style.img_form}
+						/>
+						<p>
+							{item.title},{" "}
+							{item.authors.map((item) => (
+								<li key={item.id}>
+									{item.firstname} {item.lastname}
+								</li>
+							))}
+						</p>
 
-						<Link to={`/admin/book_form/${item.id}`}>
-							<button type="submit">Modifier un livre</button>
-						</Link>
+						<div className={style.button_crud} key={item.id}>
+							<Link to={`/admin/book_form/${item.id}`}>
+								<button type="submit">
+									<EditIcon />
+								</button>
+							</Link>
 
-						<Link to={`/admin/book_delete/${item.id}`}>
-							<button type="submit">Supprimer un livre</button>
-						</Link>
+							<Link to={`/admin/book_delete/${item.id}`}>
+								<button type="submit">
+									<BinIcon />
+								</button>
+							</Link>
+						</div>
 					</div>
 				);
 			})}
-		</>
+		</div>
 	);
 };
 

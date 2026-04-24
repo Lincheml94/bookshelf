@@ -3,7 +3,6 @@ import type { unstable_RSCRouteConfig as RSCRouteConfig } from "react-router";
 class RouterService {
 	public getRouter = () => {
 		return [
-		
 			{
 				// identifiant unique de la mise en page
 				id: "root",
@@ -13,54 +12,53 @@ class RouterService {
 				lazy: () => import("../layouts/root_layout"),
 
 				children: [
-				
-					 // 🔐 ADMIN
+					// 🔐 ADMIN
 					{
 						id: "admin",
 						path: "admin",
 						lazy: () => import("../layouts/admin_layout"),
 
 						children: [
-						{
-							id: "dashboard",
-							path: "",
-							index: true,
-							lazy: () => import("../pages/admin/index"),
-						},
-						{
-							id: "admin_login",
-							path: "login",
-							lazy: () => import("../pages/admin/login"),
-						},
-						{
-							id: "admin_register",
-							path: "register",
-							lazy: () => import("../pages/admin/register"),
-						},
-						{
-							id: "admin_agenda",
-							path: "agenda",
-							lazy: () => import("../pages/admin/agenda/index"),
-						},
-						{
-							id: "admin_books",
-							path: "books",
-							lazy: () => import("../pages/admin/book/index"),
-						},
-						{
-							id: "book_form",
-							path: "book_form/:id?",
-							lazy: () => import("../pages/admin/book/admin_book_form"),
-						},
-						{
-							id: "book_delete",
-							path: "book_delete/:id",
-							lazy: () => import("../pages/admin/book/book_delete"),
-						},
+							{
+								id: "dashboard",
+								path: "",
+								index: true,
+								lazy: () => import("../pages/admin/index"),
+							},
+							{
+								id: "admin_agenda",
+								path: "agenda",
+								lazy: () => import("../pages/admin/agenda/index"),
+							},
+							{
+								id: "admin_users",
+								path: "users",
+								lazy: () => import("../pages/admin/users/index"),
+							},
+							{
+								id: "admin_newsletter",
+								path: "newsletter",
+								lazy: () => import("../pages/admin/newsletter/index"),
+							},
+							{
+								id: "admin_books",
+								path: "books",
+								lazy: () => import("../pages/admin/book/index"),
+							},
+							{
+								id: "book_form",
+								path: "book_form/:id?",
+								lazy: () => import("../pages/admin/book/admin_book_form"),
+							},
+							{
+								id: "book_delete",
+								path: "book_delete/:id",
+								lazy: () => import("../pages/admin/book/book_delete"),
+							},
 						],
 					},
 
-					// PUBLIC 
+					// PUBLIC
 
 					{
 						id: "public",
@@ -103,7 +101,17 @@ class RouterService {
 							{
 								id: "login",
 								path: "login",
-								lazy: () => import("../pages/admin/login"),
+								lazy: () => import("../pages/login"),
+							},
+							{
+								id: "logout",
+								path: "logout",
+								lazy: () => import("../pages/logout"),
+							},
+							{
+								id: "admin_register",
+								path: "register",
+								lazy: () => import("../pages/register"),
 							},
 							{
 								id: "catalogue_detail",

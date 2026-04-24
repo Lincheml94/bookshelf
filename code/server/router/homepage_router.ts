@@ -1,5 +1,6 @@
 import express from "express";
 import HomepageController from "../controleur/homepage_controller";
+import AuthorizationMiddleware from "../middleware/authorization_middleware";
 
 class HomepageRouter {
 	// routeur express
@@ -10,7 +11,11 @@ class HomepageRouter {
 		// créer une route /api accessible en GET
 		// req et res peuvent être n'importe quel mot, par contre Request et Reponse sont figés, d'ailleurs il faut choisir ceux qui correspondent à express
 		// le prefixe des routes est dans le serveur
-		this.router.get("/", new HomepageController().index);
+		this.router.get(
+			"/",
+
+			new HomepageController().index,
+		);
 		// retourner le routeur
 		return this.router;
 	};

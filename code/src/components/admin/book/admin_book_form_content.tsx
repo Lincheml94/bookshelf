@@ -1,15 +1,14 @@
 "use client";
-import { use, useEffect, useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
-import { data, useNavigate } from "react-router";
-import { date } from "zod";
+import { useNavigate } from "react-router";
 import type { ZodIssue } from "zod/v3";
 import type { Book } from "../../../../models/book";
 import style from "../../../assets/css/formulaire_crud.module.css";
 import type { AdminBookFormContentProps } from "../../../models/props/admin/admin_book_form_content_props";
 import BookApiService from "../../../services/book_api_service";
+import SecurityService from "../../../services/security_service";
 
-// import { Link } from "react-router";
 const AdminBookFormContent = ({
 	categories,
 	authors,
@@ -126,8 +125,14 @@ const AdminBookFormContent = ({
 
 		//    requête HTTP vers l'API
 		const process = dataToUpdate
-			? await new BookApiService().update(formData)
-			: await new BookApiService().insert(formData);
+			? await new BookApiService().update(
+					formData,
+					new SecurityService().getToken() as string,
+				)
+			: await new BookApiService().insert(
+					formData,
+					new SecurityService().getToken() as string,
+				);
 
 		// Si la requête HTTP a réussi : l'utilisateur.ice a ajouté un livre et est redirigé vers une autre page
 		// use navigate : hook qui permet de naviguer
@@ -147,7 +152,7 @@ const AdminBookFormContent = ({
 				{/* afficher le message (type de condition supportée par le html) 
                 Si le message existe, l'afficher, sinon, rien de s'affiche
             */}
-				{message ? <p role="alert">{message}</p> : null}
+				{/* {message ? <p role="alert">{message}</p> : null} */}
 
 				{/* si le formulaire contient un champ de fichier : 
                 - ajouter attribut enctype=" multipart/form-data"
@@ -343,15 +348,17 @@ const AdminBookFormContent = ({
 						{categories.map((item) => {
 							return (
 								<div key={item.id}>
-									<input
-										type="checkbox"
-										value={item.id}
-										id={item.id as unknown as string}
-										{...register("category_ids", {
-											required: "cochez au moins une case",
-										})}
-									/>
-									<label>{item.name}</label>
+									<label>
+										<input
+											type="checkbox"
+											value={item.id}
+											id={item.id as unknown as string}
+											{...register("category_ids", {
+												required: "cochez au moins une case",
+											})}
+										/>
+										{item.name}
+									</label>
 									<p className={style.msg_erreur} role="alert">
 										{errors.category_ids?.message ?? serverErrors?.category_ids}
 									</p>
@@ -365,15 +372,17 @@ const AdminBookFormContent = ({
 						{currentstates.map((item) => {
 							return (
 								<div key={item.id}>
-									<input
-										type="checkbox"
-										value={item.id}
-										id={item.id as unknown as string}
-										{...register("currentstate_ids", {
-											required: "cochez au moins une case",
-										})}
-									/>
-									<label>{item.statename}</label>
+									<label>
+										<input
+											type="checkbox"
+											value={item.id}
+											id={item.id as unknown as string}
+											{...register("currentstate_ids", {
+												required: "cochez au moins une case",
+											})}
+										/>
+										{item.statename}
+									</label>
 									<p className={style.msg_erreur} role="alert">
 										{errors.currentstate_ids?.message ??
 											serverErrors?.currentstate_ids}
@@ -389,15 +398,17 @@ const AdminBookFormContent = ({
 						{authors.map((item) => {
 							return (
 								<div key={item.id}>
-									<input
-										type="checkbox"
-										value={item.id}
-										id={item.id as unknown as string}
-										{...register("author_ids", {
-											required: "cochez au moins une case",
-										})}
-									/>
-									<label>{item.firstname}</label>
+									<label>
+										<input
+											type="checkbox"
+											value={item.id}
+											id={item.id as unknown as string}
+											{...register("author_ids", {
+												required: "cochez au moins une case",
+											})}
+										/>
+										{item.firstname} {item.lastname}
+									</label>
 									<p className={style.msg_erreur} role="alert">
 										{errors.author_ids?.message ?? serverErrors?.author_ids}
 									</p>
@@ -406,7 +417,9 @@ const AdminBookFormContent = ({
 						})}
 					</div>
 
-					<button type="submit">Créer un livre</button>
+					<button className={style.button_add} type="submit">
+						Créer un livre
+					</button>
 				</form>
 			</div>
 		</div>

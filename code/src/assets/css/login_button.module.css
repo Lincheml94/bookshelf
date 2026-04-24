@@ -1,12 +1,16 @@
-.button_login{
-    height: 30px;
-    width: 30px;
-    border-radius: 25px;
-    border: 0px;
-    box-shadow: 3px 4px 4px black;
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 5;
-    position: fixed;
+.button_login {
+	height: 30px;
+	width: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 25px;
+	border: 0px;
+	box-shadow: 3px 4px 4px black;
+	bottom: 20px;
+	right: 20px;
+	z-index: 5;
+	margin: 0 auto;
+	position: fixed;
+	background: var(--light-grey);
 }

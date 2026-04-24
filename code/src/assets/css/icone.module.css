@@ -1,0 +1,20 @@
+/* social-icon */
+.logo-in-header {
+	display: flex;
+}
+
+.logo_principal {
+	width: 220px;
+}
+
+@media only screen and (max-width: 900px) {
+	.logo {
+		width: 40px;
+	}
+	/* .logo-in-header {
+		display: flex;
+	} */
+	.logo-in-nav {
+		display: none;
+	}
+}

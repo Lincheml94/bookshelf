@@ -1,0 +1,41 @@
+# nom du workflow
+name: Bookshelf CI workflow
+
+# déclencheur du workflow
+on: 
+  push: 
+    branches: [ main ]
+# tâches
+jobs:
+  # nom de la tâche
+  CI:
+    # choix de l'OS
+    runs-on: ubuntu-latest
+    # étapes de la tâche
+    steps:
+      - 
+        name: Cloner le repository
+        uses: actions/checkout@v6
+      -
+        name: installer les dépendances
+        working-directory: code
+        run: npm ci
+      -
+        name: compiler le projet React
+        working-directory: code
+        run: npm run build
+      -
+        name: démarrer MySQL et importer la base de donnée de test
+        working-directory: code/mysql
+        run: |
+          sudo service mysql start
+          mysql -uroot -proot -e "source script.test.sql;"
+          mysql -uroot -proot -e "source ia.test.sql;"
+          mysql -uroot -proot -e "show databases;"
+      -
+        name: démarrer les tests
+        working-directory: code
+        run: npm run test
+         
+      
+

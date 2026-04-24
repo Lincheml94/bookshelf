@@ -1,10 +1,9 @@
-// "use client";
 "use client";
 import { useState } from "react";
+import { FaUniversalAccess } from "react-icons/fa6";
 import { NavLink } from "react-router";
 import styles from "../../assets/css/navbar.module.css";
-
-// import MenuHamburger from "./menu_ham";
+import IconStripes from "../icones/icon_stripes";
 
 const Nav = () => {
 	// créer un état : hook use State
@@ -18,44 +17,45 @@ const Nav = () => {
 		// modifier la valeur de l'état : utiliser obligatoirement le setter de l'état
 		//  ! : négation, donc !navMobileSIsVisible : on va aller chercher la valeur contraire du boolean
 		setnavMobileSIsVisible(!navMobileSIsVisible);
-		console.log(navMobileSIsVisible);
+		// console.log(navMobileSIsVisible);
+	};
+	const closeMenu = () => {
+		setnavMobileSIsVisible(false);
 	};
 
 	return (
 		<div className={styles.navbar}>
-			<button className={styles.hamburger} type="button" onClick={handleClic}>
+			<button
+				className={styles.hamburger}
+				type="button"
+				onClick={handleClic}
+				aria-expanded={navMobileSIsVisible}
+				aria-label="Menu de navigation"
+			>
 				<img
 					className={styles.menuham}
-					src="/img/icons8-menu-50.png"
+					src="/img/icones/icons8-menu-50.png"
 					alt="button"
 				/>
 			</button>
 			<nav
+				id="main-nav"
 				className={`${styles.menu} ${navMobileSIsVisible ? styles["navbar-mobile-visible"] : ""}`}
+				aria-label="Navigation principale"
 			>
-				<NavLink to={"/catalogue"}>Catalogue</NavLink>
-				<NavLink to={"/agenda"}>Agenda</NavLink>
-				<NavLink to={"/info"}>Info</NavLink>
-				<NavLink to={"/contact"}>Contact</NavLink>
+				<div className={styles.navlinks} onClick={closeMenu}>
+					<NavLink to={"/catalogue"}>Catalogue</NavLink>
+					<NavLink to={"/agenda"}>Agenda</NavLink>
+					<NavLink to={"/info"}>Info</NavLink>
+					<NavLink to={"/contact"}>Contact</NavLink>
+				</div>
+				<div className={styles.navlinks}>
+					{/* <FaUniversalAccess /> */}
+					{/* <IconStripes /> */}
+				</div>
 			</nav>
 		</div>
 	);
 };
 
 export default Nav;
-
-// import { NavLink } from "react-router";
-// import styles from "../assets/css/navbar.module.css";
-
-// const Nav = () => {
-// 	return (
-// 		<nav>
-// 			<NavLink to={"/catalogue"}>
-// 				Catalogue
-// 			</NavLink>
-// 			<NavLink to={"/agenda"}>
-// 				Agenda
-// 			</NavLink>
-// 			<NavLink to={"/info"}>
-// 				Info
-// 			</NavLink>
