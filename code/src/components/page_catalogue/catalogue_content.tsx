@@ -15,12 +15,10 @@ const CatalogueContent = ({
 
 	const filteredBooks =
 		books?.filter((book) => {
-			// Logique Catégorie : On compare le NOM (ou l'ID si tu préfères)
 			const matchCat =
 				selectedCategory === "" ||
 				book.categories?.some((cat) => cat.name === selectedCategory);
 
-			// Logique Auteur
 			const matchAuth =
 				selectedAuthor === "" ||
 				book.authors?.some(

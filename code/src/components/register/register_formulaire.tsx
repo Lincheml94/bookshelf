@@ -42,7 +42,7 @@ const FormulaireRegister = (): React.JSX.Element => {
 					required: "L'email est obligatoire",
 					maxLength: {
 						value: 100,
-						message: "un email doit comporter au minimum",
+						message: "un email doit comporter au minimum 5 caractères",
 					},
 				})}
 			/>

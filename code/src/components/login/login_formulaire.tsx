@@ -36,7 +36,7 @@ const FormulaireLogin = (): React.JSX.Element => {
 			// console.log(new SecurityService().getToken());
 
 			// redirection vers une route react en fonction de son rôle
-			if (user.role.name === "Admin") {
+			if (user.role.name === "Admin" || user.role.name === "Editeur") {
 				navigate("/admin");
 				return;
 			}

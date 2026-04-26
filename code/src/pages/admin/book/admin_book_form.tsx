@@ -19,7 +19,7 @@ const AdminBookForm = ({ params }: AdminBookParams) => {
 
 	// récupérer les données à mettre à jour
 	let dataToUpdate: Book | undefined;
-	console.log(dataToUpdate);
+	// console.log(dataToUpdate);
 
 	// si un identifiant est présent dans l'URL
 	if (id) {

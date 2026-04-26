@@ -6,7 +6,7 @@ import Guard from "../components/shared/guard";
 
 const AdminLayout = () => {
 	return (
-		<Guard roles={["Admin", "Éditeur"]}>
+		<Guard roles={["Admin", "Editeur"]}>
 			{/* <> */}
 			<DashboardNav />
 			<div className={style["main-dashboard"]}>

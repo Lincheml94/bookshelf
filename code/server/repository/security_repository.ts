@@ -23,7 +23,7 @@ class SecurityRepository {
                 NULL,
                 :email,
                 :password,
-                2
+                3
             )
             ;
         `;
