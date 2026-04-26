@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import type { ZodIssue } from "zod/v3";
 import type { Book } from "../../../../models/book";
-import style from "../../../assets/css/formulaire_crud.module.css";
+import style from "../../../assets/css//admin/formulaire_crud.module.css";
 import type { AdminBookFormContentProps } from "../../../models/props/admin/admin_book_form_content_props";
 import BookApiService from "../../../services/book_api_service";
 import SecurityService from "../../../services/security_service";

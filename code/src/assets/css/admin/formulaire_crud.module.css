@@ -54,8 +54,11 @@ h2 {
 /* FORMULAIRE LIVRE */
 .formulaire_crud {
 	padding: 1.25rem;
-	max-width: 25rem;
-	margin: 0 auto;
+	max-width: 20rem;
+	/* margin: 0 auto; */
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 
 	p {
 		display: flex;
